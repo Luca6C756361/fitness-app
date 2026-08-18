@@ -1,0 +1,161 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import {
+  Scale,
+  Search,
+  User,
+  Settings,
+  LogOut,
+  ChevronDown,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
+import { formatToday } from "../_lib/utils";
+import { useUser } from "../_lib/UserContext";
+import { useWeight } from "../_lib/WeightContext";
+
+/** Header con dati letti dal WeightContext (fonte di verità sul peso). */
+export default function Header() {
+  const { profile } = useUser();
+  const { currentWeight, previousWeight } = useWeight();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [today, setToday] = useState(""); 
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Peso da mostrare: se ci sono misurazioni le usa, altrimenti fallback al profilo
+  const weight = currentWeight ?? profile.weight;
+  const delta =
+    currentWeight !== null && previousWeight !== null
+      ? currentWeight - previousWeight
+      : null;
+  useEffect(() => {
+    setToday(formatToday());
+  }, []);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [menuOpen]);
+
+  return (
+    <header className="flex items-center justify-between gap-4">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-emerald-950">
+          TODAY
+        </h1>
+        <p className="mt-0.5 min-h-[1.25rem] text-sm font-medium text-emerald-800/60">
+          {today}
+        </p>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="relative hidden md:block">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />
+          <input
+            type="search"
+            placeholder="Cerca alimenti, esercizi…"
+            className="w-56 rounded-full border border-emerald-900/10 bg-white/80 py-2 pl-9 pr-4 text-sm text-emerald-950 placeholder:text-emerald-800/40 shadow-sm outline-none transition focus:w-64 focus:ring-2 focus:ring-teal-300/60"
+          />
+        </div>
+
+        <div className="flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/80 py-1.5 pl-2.5 pr-3.5 shadow-sm">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 text-teal-700">
+            <Scale className="h-4 w-4" />
+          </span>
+          <div className="leading-tight">
+            <span className="block text-sm font-bold text-emerald-950 tabular-nums">
+              {weight.toFixed(1)} kg
+            </span>
+            <span className="block text-[10px] font-medium uppercase tracking-wide text-emerald-800/50">
+              Peso
+            </span>
+          </div>
+
+          {delta !== null && delta !== 0 && (
+            <span
+              className={`ml-1 flex items-center gap-0.5 rounded-full px-2 py-0.5 text-[10px] font-bold tabular-nums ${
+                delta < 0
+                  ? "bg-emerald-100 text-emerald-700"
+                  : "bg-amber-100 text-amber-700"
+              }`}
+            >
+              {delta < 0 ? (
+                <TrendingDown className="h-3 w-3" />
+              ) : (
+                <TrendingUp className="h-3 w-3" />
+              )}
+              {delta > 0 ? "+" : ""}
+              {delta.toFixed(1)}
+            </span>
+          )}
+        </div>
+
+        <div className="relative" ref={menuRef}>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((o) => !o)}
+            className="group flex items-center gap-1 rounded-full transition hover:opacity-80"
+            aria-label="Menu utente"
+          >
+            <img
+              src={profile.avatar}
+              alt={`Foto profilo di ${profile.name}`}
+              className="h-11 w-11 rounded-full border-2 border-white object-cover shadow-sm"
+            />
+            <ChevronDown
+              className={`h-4 w-4 text-emerald-800/50 transition-transform ${
+                menuOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {menuOpen && (
+            <div className="absolute right-0 top-full z-40 mt-2 w-56 overflow-hidden rounded-xl border border-emerald-900/10 bg-white shadow-lg">
+              <div className="border-b border-emerald-900/5 bg-emerald-50/50 px-4 py-3">
+                <p className="text-xs font-medium uppercase tracking-wide text-emerald-800/50">
+                  Ciao
+                </p>
+                <p className="text-sm font-bold text-emerald-950">{profile.name}</p>
+              </div>
+
+              <nav className="py-1">
+                <Link
+                  href="/profilo"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-emerald-950 transition hover:bg-emerald-50"
+                >
+                  <User className="h-4 w-4 text-emerald-700" />
+                  Profilo
+                </Link>
+                <Link
+                  href="/impostazioni"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-emerald-950 transition hover:bg-emerald-50"
+                >
+                  <Settings className="h-4 w-4 text-emerald-700" />
+                  Impostazioni
+                </Link>
+                <div className="my-1 border-t border-emerald-900/5" />
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-red-600 transition hover:bg-red-50"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Esci
+                </button>
+              </nav>
+            </div>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}

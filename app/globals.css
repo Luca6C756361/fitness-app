@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/**
+ * Tema chiaro/scuro.
+ * Su [data-theme="dark"] applichiamo un filtro di inversione controllata
+ * allo sfondo e ai testi/card che usano i colori chiari standard.
+ *
+ * Per un vero dark mode a lungo termine sarebbe meglio migrare tutte le
+ * classi Tailwind con varianti dark: (es. dark:bg-emerald-950). Per ora
+ * usiamo un approccio pragmatico che copre l'intera app subito.
+ */
+
+/* === TEMA CHIARO (default) === */
+html, body {
+  background-color: #FAF7F0;
+  color: #002815;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* === TEMA SCURO === */
+html[data-theme="dark"] {
+  background-color: #0f1a15;
+}
+
+html[data-theme="dark"] body {
+  background-color: #0f1a15;
+  color: #13ff91;
+}
+
+/* Sfondo panna (usato in main) → verde molto scuro */
+html[data-theme="dark"] main.bg-\[\#FAF7F0\] {
+  background-color: #0f1a15;
+}
+
+/* Card bianche → grigio-verde scuro */
+html[data-theme="dark"] .bg-white {
+  background-color: #1a2620;
+}
+
+/* Card interne panna → un tono sopra */
+html[data-theme="dark"] .bg-\[\#FAF7F0\] {
+  background-color: #223129;
+}
+
+/* Testo emerald-950 (nero) → panna chiara */
+html[data-theme="dark"] .text-emerald-950 {
+  color: #ecfdf5;
+}
+
+/* Bordi sottili → più chiari sul dark */
+html[data-theme="dark"] .border-emerald-900\/10,
+html[data-theme="dark"] .border-emerald-900\/5,
+html[data-theme="dark"] .border-teal-900\/5 {
+  border-color: rgba(236, 253, 245, 0.1);
+}
+
+/* Sidebar */
+html[data-theme="dark"] aside.bg-white {
+  background-color: #1a2620;
+  border-color: rgba(236, 253, 245, 0.08);
+}
+
+/* BottomNav */
+html[data-theme="dark"] nav.bg-white\/95 {
+  background-color: rgba(26, 38, 32, 0.95);
+}
+
+/* Sfondi emerald-50 delle card interne / hover → tono verde scuro */
+html[data-theme="dark"] .bg-emerald-50,
+html[data-theme="dark"] .bg-emerald-50\/50,
+html[data-theme="dark"] .bg-emerald-50\/60 {
+  background-color: rgba(6, 78, 59, 0.4);
+}
+
+/* Gradiente della card allenamento → verde scuro */
+html[data-theme="dark"] .from-\[\#E8F3EE\] {
+  --tw-gradient-from: #1e2b23;
+}
+html[data-theme="dark"] .to-\[\#DCEFEA\] {
+  --tw-gradient-to: #223129;
+}
+
+/* Input, textarea, select */
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: #223129;
+  color: #ecfdf5;
+  border-color: rgba(236, 253, 245, 0.1);
+}
