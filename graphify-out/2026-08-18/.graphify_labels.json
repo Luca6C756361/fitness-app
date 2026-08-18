@@ -1,22 +1,20 @@
 {
-  "0": "PlanContext.tsx",
+  "0": "types.ts",
   "1": "UserContext.tsx",
   "2": "WorkoutSessionContext.tsx",
   "3": "SettingsContext.tsx",
   "4": "compilerOptions",
-  "5": "types.ts",
-  "6": "allenamento/page.tsx",
-  "7": "dependencies",
+  "5": "data.ts",
+  "6": "DiaryContext.tsx",
+  "7": "package.json",
   "8": "layout.tsx",
   "9": "devDependencies",
-  "10": "middleware.ts",
+  "10": "WorkoutCard.tsx",
   "11": "WorkoutContext.tsx",
   "12": "README.md",
   "13": "AGENTS.md",
   "14": "eslint.config.mjs",
   "15": "next.config.ts",
   "16": "postcss.config.mjs",
-  "17": "CLAUDE.md",
-  "18": "server.ts",
-  "19": "next-env.d.ts"
+  "17": "CLAUDE.md"
 }
