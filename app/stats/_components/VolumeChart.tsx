@@ -151,8 +151,8 @@ export default function VolumeChart() {
                   border: "1px solid #E5E7EB",
                   fontSize: "0.8rem",
                 }}
-                formatter={(v: number) => [
-                  `${v.toLocaleString("it-IT")} kg`,
+                formatter={(v) => [
+                  `${Number(v).toLocaleString("it-IT")} kg`,
                   "Volume",
                 ]}
               />

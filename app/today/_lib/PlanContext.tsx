@@ -1,6 +1,8 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { supabase } from "../../_lib/supabase/client";   // <-- NUOVO
+import { useAuth } from "../../_lib/AuthContext";        // <-- NUOVO
 import { defaultWeeklyPlan, exerciseDatabase } from "./exerciseData";
 import type {
   WeeklyPlan,
@@ -28,27 +30,26 @@ import type {
 
 interface PlanContextValue {
   plan: WeeklyPlan;
+  loading: boolean;                                              // <-- NUOVO
   todaySession: WorkoutSession | null;
-  isTodayComposed: boolean; // true se oggi è una composizione al volo
+  isTodayComposed: boolean;
   getSessionById: (id: string) => WorkoutSession | undefined;
   getExerciseDef: (id: string) => ExerciseDefinition | undefined;
 
-  // Composizione e override
   composeToday: (exercises: PlannedExercise[], name?: string) => void;
   resetTodayOverride: () => void;
-  overrideDay: (dayIndex: number, sessionId: string | null) => void;
+  overrideDay: (dayIndex: number, sessionId: string | null) => Promise<void>;
 
-  // Editor scheda (usato dalla Tappa 4)
-  updateSession: (session: WorkoutSession) => void;
-  createSession: (session: WorkoutSession) => void;
-  deleteSession: (sessionId: string) => void;
+  updateSession: (session: WorkoutSession) => Promise<void>;
+  createSession: (session: WorkoutSession) => Promise<void>;
+  deleteSession: (sessionId: string) => Promise<void>;
 
   exercises: ExerciseDefinition[];
 }
 
 const PlanContext = createContext<PlanContextValue | null>(null);
-const STORAGE_KEY = "fitness-app:plan";
-const STORAGE_KEY_TODAY = "fitness-app:todayOverride";
+// const STORAGE_KEY = "fitness-app:plan";      ← CANCELLA
+const STORAGE_KEY_TODAY = "fitness-app:todayOverride";   // resta
 
 function todayISO(): string {
   return new Date().toISOString().slice(0, 10);
@@ -65,60 +66,94 @@ interface TodayOverride {
 }
 
 export function PlanProvider({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
   const [plan, setPlan] = useState<WeeklyPlan>(defaultWeeklyPlan);
   const [todayOverride, setTodayOverride] = useState<TodayOverride | null>(null);
+  const [dayIndex, setDayIndex] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Carica plan e override da localStorage
+  // Il giorno corrente si calcola SOLO lato client: new Date() nel render
+  // darebbe un indice diverso su server e browser → hydration mismatch.
+  useEffect(() => {
+    setDayIndex(todayDayIndex());
+  }, []);
+
+  // plan → DB
+  useEffect(() => {
+    if (!user) {
+      setPlan(defaultWeeklyPlan);
+      setLoading(false);
+      return;
+    }
+    (async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("plan")
+        .eq("id", user.id)
+        .single();
+
+      if (error) console.error("[plan]", error.message);
+      // JSONB può essere null OPPURE {} (default colonna): valida la forma
+      const raw = data?.plan as Partial<WeeklyPlan> | null;
+      if (raw && Array.isArray(raw.sessions) && Array.isArray(raw.weekMap)) {
+        setPlan(raw as WeeklyPlan);
+      } else {
+        setPlan(defaultWeeklyPlan);
+      }
+      setLoading(false);
+    })();
+  }, [user]);
+
+  // todayOverride → localStorage (effimero, non sincronizzato tra dispositivi)
   useEffect(() => {
     try {
-      const savedPlan = localStorage.getItem(STORAGE_KEY);
-      if (savedPlan) setPlan(JSON.parse(savedPlan));
-    } catch {
-      /* fallback */
-    }
-    try {
-      const savedOverride = localStorage.getItem(STORAGE_KEY_TODAY);
-      if (savedOverride) {
-        const parsed: TodayOverride = JSON.parse(savedOverride);
-        // Se l'override è di un altro giorno, lo scartiamo
-        if (parsed.date === todayISO()) {
-          setTodayOverride(parsed);
-        } else {
-          localStorage.removeItem(STORAGE_KEY_TODAY);
-        }
-      }
+      const saved = localStorage.getItem(STORAGE_KEY_TODAY);
+      if (!saved) return;
+      const parsed: TodayOverride = JSON.parse(saved);
+      if (parsed.date === todayISO()) setTodayOverride(parsed);
+      else localStorage.removeItem(STORAGE_KEY_TODAY);
     } catch {
       /* ignora */
     }
   }, []);
 
-  const persistPlan = (next: WeeklyPlan) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  /** Scrive l'intero WeeklyPlan sul JSONB. Ottimistico con rollback. */
+  const persistPlan = async (next: WeeklyPlan) => {
+    if (!user) return;
+    const previous = plan;
     setPlan(next);
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ plan: next })
+      .eq("id", user.id);
+
+    if (error) {
+      console.error("[plan]", error.message);
+      setPlan(previous);
+    }
   };
 
   const persistTodayOverride = (next: TodayOverride | null) => {
-    if (next) {
-      localStorage.setItem(STORAGE_KEY_TODAY, JSON.stringify(next));
-    } else {
-      localStorage.removeItem(STORAGE_KEY_TODAY);
-    }
+    if (next) localStorage.setItem(STORAGE_KEY_TODAY, JSON.stringify(next));
+    else localStorage.removeItem(STORAGE_KEY_TODAY);
     setTodayOverride(next);
   };
 
-  const getSessionById = (id: string) =>
-    plan.sessions.find((s) => s.id === id);
+  const getSessionById = (id: string) => (plan.sessions ?? []).find((s) => s.id === id);
+  const getExerciseDef = (id: string) => exerciseDatabase.find((e) => e.id === id);
 
-  const getExerciseDef = (id: string) =>
-    exerciseDatabase.find((e) => e.id === id);
-
-  // Sessione di oggi: prima override composto, poi scheda base
   const todaySession = useMemo<WorkoutSession | null>(() => {
     if (todayOverride) return todayOverride.session;
-    const sessionId = plan.weekMap[todayDayIndex()];
+    if (dayIndex === null) return null;          // primo render
+    
+    // PROTEZIONE AGGIUNTA QUI: usiamo ?. per evitare il crash se weekMap non esiste
+        const sessionId = (plan.weekMap ?? [])[dayIndex];
     if (!sessionId) return null;
-    return plan.sessions.find((s) => s.id === sessionId) ?? null;
-  }, [plan, todayOverride]);
+    
+    // Stessa cosa qui: proteggiamo sessions
+    return plan?.sessions?.find((s) => s.id === sessionId) ?? null;
+  }, [plan, todayOverride, dayIndex]);
 
   const composeToday = (exercises: PlannedExercise[], name = "Sessione libera") => {
     const composed: WorkoutSession = {
@@ -131,40 +166,46 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     persistTodayOverride({ date: todayISO(), session: composed });
   };
 
-  const resetTodayOverride = () => {
-    persistTodayOverride(null);
-  };
+  const resetTodayOverride = () => persistTodayOverride(null);
 
-  const overrideDay = (dayIndex: number, sessionId: string | null) => {
-    const nextMap = [...plan.weekMap];
-    nextMap[dayIndex] = sessionId;
-    persistPlan({ ...plan, weekMap: nextMap });
-  };
+  
 
-  const updateSession = (session: WorkoutSession) => {
-    persistPlan({
+  const updateSession = async (session: WorkoutSession) => {
+    await persistPlan({
       ...plan,
       sessions: plan.sessions.map((s) => (s.id === session.id ? session : s)),
     });
   };
 
-  const createSession = (session: WorkoutSession) => {
-    persistPlan({ ...plan, sessions: [...plan.sessions, session] });
+    const createSession = async (session: WorkoutSession) => {
+    await persistPlan({
+      ...plan,
+      sessions: [...(plan.sessions ?? []), session],       // <-- MODIFICATA
+      weekMap: plan.weekMap ?? defaultWeeklyPlan.weekMap,  // <-- NUOVA
+    });
   };
 
-  const deleteSession = (sessionId: string) => {
-    persistPlan({
+  const deleteSession = async (sessionId: string) => {
+    await persistPlan({
       ...plan,
-      sessions: plan.sessions.filter((s) => s.id !== sessionId),
-      // Rimuovi anche dalle assegnazioni settimanali
-      weekMap: plan.weekMap.map((id) => (id === sessionId ? null : id)),
+      sessions: (plan.sessions ?? []).filter((s) => s.id !== sessionId),   // <-- MODIFICATA
+      weekMap: (plan.weekMap ?? defaultWeeklyPlan.weekMap).map((id) =>
+        id === sessionId ? null : id
+      ),
     });
+  };
+
+  const overrideDay = async (dayIdx: number, sessionId: string | null) => {
+    const nextMap = [...(plan.weekMap ?? defaultWeeklyPlan.weekMap)];   // <-- MODIFICATA
+    nextMap[dayIdx] = sessionId;
+    await persistPlan({ ...plan, weekMap: nextMap });
   };
 
   return (
     <PlanContext.Provider
       value={{
         plan,
+        loading,
         todaySession,
         isTodayComposed: todayOverride !== null,
         getSessionById,

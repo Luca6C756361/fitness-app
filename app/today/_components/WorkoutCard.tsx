@@ -258,7 +258,7 @@ function SessionSwitchModal({
         La scelta sostituisce la proposta di oggi. La scheda base resta invariata.
       </p>
       <ul className="space-y-2">
-        {sessions.map((s) => {
+        {sessions?.map((s) => {
           const isCurrent = s.id === currentId;
           return (
             <li key={s.id}>
@@ -285,7 +285,7 @@ function SessionSwitchModal({
             </li>
           );
         })}
-        {sessions.length === 0 && (
+        {(sessions?.length || 0) === 0 && (
           <p className="py-6 text-center text-sm text-emerald-800/50">
             Nessuna sessione nella scheda.
           </p>

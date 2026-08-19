@@ -67,42 +67,6 @@ function calcNutrients(entry: DiaryEntry): Totals {
 }
 
 export function DiaryProvider({ children }: { children: React.ReactNode }) {
-  /*const [entries, setEntries] = useState<DiaryEntry[]>([]);
-
-  // Carica da localStorage
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) setEntries(JSON.parse(saved));
-    } catch {
-      fallback: array vuoto
-    }
-  }, []);
-
-  const persist = (next: DiaryEntry[]) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    setEntries(next);
-  };
-
-  const addEntry = (food: Food, quantity: number) => {
-    const now = new Date();
-    const time = `${String(now.getHours()).padStart(2, "0")}:${String(
-      now.getMinutes()
-    ).padStart(2, "0")}`;
-    const newEntry: DiaryEntry = {
-      id: Date.now(),
-      date: todayISO(),
-      time,
-      food,
-      quantity,
-    };
-    persist([...entries, newEntry]);
-  };
-
-  const removeEntry = (id: number) => {
-    persist(entries.filter((e) => e.id !== id));
-  };*/
-export function DiaryProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [loading, setLoading] = useState(true);

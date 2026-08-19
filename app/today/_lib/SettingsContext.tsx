@@ -1,6 +1,8 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "../../_lib/supabase/client";   // <-- NUOVO
+import { useAuth } from "../../_lib/AuthContext";        // <-- NUOVO
 
 export type Theme = "light" | "dark";
 export type WeightUnit = "kg" | "lb";
@@ -33,57 +35,101 @@ const defaultSettings: Settings = {
 
 interface SettingsContextValue {
   settings: Settings;
-  updateSettings: (patch: Partial<Settings>) => void;
-  resetSettings: () => void;
-  resetAll: () => void;
+  loading: boolean;                                        // <-- NUOVO
+  updateSettings: (patch: Partial<Settings>) => Promise<void>;
+  resetSettings: () => Promise<void>;
+  resetAll: () => Promise<void>;
 }
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
-const STORAGE_KEY = "fitness-app:settings";
+// const STORAGE_KEY = "fitness-app:settings";   ← CANCELLA
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
   const [settings, setSettings] = useState<Settings>(defaultSettings);
+  const [loading, setLoading] = useState(true);
 
+  // Carica settings dal profilo
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) setSettings({ ...defaultSettings, ...JSON.parse(saved) });
-    } catch {
-      /* fallback */
+    if (!user) {
+      setSettings(defaultSettings);
+      setLoading(false);
+      return;
     }
-  }, []);
+    (async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("settings")
+        .eq("id", user.id)
+        .single();
 
+      if (error) console.error("[settings]", error.message);
+      // merge coi default: gestisce chiavi nuove aggiunte dopo il primo salvataggio
+      if (data?.settings) setSettings({ ...defaultSettings, ...data.settings });
+      setLoading(false);
+    })();
+  }, [user]);
+
+  // Applica il tema al DOM (nessuna scrittura: sicuro in useEffect)
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", settings.theme);
   }, [settings.theme]);
 
-  const updateSettings = (patch: Partial<Settings>) => {
-    setSettings((prev) => {
-      const next = { ...prev, ...patch };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      return next;
-    });
+  /** Scrive l'intero oggetto settings (JSONB non supporta patch parziali lato PostgREST). */
+  const persist = async (next: Settings) => {
+    if (!user) return;
+    const previous = settings;
+    setSettings(next);                                   // ottimistico
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ settings: next })
+      .eq("id", user.id);
+
+    if (error) {
+      console.error("[settings]", error.message);
+      setSettings(previous);                             // rollback
+    }
   };
 
-  const resetSettings = () => {
-    setSettings(defaultSettings);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultSettings));
+  const updateSettings = async (patch: Partial<Settings>) => {
+    await persist({ ...settings, ...patch });
   };
 
-  /** Reset TOTALE: cancella tutti i dati locali. */
-  const resetAll = () => {
-    localStorage.removeItem("fitness-app:profile");
-    localStorage.removeItem("fitness-app:goals");
-    localStorage.removeItem("fitness-app:diary");
-    localStorage.removeItem("fitness-app:workoutLogs");
-    localStorage.removeItem("fitness-app:weight");
-    localStorage.removeItem(STORAGE_KEY);
-    window.location.href = "/today";
+  const resetSettings = async () => {
+    await persist(defaultSettings);
+  };
+
+  /** Reset TOTALE: svuota le tabelle dell'utente e azzera i JSONB del profilo. */
+  const resetAll = async () => {
+    if (!user) return;
+
+    // PostgREST rifiuta le DELETE senza filtro: .eq() è obbligatorio anche con RLS attiva
+    await Promise.all([
+      supabase.from("diary_entries").delete().eq("user_id", user.id),
+      supabase.from("weight_entries").delete().eq("user_id", user.id),
+      supabase.from("workout_logs").delete().eq("user_id", user.id),
+      supabase.from("active_sessions").delete().eq("user_id", user.id),
+    ]);
+
+    await supabase
+      .from("profiles")
+      .update({
+        name: null, avatar: null, age: null, sex: null,
+        height: null, weight: null, activity: null,
+        goals: null, plan: null,
+        settings: defaultSettings,
+      })
+      .eq("id", user.id);
+
+    localStorage.removeItem("fitness-app:todayOverride");
+
+    window.location.href = "/today";   // reload completo: ricarica tutti i Context
   };
 
   return (
     <SettingsContext.Provider
-      value={{ settings, updateSettings, resetSettings, resetAll }}
+      value={{ settings, loading, updateSettings, resetSettings, resetAll }}
     >
       {children}
     </SettingsContext.Provider>

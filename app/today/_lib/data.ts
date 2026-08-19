@@ -5,8 +5,6 @@ import type {
   UserGoals,
   UserProfile,
   WeightEntry,
-  Workout,
-  WorkoutLog,
 } from "./types";
 
 /* Dati mock: sostituiscili con le chiamate al DB/API. */
@@ -37,17 +35,6 @@ export const weightHistory: WeightEntry[] = [
   { date: "2026-08-01", weight: 75.4 },
 ];
 
-export const workout: Workout = {
-  session: "Sessione A — Forza Base",
-  focus: "Petto · Tricipiti · Spalle",
-  estimatedMinutes: 35,
-  exercises: [
-    { name: "Panca Piana", sets: 3, reps: 15, scheme: "3 × 15" },
-    { name: "Dip alle parallele", sets: 3, reps: 10, scheme: "3 × 10" },
-    { name: "Arnold Press", sets: 3, reps: 10, scheme: "3 × 10" },
-    { name: "Croci ai cavi", sets: 3, reps: 12, scheme: "3 × 12" },
-  ],
-};
 
 export const macros: Macro[] = [
   { key: "carbs", label: "Carbo", current: 120, goal: 250, kcalPerGram: 4, color: "#E8B04B" },
@@ -77,15 +64,6 @@ export const dailyKcalHistory: DailyKcal[] = [
   { date: "2026-07-30", kcal: 2050 },
   { date: "2026-07-31", kcal: 2380 },
   { date: "2026-08-01", kcal: 1350 },
-];
-
-/** Log allenamenti completati (per streak). */
-export const workoutLogs: WorkoutLog[] = [
-  { date: "2026-07-24", session: "Sessione B — Gambe" },
-  { date: "2026-07-26", session: "Sessione A — Forza Base" },
-  { date: "2026-07-28", session: "Sessione C — Schiena e Bicipiti" },
-  { date: "2026-07-30", session: "Sessione A — Forza Base" },
-  { date: "2026-07-31", session: "Sessione B — Gambe" },
 ];
 
 /** Database alimenti — valori nutrizionali per 100g o per pezzo. */

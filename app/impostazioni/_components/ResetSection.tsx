@@ -8,6 +8,7 @@ import { useSettings } from "../../today/_lib/SettingsContext";
 export default function ResetSection() {
   const { resetAll } = useSettings();
   const [confirming, setConfirming] = useState(false);
+  const [resetting, setResetting] = useState(false);
 
   return (
     <section className="rounded-2xl border border-red-200/50 bg-red-50/30 p-6 shadow-sm">
@@ -19,8 +20,8 @@ export default function ResetSection() {
       </div>
 
       <p className="mb-4 text-sm text-red-900/70">
-        Il reset cancella <strong>profilo, obiettivi e impostazioni</strong>{" "}
-        salvati sul dispositivo. L'operazione è irreversibile.
+        Il reset cancella <strong>profilo, obiettivi, diario, peso e allenamenti</strong>{" "}
+        dal server. L'operazione è irreversibile.
       </p>
 
       {!confirming ? (
@@ -45,10 +46,14 @@ export default function ResetSection() {
             </button>
             <button
               type="button"
-              onClick={resetAll}
-              className="rounded-xl bg-red-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700"
+              disabled={resetting}                                   // <-- NUOVO
+              onClick={async () => {                                 // <-- MODIFICATO
+                setResetting(true);
+                await resetAll();
+              }}
+              className="rounded-xl bg-red-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 disabled:opacity-50"
             >
-              Sì, resetta
+              {resetting ? "Reset in corso…" : "Sì, resetta"}
             </button>
           </div>
         </div>

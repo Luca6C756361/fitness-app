@@ -32,7 +32,7 @@ export default function SessionList() {
           <div className="flex items-center gap-2">
             <Dumbbell className="h-4 w-4 text-teal-700" />
             <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
-              Le mie sessioni ({plan.sessions.length})
+              Le mie sessioni ({plan?.sessions?.length || 0})
             </h2>
           </div>
           <button
@@ -45,7 +45,7 @@ export default function SessionList() {
           </button>
         </div>
 
-        {plan.sessions.length === 0 ? (
+        {(plan?.sessions?.length || 0) === 0 ? (
           <p className="py-6 text-center text-sm text-emerald-800/50">
             Nessuna sessione. Creane una per iniziare a costruire la scheda.
           </p>

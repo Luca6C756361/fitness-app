@@ -105,7 +105,7 @@ export default function WeightHistoryChart() {
                     border: "1px solid #E5E7EB",
                     fontSize: "0.8rem",
                   }}
-                  formatter={(v: number) => [`${v} kg`, "Peso"]}
+                  formatter={(v) => [`${Number(v)} kg`, "Peso"]}
                 />
                 <ReferenceLine
                   y={goals.weightTarget}

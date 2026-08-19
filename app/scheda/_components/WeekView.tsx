@@ -27,14 +27,18 @@ export default function WeekView() {
       </div>
 
       <ul className="space-y-2">
-        {displayOrder.map((dayIndex) => {
-          const sessionId = plan.weekMap[dayIndex];
-          const session = sessionId
-            ? plan.sessions.find((s) => s.id === sessionId)
-            : null;
-          const isToday = dayIndex === todayDayIndex;
+  {displayOrder.map((dayIndex) => {
+    // 1. Aggiungi i punti interrogativi qui:
+    const sessionId = plan?.weekMap?.[dayIndex];
+    
+    const session = sessionId
+      // 2. E aggiungi i punti interrogativi anche qui:
+      ? plan?.sessions?.find((s) => s.id === sessionId)
+      : null;
+      
+    const isToday = dayIndex === todayDayIndex;
 
-          return (
+    return (
             <li
               key={dayIndex}
               className={`flex items-center gap-3 rounded-xl border p-3 ${
@@ -65,7 +69,7 @@ export default function WeekView() {
                   className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
                 >
                   <option value="">— Riposo —</option>
-                  {plan.sessions.map((s) => (
+                  {plan?.sessions?.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name}
                     </option>

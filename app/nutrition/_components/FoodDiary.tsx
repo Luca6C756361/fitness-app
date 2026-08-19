@@ -13,9 +13,8 @@ interface Totals {
 interface FoodDiaryProps {
   entries: DiaryEntry[];
   totals: Totals;
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void | Promise<void>;   // <-- MODIFICATA (era: (id: number) => void)
 }
-
 /** Diario alimentare del giorno. */
 export default function FoodDiary({ entries, totals, onRemove }: FoodDiaryProps) {
   return (

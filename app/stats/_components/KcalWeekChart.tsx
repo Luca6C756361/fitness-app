@@ -68,7 +68,7 @@ export default function KcalWeekChart() {
                 border: "1px solid #E5E7EB",
                 fontSize: "0.8rem",
               }}
-              formatter={(v: number) => [`${v} kcal`, "Consumate"]}
+              formatter={(v) => [`${Number(v)} kcal`, "Consumate"]}
             />
             <ReferenceLine
               y={goals.kcalTarget}
