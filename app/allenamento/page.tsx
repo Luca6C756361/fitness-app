@@ -133,8 +133,8 @@ export default function AllenamentoPage() {
     }
   };
 
-  const handleFinish = () => {
-    const log = finishSession(durationSec);
+    const handleFinish = async () => {                      // <-- MODIFICATA
+    const log = await finishSession(durationSec);         // <-- MODIFICATA
     if (log) router.push("/today");
   };
 

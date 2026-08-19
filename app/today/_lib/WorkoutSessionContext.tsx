@@ -1,6 +1,8 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { supabase } from "../../_lib/supabase/client";   // <-- NUOVO
+import { useAuth } from "../../_lib/AuthContext";        // <-- NUOVO
 import type {
   CompletedExercise,
   CompletedSet,
@@ -49,30 +51,33 @@ interface WorkoutStats {
 interface WorkoutSessionContextValue {
   active: ActiveSession | null;
   logs: DetailedWorkoutLog[];
+  loading: boolean;                                          // <-- NUOVO
   stats: WorkoutStats;
   records: ExerciseRecord[];
-  /** PR appena battuto nella sessione live (null se nessuno). */
   lastPR: PRHit | null;
   dismissPR: () => void;
 
-  // Gestione sessione attiva
   startSession: (session: WorkoutSession, exerciseDefName: (id: string) => string) => void;
   addSet: (exerciseIndex: number, set: CompletedSet) => void;
   removeLastSet: (exerciseIndex: number) => void;
   cancelSession: () => void;
-  finishSession: (durationSeconds: number) => DetailedWorkoutLog | null;
+  finishSession: (durationSeconds: number) => Promise<DetailedWorkoutLog | null>;
 }
 
 const WorkoutSessionContext = createContext<WorkoutSessionContextValue | null>(null);
-const STORAGE_KEY_LOGS = "fitness-app:workoutLogs";
-const STORAGE_KEY_ACTIVE = "fitness-app:activeSession";
+// const STORAGE_KEY_LOGS = ...      ← CANCELLA
+// const STORAGE_KEY_ACTIVE = ...    ← CANCELLA
+// const initialLogs = [ ... ]       ← CANCELLA tutto il seed (righe ~65-80)
 
 function todayISO(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
 /** Seed iniziale per far vedere subito qualche statistica. */
-const initialLogs: DetailedWorkoutLog[] = [
+
+//Commentato e non cancellato che non so cosa faccia
+//Dovrebbero esser i dati finti-- di prova
+/*const initialLogs: DetailedWorkoutLog[] = [
   {
     id: 1,
     date: "2026-07-30",
@@ -87,46 +92,78 @@ const initialLogs: DetailedWorkoutLog[] = [
     durationSeconds: 2100,
     exercises: [],
   },
-];
+];*/
+
 
 export function WorkoutSessionProvider({ children }: { children: React.ReactNode }) {
-  const [logs, setLogs] = useState<DetailedWorkoutLog[]>(initialLogs);
+  const { user } = useAuth();
+  const [logs, setLogs] = useState<DetailedWorkoutLog[]>([]);
   const [active, setActive] = useState<ActiveSession | null>(null);
   const [lastPR, setLastPR] = useState<PRHit | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const dismissPR = useCallback(() => setLastPR(null), []);
-
-  /** Record storici, ricalcolati solo quando cambiano i log. */
   const records = useMemo(() => buildAllRecords(logs), [logs]);
 
-  // Carica da localStorage
+  // Carica storico + eventuale sessione interrotta
   useEffect(() => {
-    try {
-      const savedLogs = localStorage.getItem(STORAGE_KEY_LOGS);
-      if (savedLogs) setLogs(JSON.parse(savedLogs));
-    } catch {
-      /* seed */
+    if (!user) {
+      setLogs([]);
+      setActive(null);
+      setLoading(false);
+      return;
     }
-    try {
-      const savedActive = localStorage.getItem(STORAGE_KEY_ACTIVE);
-      if (savedActive) setActive(JSON.parse(savedActive));
-    } catch {
-      /* ignora */
-    }
-  }, []);
+    (async () => {
+      const [logsRes, activeRes] = await Promise.all([
+        supabase
+          .from("workout_logs")
+          .select("id, date, session_name, duration_seconds, exercises")
+          .order("date", { ascending: false })
+          .limit(200),
+        // maybeSingle: 0 righe non è un errore (nessuna sessione in corso)
+        supabase.from("active_sessions").select("data").eq("user_id", user.id).maybeSingle(),
+      ]);
 
-  const persistLogs = (next: DetailedWorkoutLog[]) => {
-    localStorage.setItem(STORAGE_KEY_LOGS, JSON.stringify(next));
-    setLogs(next);
-  };
+      if (logsRes.error) console.error("[workout]", logsRes.error.message);
+      if (logsRes.data) {
+        setLogs(
+          logsRes.data.map((r) => ({
+            id: r.id as string,
+            date: r.date as string,
+            sessionName: r.session_name as string,
+            durationSeconds: Number(r.duration_seconds),   // numeric → stringa
+            exercises: (r.exercises ?? []) as CompletedExercise[],
+          }))
+        );
+      }
 
+      if (activeRes.error) console.error("[workout:active]", activeRes.error.message);
+      if (activeRes.data?.data) setActive(activeRes.data.data as ActiveSession);
+
+      setLoading(false);
+    })();
+  }, [user]);
+
+  /**
+   * Sessione attiva: upsert su PK user_id (una sola sessione in corso per utente).
+   * Fire-and-forget: la UI non deve attendere la rete a ogni set.
+   */
   const persistActive = (next: ActiveSession | null) => {
-    if (next) {
-      localStorage.setItem(STORAGE_KEY_ACTIVE, JSON.stringify(next));
-    } else {
-      localStorage.removeItem(STORAGE_KEY_ACTIVE);
-    }
     setActive(next);
+    if (!user) return;
+
+    if (next) {
+      supabase
+        .from("active_sessions")
+        .upsert({ user_id: user.id, data: next })
+        .then(({ error }) => error && console.error("[workout:active]", error.message));
+    } else {
+      supabase
+        .from("active_sessions")
+        .delete()
+        .eq("user_id", user.id)
+        .then(({ error }) => error && console.error("[workout:active]", error.message));
+    }
   };
 
   const startSession = (
@@ -184,34 +221,59 @@ export function WorkoutSessionProvider({ children }: { children: React.ReactNode
     persistActive(null);
   };
 
-  const finishSession = (durationSeconds: number): DetailedWorkoutLog | null => {
+  const finishSession = async (
+    durationSeconds: number
+  ): Promise<DetailedWorkoutLog | null> => {
     setLastPR(null);
-    if (!active) return null;
+    if (!active || !user) return null;
 
-    const log: DetailedWorkoutLog = {
-      id: Date.now(),
-      date: todayISO(),
-      sessionName: active.sessionName,
-      durationSeconds,
-      exercises: active.exercises
-        .filter((ex) => ex.sets.length > 0) // solo esercizi con almeno un set
-        .map<CompletedExercise>((ex) => ({
-          exerciseId: ex.exerciseId,
-          name: ex.name,
-          sets: ex.sets,
-        })),
-    };
-
-    // Evita duplicati dello stesso allenamento nello stesso giorno
     const today = todayISO();
+    const exercises = active.exercises
+      .filter((ex) => ex.sets.length > 0)
+      .map<CompletedExercise>((ex) => ({
+        exerciseId: ex.exerciseId,
+        name: ex.name,
+        sets: ex.sets,
+      }));
+
+    // Anti-duplicato: stesso nome sessione, stesso giorno
     const alreadyToday = logs.some(
       (l) => l.date === today && l.sessionName === active.sessionName
     );
+
+    let saved: DetailedWorkoutLog | null = null;
+
     if (!alreadyToday) {
-      persistLogs([...logs, log]);
+      // select().single() obbligatorio: serve l'uuid generato dal DB
+      const { data, error } = await supabase
+        .from("workout_logs")
+        .insert({
+          user_id: user.id,
+          date: today,
+          session_name: active.sessionName,
+          duration_seconds: durationSeconds,
+          exercises,
+        })
+        .select("id, date, session_name, duration_seconds, exercises")
+        .single();
+
+      if (error) {
+        console.error("[workout]", error.message);
+      } else if (data) {
+        saved = {
+          id: data.id as string,
+          date: data.date as string,
+          sessionName: data.session_name as string,
+          durationSeconds: Number(data.duration_seconds),
+          exercises: (data.exercises ?? []) as CompletedExercise[],
+        };
+        // forma funzionale: siamo dopo un await, `logs` in closure è stale
+        setLogs((prev) => [saved!, ...prev]);
+      }
     }
+
     persistActive(null);
-    return log;
+    return saved;
   };
 
   // Statistiche derivate
@@ -249,6 +311,7 @@ export function WorkoutSessionProvider({ children }: { children: React.ReactNode
         logs,
         stats,
         records,     
+        loading,
         lastPR,       
         dismissPR,
         startSession,

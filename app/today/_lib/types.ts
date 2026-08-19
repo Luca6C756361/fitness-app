@@ -158,8 +158,8 @@ export interface CompletedExercise {
 }
 
 export interface DetailedWorkoutLog {
-  id: number;
-  date: string; // ISO YYYY-MM-DD
+  id: string;   // <-- MODIFICATA (era number) — uuid generato dal DB
+  date: string;
   sessionName: string;
   durationSeconds: number;
   exercises: CompletedExercise[];
