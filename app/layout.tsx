@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata,Viewport } from "next";
 import "./globals.css";
 import { UserProvider } from "./today/_lib/UserContext";
 import { SettingsProvider } from "./today/_lib/SettingsContext";
@@ -9,10 +9,15 @@ import { WorkoutSessionProvider } from "./today/_lib/WorkoutSessionContext";
 import { AuthProvider } from "./_lib/AuthContext";  
 import BottomNav from "./_components/BottomNav";
 import Sidebar from "./_components/Sidebar";
+import ServiceWorker from "./_components/ServiceWorker";   // <-- NUOVO
 
 export const metadata: Metadata = {
   title: "Fitness App",
   description: "Dashboard fitness e nutrizionale",
+};
+export const viewport: Viewport = {                        // <-- NUOVO
+  themeColor: "#0d9488",
+  viewportFit: "cover",
 };
 
 /**
@@ -35,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body>
+        <ServiceWorker />
         <AuthProvider>    
           <SettingsProvider>
             <UserProvider>

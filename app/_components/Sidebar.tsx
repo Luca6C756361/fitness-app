@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { supabase } from "../_lib/supabase/client";   // <-- NUOVO
 import { usePathname } from "next/navigation";
 import {
   Home,
@@ -24,6 +25,11 @@ const items = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+
+  const handleLogout = async () => {                   // <-- NUOVO
+    await supabase.auth.signOut();
+    window.location.href = "/login";
+  };
 
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 flex-col border-r border-emerald-900/10 bg-white md:flex">
@@ -61,10 +67,11 @@ export default function Sidebar() {
       </nav>
 
       <div className="border-t border-emerald-900/5 p-3">
-        <button
-          type="button"
-          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-50"
-        >
+          <button
+            type="button"
+            onClick={handleLogout}                        // <-- NUOVO
+            className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-600 transition hover:bg-red-50"
+          >
           <LogOut className="h-4 w-4" />
           Esci
         </button>

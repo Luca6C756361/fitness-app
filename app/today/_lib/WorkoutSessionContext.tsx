@@ -16,17 +16,7 @@ import {
   type ExerciseRecord,
   type PRHit,
 } from "./prStats";
-/**
- * WorkoutSessionContext: gestisce l'allenamento in corso e lo storico completato.
- *
- * Concetti:
- * - active: la sessione in corso (con dati compilati durante l'esecuzione)
- * - logs: storico di sessioni completate (persistente in localStorage)
- * - stats: derivati per la pagina /stats (mese, streak, ultima)
- *
- * Il timer NON vive qui — sta nella pagina /allenamento, che lo gestisce
- * localmente. Qui salviamo solo il totale al momento del salvataggio.
- */
+
 
 interface ActiveExercise {
   exerciseId: string;

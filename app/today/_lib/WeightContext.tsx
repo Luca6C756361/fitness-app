@@ -1,10 +1,10 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+
 import { supabase } from "../../_lib/supabase/client";
 import { useAuth } from "../../_lib/AuthContext";
 import { useUser } from "./UserContext";
-import type { WeightEntry } from "./types";
+
 
 /**
  * Storico misurazioni peso — fonte di verità sul peso corporeo.
@@ -124,7 +124,7 @@ export function useWeight() {
 
 
 
-/* Vecchio codice :"use client";
+
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { WeightEntry } from "./types";

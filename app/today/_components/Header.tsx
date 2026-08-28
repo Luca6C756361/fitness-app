@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "../../_lib/supabase/client";   // <-- NUOVO
 import Link from "next/link";
 import {
   Scale,
@@ -43,6 +44,13 @@ export default function Header() {
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, [menuOpen]);
+    const handleLogout = async () => {
+    setMenuOpen(false);
+    await supabase.auth.signOut();
+    // Reload completo, non router.push: azzera lo stato di TUTTI i context
+    window.location.href = "/login";
+  };
+
 
   return (
     <header className="flex items-center justify-between gap-4">
@@ -143,14 +151,14 @@ export default function Header() {
                   Impostazioni
                 </Link>
                 <div className="my-1 border-t border-emerald-900/5" />
-                <button
-                  type="button"
-                  onClick={() => setMenuOpen(false)}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-red-600 transition hover:bg-red-50"
-                >
-                  <LogOut className="h-4 w-4" />
-                  Esci
-                </button>
+                  <button
+                    type="button"
+                    onClick={handleLogout}                    // <-- MODIFICATA
+                    className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-red-600 transition hover:bg-red-50"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Esci
+                  </button>
               </nav>
             </div>
           )}
