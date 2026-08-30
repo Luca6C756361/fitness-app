@@ -54,15 +54,17 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-sm space-y-4">
-        <h1 className="text-2xl font-bold">
-          {mode === "login" ? "Accedi" : "Registrati"}
-        </h1>
+        <div className="flex justify-center w-full">
+          <h1 className="text-2xl font-bold">
+            {mode === "login" ? "Accedi" : "Registrati"}
+          </h1>
+        </div>
         <input className="w-full rounded border p-3" type="email" placeholder="Email"
           value={email} onChange={(e) => setEmail(e.target.value)} />
         <input className="w-full rounded border p-3" type="password" placeholder="Password"
           value={password} onChange={(e) => setPassword(e.target.value)} />
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        {notice && <p className="text-sm text-emerald-700">{notice}</p>}   {/* <-- NUOVO */}
+        {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+        {notice && <p className="text-sm text-emerald-700 text-center">{notice}</p>}   {/* <-- NUOVO */}
         <button onClick={submit} disabled={loading}
           className="w-full rounded bg-black p-3 text-white disabled:opacity-50">
           {loading ? "..." : mode === "login" ? "Entra" : "Crea account"}
