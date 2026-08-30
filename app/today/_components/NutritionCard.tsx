@@ -41,12 +41,12 @@ export default function NutritionCard() {
   ];
 
   return (
-    <section className="flex flex-col rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="flex flex-col rounded-none bg-[#f5f5f5] p-6">
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm">
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#111111]">
           <Apple className="h-5 w-5" />
         </span>
-        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[#707072]">
           Obiettivo calorico
         </h2>
       </div>
@@ -58,25 +58,20 @@ export default function NutritionCard() {
         {macroRows.map((m) => {
           const pct = m.goal > 0 ? Math.min((m.current / m.goal) * 100, 100) : 0;
           return (
-            <div key={m.key} className="rounded-xl bg-[#FAF7F0] p-3">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ backgroundColor: m.color }}
-                  />
-                  <span className="text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
-                    {m.label}
+            <div key={m.key} className="rounded-none bg-white p-3">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: m.color }} />
+                    <span className="text-[11px] font-bold uppercase tracking-wide text-[#707072]">
+                      {m.label}
+                    </span>
                   </span>
-                </span>
-                <span className="text-xs font-bold text-[#111111] tabular-nums">
-                  {m.current}
-                  <span className="font-medium text-[#111111]/50">
-                    {" "}/ {m.goal}g
+                  <span className="text-xs font-bold text-[#111111] tabular-nums">
+                    {m.current}
+                    <span className="font-medium text-[#707072]"> / {m.goal}g</span>
                   </span>
-                </span>
-              </div>
-              <div className="h-1.5 overflow-hidden rounded-full bg-emerald-100/60">
+                </div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-[#e5e5e5]">
                 <div
                   className="h-full rounded-full transition-all duration-500"
                   style={{ width: `${pct}%`, backgroundColor: m.color }}
@@ -90,18 +85,18 @@ export default function NutritionCard() {
       {/* I bottoni ora sono link a /nutrition invece di modali locali */}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <Link
-          href="/nutrition"
-          className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700"
-        >
-          <Plus className="h-4 w-4" />
-          Aggiungi pasto
-        </Link>
-        <Link
-          href="/nutrition"
-          className="flex items-center justify-center gap-2 rounded-xl border border-emerald-900/10 bg-white py-3 text-sm font-bold text-[#111111] shadow-sm transition hover:bg-emerald-50"
-        >
-          <ListChecks className="h-4 w-4" />
-          Dettagli pasti
+            href="/nutrition"
+            className="flex items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-sm font-bold text-white transition hover:bg-[#2c2c2c]"
+          >
+            <Plus className="h-4 w-4" />
+            Aggiungi pasto
+          </Link>
+          <Link
+            href="/nutrition"
+            className="flex items-center justify-center gap-2 rounded-full border border-[#111111] bg-transparent py-3 text-sm font-bold text-[#111111] transition hover:bg-[#f5f5f5]"
+          >
+            <ListChecks className="h-4 w-4" />
+            Dettagli pasti
         </Link>
       </div>
     </section>
