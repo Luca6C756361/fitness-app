@@ -29,17 +29,17 @@ export default function GoalsForm() {
   };
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center gap-2">
-        <Target className="h-4 w-4 text-teal-600" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+        <Target className="h-4 w-4 text-[#3F9B95]" />
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
           Obiettivi
         </h2>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Peso target (kg)
           </label>
           <input
@@ -47,55 +47,55 @@ export default function GoalsForm() {
             step="0.1"
             value={weightTarget}
             onChange={(e) => setWeightTarget(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-teal-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[#3F9B95] focus:ring-2 focus:ring-[#3F9B95]/30"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Calorie giornaliere (kcal)
           </label>
           <input
             type="number"
             value={kcalTarget}
             onChange={(e) => setKcalTarget(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-teal-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[#3F9B95] focus:ring-2 focus:ring-[#3F9B95]/30"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Carbo (g)
           </label>
           <input
             type="number"
             value={carbsTarget}
             onChange={(e) => setCarbsTarget(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-teal-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[#3F9B95] focus:ring-2 focus:ring-[#3F9B95]/30"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Proteine (g)
           </label>
           <input
             type="number"
             value={proteinTarget}
             onChange={(e) => setProteinTarget(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-teal-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[#3F9B95] focus:ring-2 focus:ring-[#3F9B95]/30"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Grassi (g)
           </label>
           <input
             type="number"
             value={fatTarget}
             onChange={(e) => setFatTarget(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-teal-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[#3F9B95] focus:ring-2 focus:ring-[#3F9B95]/30"
           />
         </div>
       </div>
@@ -103,8 +103,10 @@ export default function GoalsForm() {
       <button
         type="button"
         onClick={handleSave}
-        className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white shadow-sm transition ${
-          saved ? "bg-emerald-600" : "bg-teal-600 hover:bg-teal-700"
+        className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white transition ${
+          saved
+            ? "bg-[var(--kh-secondary)] shadow-[var(--kh-glow-secondary)]"
+            : "bg-[var(--kh-primary)] shadow-[var(--kh-glow-primary)] hover:bg-[var(--kh-primary-hover)]"
         }`}
       >
         {saved ? (

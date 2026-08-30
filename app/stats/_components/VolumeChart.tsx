@@ -60,16 +60,16 @@ export default function VolumeChart() {
   const chartHeight = Math.max(160, data.length * 38);
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Dumbbell className="h-4 w-4 text-[#111111]" />
-          <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+          <Dumbbell className="h-4 w-4 text-[var(--kh-primary)]" />
+          <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
             Volume per gruppo muscolare
           </h2>
         </div>
 
-        <div className="flex gap-1 rounded-full bg-emerald-50 p-1">
+        <div className="flex gap-1 rounded-full bg-[var(--kh-surface-2)] p-1">
           {(["week", "month"] as VolumePeriod[]).map((p) => (
             <button
               key={p}
@@ -77,8 +77,8 @@ export default function VolumeChart() {
               onClick={() => setPeriod(p)}
               className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide transition ${
                 period === p
-                  ? "bg-white text-[#111111] shadow-sm"
-                  : "text-[#111111]/50 hover:text-[#111111]"
+                  ? "bg-[var(--kh-surface-1)] text-[var(--kh-ink)] shadow-sm"
+                  : "text-[var(--kh-ink-subtle)] hover:text-[var(--kh-ink)]"
               }`}
             >
               {p === "week" ? "Sett." : "Mese"}
@@ -87,10 +87,10 @@ export default function VolumeChart() {
         </div>
       </div>
 
-      <p className="mb-4 flex items-center gap-2 text-sm font-medium text-[#111111]/60">
+      <p className="mb-4 flex items-center gap-2 text-sm font-medium text-[var(--kh-ink-muted)]">
         <span>
           Totale ultimi {periodLabels[period]}:{" "}
-          <span className="font-bold text-[#111111] tabular-nums">
+          <span className="font-mono font-bold text-[var(--kh-ink)] tabular-nums">
             {total.toLocaleString("it-IT")} kg
           </span>
         </span>
@@ -98,8 +98,8 @@ export default function VolumeChart() {
           <span
             className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums ${
               delta >= 0
-                ? "bg-emerald-50 text-emerald-700"
-                : "bg-amber-50 text-amber-700"
+                ? "bg-[var(--kh-primary)]/15 text-[var(--kh-primary)]"
+                : "bg-amber-500/15 text-amber-600"
             }`}
           >
             {delta >= 0 ? (
@@ -114,11 +114,11 @@ export default function VolumeChart() {
       </p>
 
       {data.length === 0 ? (
-        <div className="rounded-xl bg-[#FAF7F0] p-6 text-center">
-          <p className="text-sm font-medium text-[#111111]/60">
+        <div className="rounded-xl bg-[var(--kh-surface-2)] p-6 text-center">
+          <p className="text-sm font-medium text-[var(--kh-ink-muted)]">
             Nessun carico registrato negli ultimi {periodLabels[period]}.
           </p>
-          <p className="mt-1 text-xs text-[#111111]/40">
+          <p className="mt-1 text-xs text-[var(--kh-ink-subtle)]">
             Completa un allenamento per vedere qui il volume.
           </p>
         </div>
@@ -132,7 +132,7 @@ export default function VolumeChart() {
             >
               <XAxis
                 type="number"
-                tick={{ fontSize: 11, fill: "#6B7280" }}
+                tick={{ fontSize: 11, fill: "var(--kh-ink-subtle)" }}
                 axisLine={false}
                 tickLine={false}
               />
@@ -140,15 +140,17 @@ export default function VolumeChart() {
                 type="category"
                 dataKey="label"
                 width={92}
-                tick={{ fontSize: 11, fill: "#6B7280" }}
+                tick={{ fontSize: 11, fill: "var(--kh-ink-subtle)" }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
-                cursor={{ fill: "#FAF7F0" }}
+                cursor={{ fill: "var(--kh-surface-2)" }}
                 contentStyle={{
                   borderRadius: "0.75rem",
-                  border: "1px solid #E5E7EB",
+                  border: "1px solid var(--kh-hairline)",
+                  backgroundColor: "var(--kh-surface-1)",
+                  color: "var(--kh-ink)",
                   fontSize: "0.8rem",
                 }}
                 formatter={(v) => [

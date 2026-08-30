@@ -67,20 +67,20 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
   };
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
+      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-subtle)]">
         Cerca alimento
       </h2>
 
       {/* Barra di ricerca */}
       <div className="relative mb-3">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#111111]/40" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--kh-ink-subtle)]" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Cerca (es. pollo, avena, mela)…"
-          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-[#111111] placeholder:text-[#111111]/40 outline-none focus:ring-2 focus:ring-emerald-300"
+          className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-2.5 pl-10 pr-4 text-sm text-[var(--kh-ink)] placeholder:text-[var(--kh-ink-subtle)] outline-none focus:ring-2 focus:ring-[var(--kh-primary)]"
         />
       </div>
 
@@ -91,8 +91,8 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
           onClick={() => setSelectedCategory("all")}
           className={`rounded-full px-3 py-1 text-xs font-bold transition ${
             selectedCategory === "all"
-              ? "bg-emerald-600 text-white"
-              : "bg-emerald-50 text-[#111111]/70 hover:bg-emerald-100"
+              ? "bg-[var(--kh-primary)] text-[var(--kh-canvas)]"
+              : "bg-[var(--kh-surface-2)] text-[var(--kh-ink-muted)] hover:bg-[var(--kh-hairline)]"
           }`}
         >
           Tutti
@@ -104,8 +104,8 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
             onClick={() => setSelectedCategory(cat)}
             className={`rounded-full px-3 py-1 text-xs font-bold transition ${
               selectedCategory === cat
-                ? "bg-emerald-600 text-white"
-                : "bg-emerald-50 text-[#111111]/70 hover:bg-emerald-100"
+                ? "bg-[var(--kh-primary)] text-[var(--kh-canvas)]"
+                : "bg-[var(--kh-surface-2)] text-[var(--kh-ink-muted)] hover:bg-[var(--kh-hairline)]"
             }`}
           >
             {categoryLabels[cat]}
@@ -116,7 +116,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
       {/* Lista alimenti */}
       <div className="max-h-64 space-y-1.5 overflow-y-auto pr-1">
         {filtered.length === 0 ? (
-          <p className="py-6 text-center text-sm text-[#111111]/50">
+          <p className="py-6 text-center text-sm text-[var(--kh-ink-subtle)]">
             Nessun alimento trovato.
           </p>
         ) : (
@@ -127,12 +127,12 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
               onClick={() => setSelectedFood(f)}
               className={`flex w-full items-center justify-between rounded-xl border px-3 py-2.5 text-left transition ${
                 selectedFood?.id === f.id
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-emerald-900/10 bg-white hover:bg-emerald-50/50"
+                  ? "border-[var(--kh-primary)] bg-[var(--kh-surface-2)]"
+                  : "border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] hover:bg-[var(--kh-surface-2)]"
               }`}
             >
-              <span className="text-sm font-medium text-[#111111]">{f.name}</span>
-              <span className="text-xs font-bold text-[#111111]/60 tabular-nums">
+              <span className="text-sm font-medium text-[var(--kh-ink)]">{f.name}</span>
+              <span className="font-mono text-xs font-bold text-[var(--kh-ink-muted)] tabular-nums">
                 {f.kcal} kcal / {f.unit}
               </span>
             </button>
@@ -142,22 +142,22 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
 
       {/* Pannello porzione + preview + aggiungi */}
       {selectedFood && (
-        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
-          <p className="mb-3 text-sm font-bold text-[#111111]">
+        <div className="mt-4 rounded-xl border border-[var(--kh-primary)] bg-[var(--kh-surface-2)] p-4">
+          <p className="mb-3 text-sm font-bold text-[var(--kh-ink)]">
             {selectedFood.name}
           </p>
 
           <div className="mb-3 flex items-center gap-2">
-            <label className="text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+            <label className="text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
               Quantità
             </label>
             <input
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-24 rounded-lg border border-emerald-900/10 bg-white px-2 py-1 text-sm tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-24 rounded-lg border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] px-2 py-1 text-sm text-[var(--kh-ink)] tabular-nums outline-none focus:ring-2 focus:ring-[var(--kh-primary)]"
             />
-            <span className="text-sm font-medium text-[#111111]/70">
+            <span className="text-sm font-medium text-[var(--kh-ink-muted)]">
               {selectedFood.unit === "100g" ? "grammi" : "pezzi"}
             </span>
           </div>
@@ -165,26 +165,26 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
           {preview && (
             <div className="mb-3 grid grid-cols-4 gap-2 text-center">
               <div>
-                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Kcal</p>
-                <p className="text-sm font-bold text-[#111111] tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[var(--kh-ink-muted)]">Kcal</p>
+                <p className="font-mono text-sm font-bold text-[var(--kh-ink)] tabular-nums">
                   {preview.kcal}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Carbo</p>
-                <p className="text-sm font-bold text-[#111111] tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[var(--kh-ink-muted)]">Carbo</p>
+                <p className="font-mono text-sm font-bold text-[var(--kh-ink)] tabular-nums">
                   {preview.carbs}g
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Prot</p>
-                <p className="text-sm font-bold text-[#111111] tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[var(--kh-ink-muted)]">Prot</p>
+                <p className="font-mono text-sm font-bold text-[var(--kh-ink)] tabular-nums">
                   {preview.protein}g
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Grassi</p>
-                <p className="text-sm font-bold text-[#111111] tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[var(--kh-ink-muted)]">Grassi</p>
+                <p className="font-mono text-sm font-bold text-[var(--kh-ink)] tabular-nums">
                   {preview.fat}g
                 </p>
               </div>
@@ -194,8 +194,10 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
           <button
             type="button"
             onClick={handleAdd}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white shadow-sm transition ${
-              justAdded ? "bg-teal-600" : "bg-emerald-600 hover:bg-emerald-700"
+            className={`flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold transition ${
+              justAdded
+                ? "bg-[var(--kh-secondary)] text-[var(--kh-canvas)]"
+                : "bg-[var(--kh-primary)] text-[var(--kh-canvas)] hover:bg-[var(--kh-primary-hover)]"
             }`}
           >
             {justAdded ? (

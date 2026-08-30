@@ -27,8 +27,8 @@ function ChipGroup<T extends string>({
           onClick={() => onChange(opt.value)}
           className={`flex-1 rounded-lg border py-2 text-xs font-bold uppercase tracking-wide transition ${
             value === opt.value
-              ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-              : "border-emerald-900/10 bg-white text-emerald-800/50 hover:bg-emerald-50/50"
+              ? "border-[var(--kh-primary)] bg-[var(--kh-primary)]/10 text-[var(--kh-primary)]"
+              : "border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] text-[var(--kh-ink-subtle)] hover:border-[var(--kh-primary)]/40 hover:text-[var(--kh-ink)]"
           }`}
         >
           {opt.label}
@@ -42,17 +42,17 @@ export default function UnitsSection() {
   const { settings, updateSettings } = useSettings();
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center gap-2">
-        <Ruler className="h-4 w-4 text-teal-700" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <Ruler className="h-4 w-4 text-[var(--kh-primary)]" />
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
           Unità di misura
         </h2>
       </div>
 
       <div className="space-y-4">
         <div>
-          <p className="mb-2 text-sm font-medium text-emerald-800/60">Peso</p>
+          <p className="mb-2 text-sm font-medium text-[var(--kh-ink-muted)]">Peso</p>
           <ChipGroup<WeightUnit>
             options={[
               { value: "kg", label: "Kilogrammi (kg)" },
@@ -64,7 +64,7 @@ export default function UnitsSection() {
         </div>
 
         <div>
-          <p className="mb-2 text-sm font-medium text-emerald-800/60">Altezza</p>
+          <p className="mb-2 text-sm font-medium text-[var(--kh-ink-muted)]">Altezza</p>
           <ChipGroup<HeightUnit>
             options={[
               { value: "cm", label: "Centimetri (cm)" },
@@ -76,7 +76,7 @@ export default function UnitsSection() {
         </div>
 
         <div>
-          <p className="mb-2 text-sm font-medium text-emerald-800/60">Energia</p>
+          <p className="mb-2 text-sm font-medium text-[var(--kh-ink-muted)]">Energia</p>
           <ChipGroup<EnergyUnit>
             options={[
               { value: "kcal", label: "Kilocalorie (kcal)" },

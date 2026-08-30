@@ -22,56 +22,55 @@ export default function NutritionCard() {
       label: "Carbo",
       current: Math.round(todayTotals.carbs),
       goal: goals.carbsTarget,
-      color: "#E8B04B",
+      color: "var(--kh-secondary)",
     },
     {
       key: "protein",
       label: "Prot",
       current: Math.round(todayTotals.protein),
       goal: goals.proteinTarget,
-      color: "#3F9B95",
+      color: "var(--kh-primary)",
     },
     {
       key: "fat",
       label: "Grassi",
       current: Math.round(todayTotals.fat),
       goal: goals.fatTarget,
-      color: "#C08497",
+      color: "#CCFF00",
     },
   ];
 
   return (
-    <section className="flex flex-col rounded-none bg-[#f5f5f5] p-6">
+    <section className="flex flex-col rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#111111]">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--kh-surface-2)] text-[var(--kh-primary)]">
           <Apple className="h-5 w-5" />
         </span>
-        <h2 className="text-xs font-bold uppercase tracking-widest text-[#707072]">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-subtle)]">
           Obiettivo calorico
         </h2>
       </div>
 
       <MacroDonut />
 
-      {/* Barre di progresso macro */}
       <div className="mt-5 space-y-3">
         {macroRows.map((m) => {
           const pct = m.goal > 0 ? Math.min((m.current / m.goal) * 100, 100) : 0;
           return (
-            <div key={m.key} className="rounded-none bg-white p-3">
-                <div className="mb-2 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: m.color }} />
-                    <span className="text-[11px] font-bold uppercase tracking-wide text-[#707072]">
-                      {m.label}
-                    </span>
+            <div key={m.key} className="rounded-xl bg-[var(--kh-surface-2)] p-3">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: m.color }} />
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
+                    {m.label}
                   </span>
-                  <span className="text-xs font-bold text-[#111111] tabular-nums">
-                    {m.current}
-                    <span className="font-medium text-[#707072]"> / {m.goal}g</span>
-                  </span>
-                </div>
-              <div className="h-1.5 overflow-hidden rounded-full bg-[#e5e5e5]">
+                </span>
+                <span className="font-mono text-xs font-bold text-[var(--kh-ink)] tabular-nums">
+                  {m.current}
+                  <span className="font-medium text-[var(--kh-ink-subtle)]"> / {m.goal}g</span>
+                </span>
+              </div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-[var(--kh-hairline)]">
                 <div
                   className="h-full rounded-full transition-all duration-500"
                   style={{ width: `${pct}%`, backgroundColor: m.color }}
@@ -82,21 +81,20 @@ export default function NutritionCard() {
         })}
       </div>
 
-      {/* I bottoni ora sono link a /nutrition invece di modali locali */}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <Link
-            href="/nutrition"
-            className="flex items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-sm font-bold text-white transition hover:bg-[#2c2c2c]"
-          >
-            <Plus className="h-4 w-4" />
-            Aggiungi pasto
-          </Link>
-          <Link
-            href="/nutrition"
-            className="flex items-center justify-center gap-2 rounded-full border border-[#111111] bg-transparent py-3 text-sm font-bold text-[#111111] transition hover:bg-[#f5f5f5]"
-          >
-            <ListChecks className="h-4 w-4" />
-            Dettagli pasti
+          href="/nutrition"
+          className="flex items-center justify-center gap-2 rounded-xl bg-[var(--kh-primary)] py-3 text-sm font-bold text-[var(--kh-canvas)] transition hover:bg-[var(--kh-primary-hover)]"
+        >
+          <Plus className="h-4 w-4" />
+          Aggiungi pasto
+        </Link>
+        <Link
+          href="/nutrition"
+          className="flex items-center justify-center gap-2 rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-3 text-sm font-bold text-[var(--kh-ink-muted)] transition hover:bg-[var(--kh-surface-2)]"
+        >
+          <ListChecks className="h-4 w-4" />
+          Dettagli pasti
         </Link>
       </div>
     </section>

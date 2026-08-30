@@ -55,43 +55,41 @@ export default function RestTimer({
 
   const progress = active > 0 ? ((active - remaining) / active) * 100 : 0;
 
-  return (
-    <div className="fixed inset-x-4 bottom-20 z-40 mx-auto max-w-md rounded-2xl border border-teal-200 bg-white p-4 shadow-lg md:bottom-6 md:left-64">
+    return (
+    <div className="fixed inset-x-4 bottom-20 z-40 mx-auto max-w-md rounded-2xl border-2 border-[var(--kh-primary)] bg-[var(--kh-canvas)] p-4 shadow-[var(--kh-glow-primary)] md:bottom-6 md:left-64">
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Timer className="h-4 w-4 text-teal-600" />
-          <p className="text-xs font-bold uppercase tracking-widest text-[#111111]">
+          <Timer className="h-4 w-4 text-[var(--kh-primary)]" />
+          <p className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink)]">
             Recupero
           </p>
         </div>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg p-1 text-[#111111]/50 transition hover:bg-emerald-50 hover:text-[#111111]"
+          className="rounded-lg p-1 text-[var(--kh-ink-subtle)] transition hover:bg-[var(--kh-surface-2)] hover:text-[var(--kh-ink)]"
           aria-label="Annulla recupero"
         >
           <X className="h-4 w-4" />
         </button>
       </div>
 
-      <p className="mb-2 text-center font-mono text-3xl font-bold text-[#111111] tabular-nums">
+      <p className="mb-2 text-center font-mono text-3xl font-bold text-[var(--kh-ink)] tabular-nums">
         {formatTime(remaining)}
       </p>
 
-      {/* Barra progresso */}
-      <div className="mb-3 h-1.5 overflow-hidden rounded-full bg-teal-100">
+      <div className="mb-3 h-1.5 overflow-hidden rounded-full bg-[var(--kh-surface-2)]">
         <div
-          className="h-full rounded-full bg-teal-600 transition-all duration-500"
+          className="h-full rounded-full bg-[var(--kh-primary)] transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      {/* Bottone +15s per estendere */}
       {onExtend && (
         <button
           type="button"
           onClick={() => onExtend(15)}
-          className="w-full rounded-xl bg-teal-50 py-2 text-xs font-bold text-[#111111] transition hover:bg-teal-100"
+          className="w-full rounded-xl bg-[var(--kh-surface-2)] py-2 text-xs font-bold text-[var(--kh-ink)] transition hover:bg-[var(--kh-hairline)]"
         >
           <Plus className="mr-1 inline h-3.5 w-3.5" />
           Aggiungi 15s

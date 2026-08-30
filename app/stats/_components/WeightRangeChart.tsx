@@ -44,16 +44,16 @@ export default function WeightRangeChart() {
       : 80;
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <TrendingDown className="h-4 w-4 text-emerald-700" />
-          <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+          <TrendingDown className="h-4 w-4 text-[var(--kh-primary)]" />
+          <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
             Storico peso
           </h2>
         </div>
 
-        <div className="flex gap-1 rounded-full bg-emerald-50 p-1">
+        <div className="flex gap-1 rounded-full bg-[var(--kh-surface-2)] p-1">
           {(["3m", "6m", "12m"] as Range[]).map((r) => (
             <button
               key={r}
@@ -61,8 +61,8 @@ export default function WeightRangeChart() {
               onClick={() => setRange(r)}
               className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide transition ${
                 range === r
-                  ? "bg-white text-emerald-800 shadow-sm"
-                  : "text-emerald-800/50 hover:text-emerald-800"
+                  ? "bg-[var(--kh-surface-1)] text-[var(--kh-ink)] shadow-sm"
+                  : "text-[var(--kh-ink-subtle)] hover:text-[var(--kh-ink)]"
               }`}
             >
               {r}
@@ -73,7 +73,7 @@ export default function WeightRangeChart() {
 
       <div className="h-64 w-full">
         {data.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-sm text-emerald-800/50">
+          <div className="flex h-full items-center justify-center text-sm text-[var(--kh-ink-subtle)]">
             Nessun dato in questo range.
           </div>
         ) : (
@@ -81,20 +81,20 @@ export default function WeightRangeChart() {
             <AreaChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -20 }}>
               <defs>
                 <linearGradient id="weightGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#065F46" stopOpacity={0.25} />
-                  <stop offset="100%" stopColor="#065F46" stopOpacity={0} />
+                  <stop offset="0%" stopColor="var(--kh-primary)" stopOpacity={0.25} />
+                  <stop offset="100%" stopColor="var(--kh-primary)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--kh-hairline)" vertical={false} />
               <XAxis
                 dataKey="label"
-                tick={{ fontSize: 11, fill: "#6B7280" }}
+                tick={{ fontSize: 11, fill: "var(--kh-ink-subtle)" }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
                 domain={[minY, maxY]}
-                tick={{ fontSize: 11, fill: "#6B7280" }}
+                tick={{ fontSize: 11, fill: "var(--kh-ink-subtle)" }}
                 axisLine={false}
                 tickLine={false}
                 unit=" kg"
@@ -102,7 +102,9 @@ export default function WeightRangeChart() {
               <Tooltip
                 contentStyle={{
                   borderRadius: "0.75rem",
-                  border: "1px solid #E5E7EB",
+                  border: "1px solid var(--kh-hairline)",
+                  backgroundColor: "var(--kh-surface-1)",
+                  color: "var(--kh-ink)",
                   fontSize: "0.8rem",
                 }}
                 formatter={(v) => [`${Number(v)} kg`, "Peso"]}
@@ -121,10 +123,10 @@ export default function WeightRangeChart() {
               <Area
                 type="monotone"
                 dataKey="weight"
-                stroke="#065F46"
+                stroke="var(--kh-primary)"
                 strokeWidth={2.5}
                 fill="url(#weightGrad)"
-                dot={{ r: 4, fill: "#065F46" }}
+                dot={{ r: 4, fill: "var(--kh-primary)" }}
                 activeDot={{ r: 6 }}
               />
             </AreaChart>

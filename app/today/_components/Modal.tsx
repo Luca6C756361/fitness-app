@@ -31,19 +31,19 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950/40 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+        className="w-full max-w-md rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]"
       >
         {/* Intestazione */}
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-bold text-[#111111]">{title}</h3>
+          <h3 className="text-lg font-bold text-[var(--kh-ink)]">{title}</h3>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1.5 text-[#111111]/60 transition hover:bg-emerald-50 hover:text-[#111111]"
+            className="rounded-lg p-1.5 text-[var(--kh-ink-subtle)] transition hover:bg-[var(--kh-surface-2)] hover:text-[var(--kh-ink)]"
             aria-label="Chiudi"
           >
             <X className="h-5 w-5" />

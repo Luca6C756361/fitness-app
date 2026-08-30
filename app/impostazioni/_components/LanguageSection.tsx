@@ -11,10 +11,10 @@ export default function LanguageSection() {
   const { settings, updateSettings } = useSettings();
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center gap-2">
-        <Languages className="h-4 w-4 text-emerald-700" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <Languages className="h-4 w-4 text-[var(--kh-primary)]" />
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
           Lingua
         </h2>
       </div>
@@ -25,8 +25,8 @@ export default function LanguageSection() {
           onClick={() => updateSettings({ language: "it" })}
           className={`rounded-xl border py-3 text-sm font-bold transition ${
             settings.language === "it"
-              ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-              : "border-emerald-900/10 bg-white text-emerald-800/60 hover:bg-emerald-50/50"
+              ? "border-[var(--kh-primary)] bg-[var(--kh-primary)]/10 text-[var(--kh-primary)]"
+              : "border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] text-[var(--kh-ink-muted)] hover:border-[var(--kh-primary)]/40 hover:text-[var(--kh-ink)]"
           }`}
         >
           🇮🇹 Italiano
@@ -36,8 +36,8 @@ export default function LanguageSection() {
           onClick={() => updateSettings({ language: "en" })}
           className={`rounded-xl border py-3 text-sm font-bold transition ${
             settings.language === "en"
-              ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-              : "border-emerald-900/10 bg-white text-emerald-800/60 hover:bg-emerald-50/50"
+              ? "border-[var(--kh-primary)] bg-[var(--kh-primary)]/10 text-[var(--kh-primary)]"
+              : "border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] text-[var(--kh-ink-muted)] hover:border-[var(--kh-primary)]/40 hover:text-[var(--kh-ink)]"
           }`}
         >
           🇬🇧 English
@@ -45,9 +45,9 @@ export default function LanguageSection() {
       </div>
 
       {/* Avviso trasparente sullo stato reale della feature */}
-      <div className="mt-4 flex gap-2 rounded-xl bg-amber-50 p-3">
+      <div className="mt-4 flex gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3">
         <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
-        <p className="text-xs text-amber-900/80">
+        <p className="text-xs text-[var(--kh-ink-muted)]">
           La preferenza viene salvata, ma i testi dell'app non sono ancora
           tradotti. Traduzione completa in arrivo.
         </p>

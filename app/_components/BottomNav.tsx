@@ -26,9 +26,10 @@ const items = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-  if (pathname.startsWith("/login")) return null;   // <-- NUOVO
+  if (pathname.startsWith("/login")) return null;
+
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-emerald-900/10 bg-white/95 backdrop-blur-sm md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--kh-hairline)] bg-[var(--kh-surface-1)]/95 backdrop-blur-sm md:hidden">
       <div className="mx-auto flex max-w-5xl items-center justify-around px-1 py-2">
         {items.map((item) => {
           const Icon = item.icon;
@@ -38,7 +39,9 @@ export default function BottomNav() {
               key={item.href}
               href={item.href}
               className={`flex flex-1 flex-col items-center gap-0.5 rounded-lg py-2 transition ${
-                active ? "text-emerald-700" : "text-emerald-800/50 hover:text-emerald-700"
+                active
+                  ? "text-[var(--kh-primary)]"
+                  : "text-[var(--kh-ink-subtle)] hover:text-[var(--kh-ink)]"
               }`}
             >
               <Icon className="h-5 w-5" />
@@ -46,7 +49,7 @@ export default function BottomNav() {
                 {item.label}
               </span>
               {active && (
-                <span className="mt-0.5 h-1 w-1 rounded-full bg-emerald-600" />
+                <span className="mt-0.5 h-1 w-1 rounded-full bg-[var(--kh-primary)]" />
               )}
             </Link>
           );

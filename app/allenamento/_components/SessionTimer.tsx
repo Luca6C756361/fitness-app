@@ -68,15 +68,15 @@ export default function SessionTimer({
   };
 
   return (
-    <div className="rounded-2xl border border-emerald-900/5 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border-2 border-[var(--kh-primary)] bg-[var(--kh-canvas)] p-8 shadow-[var(--kh-glow-primary)]">
       <div className="mb-3 text-center">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-[#111111]/60">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-[var(--kh-ink-subtle)]">
           Durata sessione
         </p>
-        <p className="mt-1 font-mono text-4xl font-bold text-[#111111] tabular-nums">
+        <p className="mt-1 font-mono text-4xl font-bold text-[var(--kh-ink)] tabular-nums">
           {formatTime(seconds)}
         </p>
-        <p className="mt-1 text-xs font-medium text-[#111111]/50">
+        <p className="mt-1 text-xs font-medium text-[var(--kh-ink-muted)]">
           {running ? "In corso" : "In pausa"}
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function SessionTimer({
           className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-sm font-bold transition ${
             running
               ? "bg-amber-500 text-white hover:bg-amber-600"
-              : "bg-teal-600 text-white hover:bg-teal-700"
+              : "bg-[var(--kh-primary)] text-[var(--kh-canvas)] hover:bg-[var(--kh-primary-hover)]"
           }`}
         >
           {running ? (
@@ -105,7 +105,7 @@ export default function SessionTimer({
         <button
           type="button"
           onClick={handleStop}
-          className="flex items-center justify-center gap-1.5 rounded-xl border border-emerald-900/10 bg-white py-2.5 text-sm font-bold text-[#111111] transition hover:bg-emerald-50"
+          className="flex items-center justify-center gap-1.5 rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-2.5 text-sm font-bold text-[var(--kh-ink-muted)] transition hover:bg-[var(--kh-surface-2)]"
         >
           <Square className="h-4 w-4" /> Stop
         </button>
@@ -114,7 +114,7 @@ export default function SessionTimer({
           <button
             type="button"
             onClick={() => setShowResetConfirm(true)}
-            className="flex items-center justify-center gap-1.5 rounded-xl border border-emerald-900/10 bg-white py-2.5 text-sm font-bold text-red-600 transition hover:bg-red-50"
+            className="flex items-center justify-center gap-1.5 rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-2.5 text-sm font-bold text-red-600 transition hover:bg-red-500/10"
           >
             <RotateCcw className="h-4 w-4" /> Reset
           </button>
@@ -123,7 +123,7 @@ export default function SessionTimer({
             <button
               type="button"
               onClick={() => setShowResetConfirm(false)}
-              className="flex-1 rounded-xl border border-emerald-900/10 bg-white py-2.5 text-xs font-bold text-[#111111] transition hover:bg-emerald-50"
+              className="flex-1 rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-2.5 text-xs font-bold text-[var(--kh-ink-muted)] transition hover:bg-[var(--kh-surface-2)]"
             >
               No
             </button>

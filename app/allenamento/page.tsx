@@ -40,13 +40,13 @@ export default function AllenamentoPage() {
   if (!todaySession) {
     return (
       <ShellWithBack>
-        <div className="rounded-2xl border border-emerald-900/5 bg-white p-8 text-center shadow-sm">
-          <p className="mb-4 text-sm text-[#111111]/60">
+        <div className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-8 text-center shadow-[var(--kh-card-shadow)]">
+          <p className="mb-4 text-sm text-[var(--kh-ink-muted)]">
             Nessuna sessione in programma oggi.
           </p>
           <Link
             href="/allenamento/componi"
-            className="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700"
+            className="inline-flex items-center gap-2 rounded-xl bg-[var(--kh-primary)] px-5 py-2.5 text-sm font-bold text-[var(--kh-canvas)] transition hover:bg-[var(--kh-primary-hover)]"
           >
             <Sparkles className="h-4 w-4" />
             Componi al volo
@@ -59,11 +59,11 @@ export default function AllenamentoPage() {
   if (!active) {
     return (
       <ShellWithBack subtitle={isTodayComposed ? "Sessione composta" : "Sessione proposta"}>
-        <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-          <h2 className="mb-1 text-xl font-bold text-[#111111]">
+        <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
+          <h2 className="mb-1 text-xl font-bold text-[var(--kh-ink)]">
             {todaySession.name}
           </h2>
-          <p className="mb-4 flex items-center gap-1.5 text-sm font-medium text-[#111111]/60">
+          <p className="mb-4 flex items-center gap-1.5 text-sm font-medium text-[var(--kh-ink-muted)]">
             <Clock className="h-3.5 w-3.5" />
             {todaySession.focus} · ~{todaySession.estimatedMinutes} min ·{" "}
             {todaySession.exercises.length} esercizi
@@ -75,21 +75,21 @@ export default function AllenamentoPage() {
               return (
                 <li
                   key={pe.id}
-                  className="rounded-xl bg-[#FAF7F0] px-4 py-3"
+                  className="rounded-xl bg-[var(--kh-surface-2)] px-4 py-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-2 text-sm font-medium text-[#111111]">
+                    <span className="flex items-center gap-2 text-sm font-medium text-[var(--kh-ink)]">
                       {def?.name ?? "?"}
                       {pe.notes && (
                         <StickyNote className="h-3.5 w-3.5 shrink-0 text-amber-600" />
                       )}
                     </span>
-                    <span className="rounded-full bg-teal-100 px-2.5 py-1 text-xs font-bold text-[#111111] tabular-nums">
+                    <span className="rounded-full bg-[var(--kh-hairline)] px-2.5 py-1 text-xs font-mono font-bold text-[var(--kh-ink)] tabular-nums">
                       {pe.sets} × {pe.reps}
                     </span>
                   </div>
                   {pe.notes && (
-                    <p className="mt-1 text-[11px] italic text-[#111111]/60">
+                    <p className="mt-1 text-[11px] italic text-[var(--kh-ink-subtle)]">
                       {pe.notes}
                     </p>
                   )}
@@ -106,7 +106,7 @@ export default function AllenamentoPage() {
           onClick={() =>
             startSession(todaySession, (id) => getExerciseDef(id)?.name ?? "?")
           }
-          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-teal-600 py-4 text-base font-bold uppercase tracking-wide text-white shadow-md transition hover:bg-teal-700"
+          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--kh-primary)] py-4 text-base font-bold uppercase tracking-wide text-[var(--kh-canvas)] shadow-[var(--kh-glow-primary)] transition hover:bg-[var(--kh-primary-hover)]"
         >
           <Play className="h-5 w-5" />
           Inizia sessione
@@ -133,8 +133,8 @@ export default function AllenamentoPage() {
     }
   };
 
-    const handleFinish = async () => {                      // <-- MODIFICATA
-    const log = await finishSession(durationSec);         // <-- MODIFICATA
+  const handleFinish = async () => {
+    const log = await finishSession(durationSec);
     if (log) router.push("/today");
   };
 
@@ -153,16 +153,16 @@ export default function AllenamentoPage() {
     <ShellWithBack subtitle="Sessione in corso" onBack={handleCancel}>
       <SessionTimer onTick={setDurationSec} onStop={() => setDurationSec(durationSec)} />
 
-      <div className="rounded-2xl border border-emerald-900/5 bg-white p-4 shadow-sm">
-        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-[#111111]/60">
+      <div className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-4 shadow-[var(--kh-card-shadow)]">
+        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
           <span>Progresso</span>
-          <span className="tabular-nums">
+          <span className="font-mono tabular-nums">
             {totalCompleted} / {totalTargetSets} set
           </span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-emerald-100">
+        <div className="h-2 overflow-hidden rounded-full bg-[var(--kh-hairline)]">
           <div
-            className="h-full rounded-full bg-teal-600 transition-all duration-500"
+            className="h-full rounded-full bg-[var(--kh-primary)] transition-all duration-500"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -170,7 +170,6 @@ export default function AllenamentoPage() {
 
       <div className="space-y-4">
         {active.exercises.map((ex, i) => {
-          // Recupero la nota dall'esercizio pianificato originale (stessa posizione)
           const plannedNote = todaySession.exercises[i]?.notes;
           return (
             <ExerciseSetCard
@@ -192,10 +191,10 @@ export default function AllenamentoPage() {
         type="button"
         onClick={handleFinish}
         disabled={totalCompleted === 0}
-        className={`flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-base font-bold uppercase tracking-wide shadow-md transition ${
+        className={`flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-base font-bold uppercase tracking-wide transition ${
           isFullyComplete
-            ? "bg-teal-600 text-white hover:bg-teal-700"
-            : "bg-emerald-600 text-white hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
+            ? "bg-[var(--kh-primary)] text-[var(--kh-canvas)] shadow-[var(--kh-glow-primary)] hover:bg-[var(--kh-primary-hover)]"
+            : "bg-[var(--kh-surface-2)] text-[var(--kh-ink-muted)] hover:bg-[var(--kh-hairline)] disabled:cursor-not-allowed disabled:opacity-40"
         }`}
       >
         {isFullyComplete ? (
@@ -231,33 +230,33 @@ function ShellWithBack({
   onBack?: () => void;
 }) {
   return (
-    <main className="min-h-screen bg-[#FAF7F0] px-4 py-6 pb-32 md:px-8 md:py-10">
+    <main className="min-h-screen bg-[var(--kh-canvas)] px-4 py-6 pb-32 md:px-8 md:py-10">
       <div className="mx-auto max-w-3xl space-y-5">
         <div className="flex items-center gap-4">
           {onBack ? (
             <button
               type="button"
               onClick={onBack}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] transition hover:bg-[var(--kh-surface-2)]"
               aria-label="Annulla sessione"
             >
-              <ArrowLeft className="h-4 w-4 text-[#111111]" />
+              <ArrowLeft className="h-4 w-4 text-[var(--kh-ink)]" />
             </button>
           ) : (
             <Link
               href="/today"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] transition hover:bg-[var(--kh-surface-2)]"
               aria-label="Torna alla dashboard"
             >
-              <ArrowLeft className="h-4 w-4 text-[#111111]" />
+              <ArrowLeft className="h-4 w-4 text-[var(--kh-ink)]" />
             </Link>
           )}
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-[#111111]">
+            <h1 className="text-2xl font-bold tracking-tight text-[var(--kh-ink)]">
               Allenamento
             </h1>
             {subtitle && (
-              <p className="text-sm font-medium text-[#111111]/60">{subtitle}</p>
+              <p className="text-sm font-medium text-[var(--kh-ink-muted)]">{subtitle}</p>
             )}
           </div>
         </div>

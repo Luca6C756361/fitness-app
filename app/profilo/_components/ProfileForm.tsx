@@ -48,38 +48,38 @@ export default function ProfileForm() {
   };
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
+      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
         Dati anagrafici
       </h2>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Nome
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Età
           </label>
           <input
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Sesso
           </label>
           <div className="flex gap-2">
@@ -90,8 +90,8 @@ export default function ProfileForm() {
                 onClick={() => setSex(s)}
                 className={`flex-1 rounded-xl border py-2.5 text-sm font-bold transition ${
                   sex === s
-                    ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-                    : "border-emerald-900/10 bg-white text-[#111111]/60 hover:bg-emerald-50/50"
+                    ? "border-[var(--kh-primary)] bg-[var(--kh-primary)]/10 text-[var(--kh-primary)]"
+                    : "border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] text-[var(--kh-ink-muted)] hover:border-[var(--kh-primary)]/40"
                 }`}
               >
                 {s === "M" ? "Uomo" : "Donna"}
@@ -101,19 +101,19 @@ export default function ProfileForm() {
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Altezza (cm)
           </label>
           <input
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Peso (kg)
           </label>
           <input
@@ -121,21 +121,21 @@ export default function ProfileForm() {
             step="0.1"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
           />
-          <p className="mt-1 text-[10px] font-medium text-[#111111]/50">
+          <p className="mt-1 text-[10px] font-medium text-[var(--kh-ink-subtle)]">
             Salvando registri una nuova misurazione di oggi.
           </p>
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
             Livello di attività
           </label>
           <select
             value={activity}
             onChange={(e) => setActivity(e.target.value as ActivityLevel)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-2.5 text-sm text-[var(--kh-ink)] outline-none transition focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
           >
             {(Object.keys(activityLabels) as ActivityLevel[]).map((key) => (
               <option key={key} value={key}>
@@ -149,8 +149,10 @@ export default function ProfileForm() {
       <button
         type="button"
         onClick={handleSave}
-        className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white shadow-sm transition ${
-          saved ? "bg-teal-600" : "bg-emerald-600 hover:bg-emerald-700"
+        className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white transition ${
+          saved
+            ? "bg-[var(--kh-secondary)] shadow-[var(--kh-glow-secondary)]"
+            : "bg-[var(--kh-primary)] shadow-[var(--kh-glow-primary)] hover:bg-[var(--kh-primary-hover)]"
         }`}
       >
         {saved ? (

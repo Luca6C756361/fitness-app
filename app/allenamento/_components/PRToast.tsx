@@ -49,16 +49,16 @@ export default function PRToast() {
         shown ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
       }`}
     >
-      <div className="flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-lg">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-400/30">
-          <Trophy className="h-5 w-5 text-amber-600" />
+      <div className="flex items-start gap-3 rounded-2xl border-2 border-[var(--kh-secondary)] bg-[var(--kh-surface-1)] p-4 shadow-[var(--kh-glow-secondary)]">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--kh-secondary)]/15 text-[var(--kh-secondary)]">
+          <Trophy className="h-5 w-5" />
         </div>
 
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-amber-700">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[var(--kh-secondary)]">
             Record personale!
           </p>
-          <p className="truncate text-sm font-bold text-[#111111]">
+          <p className="truncate text-sm font-bold text-[var(--kh-ink)]">
             {lastPR.name}
           </p>
 
@@ -66,11 +66,11 @@ export default function PRToast() {
             {lastPR.types.map((t) => (
               <span
                 key={t}
-                className="rounded-full bg-white px-2 py-0.5 text-[11px] font-bold text-amber-800 tabular-nums shadow-sm"
+                className="rounded-full bg-[var(--kh-surface-2)] px-2 py-0.5 font-mono text-[11px] font-bold text-[var(--kh-ink)] tabular-nums"
               >
                 {prTypeLabels[t]}: {value(t)}
                 {previous(t) && (
-                  <span className="ml-1 font-medium text-amber-800/50">
+                  <span className="ml-1 font-medium text-[var(--kh-ink-subtle)]">
                     ({previous(t)})
                   </span>
                 )}
@@ -83,7 +83,7 @@ export default function PRToast() {
           type="button"
           onClick={dismissPR}
           aria-label="Chiudi"
-          className="rounded-full p-1 text-amber-700/60 transition hover:bg-amber-100 hover:text-amber-800"
+          className="rounded-full p-1 text-[var(--kh-ink-subtle)] transition hover:bg-[var(--kh-surface-2)] hover:text-[var(--kh-ink)]"
         >
           <X className="h-4 w-4" />
         </button>

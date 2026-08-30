@@ -11,16 +11,16 @@ export default function ResetSection() {
   const [resetting, setResetting] = useState(false);
 
   return (
-    <section className="rounded-2xl border border-red-200/50 bg-red-50/30 p-6 shadow-sm">
+    <section className="rounded-2xl border border-red-500/30 bg-red-500/5 p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-3 flex items-center gap-2">
-        <AlertTriangle className="h-4 w-4 text-red-600" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-red-700/80">
+        <AlertTriangle className="h-4 w-4 text-red-500" />
+        <h2 className="text-xs font-bold uppercase tracking-widest text-red-500">
           Zona pericolosa
         </h2>
       </div>
 
-      <p className="mb-4 text-sm text-red-900/70">
-        Il reset cancella <strong>profilo, obiettivi, diario, peso e allenamenti</strong>{" "}
+      <p className="mb-4 text-sm text-[var(--kh-ink-muted)]">
+        Il reset cancella <strong className="text-[var(--kh-ink)]">profilo, obiettivi, diario, peso e allenamenti</strong>{" "}
         dal server. L'operazione è irreversibile.
       </p>
 
@@ -28,30 +28,30 @@ export default function ResetSection() {
         <button
           type="button"
           onClick={() => setConfirming(true)}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-300 bg-white py-3 text-sm font-bold text-red-700 transition hover:bg-red-50"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-500/40 bg-[var(--kh-surface-1)] py-3 text-sm font-bold text-red-500 transition hover:bg-red-500/10"
         >
           <RotateCcw className="h-4 w-4" />
           Reset app
         </button>
       ) : (
         <div className="space-y-2">
-          <p className="text-sm font-bold text-red-800">Sei sicuro?</p>
+          <p className="text-sm font-bold text-red-500">Sei sicuro?</p>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => setConfirming(false)}
-              className="rounded-xl border border-emerald-900/10 bg-white py-3 text-sm font-bold text-emerald-800 transition hover:bg-emerald-50"
+              className="rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-3 text-sm font-bold text-[var(--kh-ink-muted)] transition hover:text-[var(--kh-ink)]"
             >
               Annulla
             </button>
             <button
               type="button"
-              disabled={resetting}                                   // <-- NUOVO
-              onClick={async () => {                                 // <-- MODIFICATO
+              disabled={resetting}
+              onClick={async () => {
                 setResetting(true);
                 await resetAll();
               }}
-              className="rounded-xl bg-red-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-red-700 disabled:opacity-50"
+              className="rounded-xl bg-red-600 py-3 text-sm font-bold text-white transition hover:bg-red-700 disabled:opacity-50"
             >
               {resetting ? "Reset in corso…" : "Sì, resetta"}
             </button>

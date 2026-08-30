@@ -48,35 +48,34 @@ export default function WorkoutCard() {
 
   if (!todaySession) {
     return (
-      <section className="flex flex-col rounded-[12px] border border-[#23252a] bg-[#0f1011] p-6">
+      <section className="flex flex-col rounded-[12px] border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6">
         <div className="mb-4 flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[#141516] text-[#00E5FF]">
+          <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[var(--kh-surface-2)] text-[var(--kh-primary)]">
             <Dumbbell className="h-5 w-5" />
           </span>
           <div>
-            <h2 className="text-[12px] font-bold uppercase tracking-widest text-[#d0d6e0]">
+            <h2 className="text-[12px] font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
               Allenamento del giorno
             </h2>
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-[#8a8f98]">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--kh-ink-subtle)]">
               Giorno di riposo
             </p>
           </div>
         </div>
-        <p className="mb-4 text-[16px] text-[#d0d6e0]">
+        <p className="mb-4 text-[16px] text-[var(--kh-ink-muted)]">
           Nessuna sessione in programma oggi. Vuoi allenarti comunque?
         </p>
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => setSwitchOpen(true)}
-            className="rounded-[6px] border border-[#23252a] bg-[#141516] py-3 text-[16px] font-medium text-[#F8F2FC] transition hover:bg-[#23252a]"
+            className="rounded-[6px] border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] py-3 text-[16px] font-medium text-[var(--kh-ink)] transition hover:bg-[var(--kh-hairline)]"
           >
             Scegli sessione
           </button>
           <Link
             href="/allenamento/componi"
-            className="flex items-center justify-center gap-1 rounded-[6px] bg-[#F8F2FC] py-3 text-[16px] font-medium text-[#010102] transition hover:bg-[#d0d6e0]"
-          >
+className="flex items-center justify-center gap-1 rounded-[6px] bg-[var(--kh-primary)] py-3 text-[16px] font-medium text-[var(--kh-canvas)] transition hover:bg-[var(--kh-primary-hover)]"          >
             <Wand2 className="h-4 w-4" />
             Componi
           </Link>
@@ -94,17 +93,17 @@ export default function WorkoutCard() {
 
   return (
     <>
-      <section className="flex flex-col rounded-[12px] border border-[#23252a] bg-[#0f1011] p-6">
+      <section className="flex flex-col rounded-[12px] border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6">
         <div className="mb-5 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[#141516] text-[#00E5FF]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[var(--kh-surface-2)] text-[var(--kh-primary)]">
               <Dumbbell className="h-5 w-5" />
             </span>
             <div>
-              <h2 className="text-[12px] font-bold uppercase tracking-widest text-[#d0d6e0]">
+              <h2 className="text-[12px] font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
                 Allenamento del giorno
               </h2>
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-[#00E5FF]">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--kh-primary)]">
                 {isTodayComposed ? (
                   <span className="inline-flex items-center gap-1">
                     <Sparkles className="h-3 w-3" /> Personalizzato
@@ -120,42 +119,42 @@ export default function WorkoutCard() {
             <button
               type="button"
               onClick={() => setMenuOpen((o) => !o)}
-              className="rounded-[6px] p-1.5 text-[#8a8f98] transition hover:bg-[#141516] hover:text-[#F8F2FC]"
+              className="rounded-[6px] p-1.5 text-[var(--kh-ink-subtle)] transition hover:bg-[var(--kh-surface-2)] hover:text-[var(--kh-ink)]"
               aria-label="Opzioni sessione"
             >
               <MoreVertical className="h-4 w-4" />
             </button>
             {menuOpen && (
-              <div className="absolute right-0 top-full z-30 mt-2 w-64 overflow-hidden rounded-[6px] border border-[#23252a] bg-[#0f1011]">
+              <div className="absolute right-0 top-full z-30 mt-2 w-64 overflow-hidden rounded-[6px] border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)]">
                 <button
                   type="button"
                   onClick={() => {
                     setMenuOpen(false);
                     setSwitchOpen(true);
                   }}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[#d0d6e0] transition hover:bg-[#141516]"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[var(--kh-ink-muted)] transition hover:bg-[var(--kh-surface-2)]"
                 >
-                  <Dumbbell className="h-4 w-4 text-[#d0d6e0]" />
+                  <Dumbbell className="h-4 w-4 text-[var(--kh-ink-muted)]" />
                   Scegli un'altra sessione
                 </button>
                 <Link
                   href="/allenamento/componi"
                   onClick={() => setMenuOpen(false)}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[#d0d6e0] transition hover:bg-[#141516]"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[var(--kh-ink-muted)] transition hover:bg-[var(--kh-surface-2)]"
                 >
-                  <Wand2 className="h-4 w-4 text-[#d0d6e0]" />
+                  <Wand2 className="h-4 w-4 text-[var(--kh-ink-muted)]" />
                   Componi al volo
                 </Link>
                 {isTodayComposed && (
                   <>
-                    <div className="my-1 border-t border-[#23252a]" />
+                    <div className="my-1 border-t border-[var(--kh-hairline)]" />
                     <button
                       type="button"
                       onClick={() => {
                         resetTodayOverride();
                         setMenuOpen(false);
                       }}
-                      className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[#d0d6e0] transition hover:bg-[#141516]"
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[var(--kh-ink-muted)] transition hover:bg-[var(--kh-surface-2)]"
                     >
                       <Undo2 className="h-4 w-4" />
                       Ripristina proposta
@@ -168,11 +167,11 @@ export default function WorkoutCard() {
         </div>
 
         <div className="mb-4">
-          <h3 className="text-[22px] font-medium tracking-[-0.4px] text-[#F8F2FC]">
+          <h3 className="text-[22px] font-medium tracking-[-0.4px] text-[var(--kh-ink)]">
             {todaySession.name}
           </h3>
-          <p className="text-[16px] text-[#8a8f98]">{todaySession.focus}</p>
-          <p className="mt-1 flex items-center gap-1.5 text-[12px] font-mono text-[#62666d]">
+          <p className="text-[16px] text-[var(--kh-ink-subtle)]">{todaySession.focus}</p>
+          <p className="mt-1 flex items-center gap-1.5 text-[12px] font-mono text-[var(--kh-ink-subtle)]">
             <Clock className="h-3 w-3" />
             {todaySession.exercises.length} esercizi • ~{todaySession.estimatedMinutes} min
           </p>
@@ -182,23 +181,23 @@ export default function WorkoutCard() {
           {todaySession.exercises.map((pe) => {
             const def = getExerciseDef(pe.exerciseId);
             return (
-              <li key={pe.id} className="border-b border-[#23252a] py-3 first:border-t-0">
+              <li key={pe.id} className="border-b border-[var(--kh-hairline)] py-3 first:border-t-0">
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2 text-[13px] font-mono text-[#d0d6e0]">
+                  <span className="flex items-center gap-2 text-[13px] font-mono text-[var(--kh-ink-muted)]">
                     {def?.name ?? "?"}
                     {pe.notes && (
                       <StickyNote
-                        className="h-3.5 w-3.5 shrink-0 text-[#951DD1]"
+                        className="h-3.5 w-3.5 shrink-0 text-[var(--kh-secondary)]"
                         aria-label="Ha una nota"
                       />
                     )}
                   </span>
-                  <span className="rounded-[4px] bg-[#141516] px-2.5 py-1 text-[13px] font-mono text-[#F8F2FC]">
+                  <span className="rounded-[4px] bg-[var(--kh-surface-2)] px-2.5 py-1 text-[13px] font-mono text-[var(--kh-ink)]">
                     {pe.sets} × {pe.reps}
                   </span>
                 </div>
                 {pe.notes && (
-                  <p className="mt-1 pl-0 text-[12px] italic text-[#62666d]">
+                  <p className="mt-1 pl-0 text-[12px] italic text-[var(--kh-ink-subtle)]">
                     {pe.notes}
                   </p>
                 )}
@@ -209,7 +208,7 @@ export default function WorkoutCard() {
 
         <Link
           href="/allenamento"
-          className="mt-auto flex items-center justify-center gap-2 rounded-full bg-[#00E5FF] py-4 text-[22px] font-medium tracking-[-0.4px] text-[#010102] transition hover:bg-[#5CEBFF] hover:shadow-[0_0_15px_rgba(0,229,255,0.4)]"
+          className="mt-auto flex items-center justify-center gap-2 rounded-full bg-[var(--kh-primary)] py-4 text-[22px] font-medium tracking-[-0.4px] text-[var(--kh-canvas)] transition hover:bg-[var(--kh-primary-hover)] hover:shadow-[var(--kh-glow-primary)]"
         >
           Inizia workout
           <ChevronRight className="h-5 w-5" />
@@ -245,7 +244,7 @@ function SessionSwitchModal({
 }: SessionSwitchModalProps) {
   return (
     <Modal open={open} onClose={onClose} title="Scegli una sessione">
-      <p className="mb-4 text-[12px] text-[#8a8f98]">
+      <p className="mb-4 text-[12px] text-[var(--kh-ink-subtle)]">
         La scelta sostituisce la proposta di oggi. La scheda base resta invariata.
       </p>
       <ul className="space-y-2">
@@ -258,16 +257,16 @@ function SessionSwitchModal({
                 onClick={() => onChoose(s.id)}
                 className={`flex w-full items-center justify-between gap-3 rounded-[6px] border px-4 py-3 text-left transition ${
                   isCurrent
-                    ? "border-[#00E5FF] bg-[#141516]"
-                    : "border-[#23252a] bg-[#0f1011] hover:bg-[#141516]"
+                    ? "border-[var(--kh-primary)] bg-[var(--kh-surface-2)]"
+                    : "border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] hover:bg-[var(--kh-surface-2)]"
                 }`}
               >
                 <div className="min-w-0">
-                  <p className="text-[16px] font-medium text-[#F8F2FC]">{s.name}</p>
-                  <p className="truncate text-[12px] text-[#8a8f98]">{s.focus}</p>
+                  <p className="text-[16px] font-medium text-[var(--kh-ink)]">{s.name}</p>
+                  <p className="truncate text-[12px] text-[var(--kh-ink-subtle)]">{s.focus}</p>
                 </div>
                 {isCurrent && (
-                  <span className="flex items-center gap-1 text-[10px] font-bold uppercase text-[#00E5FF]">
+                  <span className="flex items-center gap-1 text-[10px] font-bold uppercase text-[var(--kh-primary)]">
                     <Check className="h-3 w-3" />
                     Attuale
                   </span>
@@ -277,7 +276,7 @@ function SessionSwitchModal({
           );
         })}
         {(sessions?.length || 0) === 0 && (
-          <p className="py-6 text-center text-[16px] text-[#62666d]">
+          <p className="py-6 text-center text-[16px] text-[var(--kh-ink-subtle)]">
             Nessuna sessione nella scheda.
           </p>
         )}

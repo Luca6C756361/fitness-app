@@ -49,18 +49,18 @@ export default function NotificationsSection() {
   const granted = permission === "granted";
 
   return (
-    <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+    <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
       <div className="mb-4 flex items-center gap-2">
         <Bell className="h-4 w-4 text-amber-600" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
           Notifiche
         </h2>
       </div>
 
       {/* Stato permessi + bottone attivazione */}
       {!granted && (
-        <div className="mb-4 rounded-xl bg-emerald-50 p-4">
-          <p className="mb-3 text-sm font-medium text-[#111111]">
+        <div className="mb-4 rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] p-4">
+          <p className="mb-3 text-sm font-medium text-[var(--kh-ink)]">
             {denied
               ? "Le notifiche sono bloccate. Sblocca dalle impostazioni del browser."
               : "Attiva i permessi del browser per ricevere i promemoria."}
@@ -69,7 +69,7 @@ export default function NotificationsSection() {
             type="button"
             onClick={requestPermission}
             disabled={denied}
-            className="w-full rounded-xl bg-emerald-600 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-xl bg-[var(--kh-primary)] py-2.5 text-sm font-bold text-white shadow-[var(--kh-glow-primary)] transition hover:bg-[var(--kh-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
           >
             {denied ? "Bloccate dal browser" : "Attiva notifiche"}
           </button>
@@ -78,10 +78,10 @@ export default function NotificationsSection() {
 
       {/* Toggles per tipo */}
       <div className="space-y-3">
-        <div className="flex items-center justify-between rounded-xl bg-[#FAF7F0] px-4 py-3">
+        <div className="flex items-center justify-between rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-3">
           <span className="flex items-center gap-2.5">
             <Droplet className="h-4 w-4 text-sky-600" />
-            <span className="text-sm font-medium text-[#111111]">Acqua</span>
+            <span className="text-sm font-medium text-[var(--kh-ink)]">Acqua</span>
           </span>
           <Toggle
             checked={settings.notifications.water}
@@ -90,10 +90,10 @@ export default function NotificationsSection() {
           />
         </div>
 
-        <div className="flex items-center justify-between rounded-xl bg-[#FAF7F0] px-4 py-3">
+        <div className="flex items-center justify-between rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-3">
           <span className="flex items-center gap-2.5">
-            <Dumbbell className="h-4 w-4 text-[#111111]" />
-            <span className="text-sm font-medium text-[#111111]">Allenamento</span>
+            <Dumbbell className="h-4 w-4 text-[var(--kh-primary)]" />
+            <span className="text-sm font-medium text-[var(--kh-ink)]">Allenamento</span>
           </span>
           <Toggle
             checked={settings.notifications.workout}
@@ -102,10 +102,10 @@ export default function NotificationsSection() {
           />
         </div>
 
-        <div className="flex items-center justify-between rounded-xl bg-[#FAF7F0] px-4 py-3">
+        <div className="flex items-center justify-between rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-4 py-3">
           <span className="flex items-center gap-2.5">
-            <Apple className="h-4 w-4 text-red-600" />
-            <span className="text-sm font-medium text-[#111111]">Pasti</span>
+            <Apple className="h-4 w-4 text-red-500" />
+            <span className="text-sm font-medium text-[var(--kh-ink)]">Pasti</span>
           </span>
           <Toggle
             checked={settings.notifications.meals}
@@ -115,7 +115,7 @@ export default function NotificationsSection() {
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-[#111111]/50">
+      <p className="mt-3 text-xs text-[var(--kh-ink-subtle)]">
         I promemoria funzionano quando l'app è aperta nel browser.
       </p>
     </section>

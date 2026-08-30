@@ -38,18 +38,18 @@ function Stepper({
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
-        className="rounded-md bg-emerald-50 p-1 text-emerald-700 transition hover:bg-emerald-100"
+        className="rounded-md border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-1 text-[var(--kh-primary)] transition hover:border-[var(--kh-primary)]"
         aria-label="Diminuisci"
       >
         <Minus className="h-3 w-3" />
       </button>
-      <span className="min-w-[2ch] text-center text-sm font-bold text-[#111111] tabular-nums">
+      <span className="min-w-[2ch] text-center font-mono text-sm font-bold tabular-nums text-[var(--kh-ink)]">
         {value}
       </span>
       <button
         type="button"
         onClick={() => onChange(Math.min(max, value + 1))}
-        className="rounded-md bg-emerald-50 p-1 text-emerald-700 transition hover:bg-emerald-100"
+        className="rounded-md border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-1 text-[var(--kh-primary)] transition hover:border-[var(--kh-primary)]"
         aria-label="Aumenta"
       >
         <Plus className="h-3 w-3" />
@@ -158,7 +158,7 @@ export default function SessionEditor({
       >
         <div className="space-y-4">
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
               Nome sessione
             </label>
             <input
@@ -166,12 +166,12 @@ export default function SessionEditor({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Es. Push — Petto, Spalle, Tricipiti"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-3 py-2 text-sm text-[var(--kh-ink)] outline-none transition placeholder:text-[var(--kh-ink-subtle)] focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
               Focus muscolare
             </label>
             <input
@@ -179,12 +179,12 @@ export default function SessionEditor({
               value={focus}
               onChange={(e) => setFocus(e.target.value)}
               placeholder="Es. Petto · Spalle · Tricipiti"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-3 py-2 text-sm text-[var(--kh-ink)] outline-none transition placeholder:text-[var(--kh-ink-subtle)] focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
               Durata stimata (min)
             </label>
             <input
@@ -193,19 +193,19 @@ export default function SessionEditor({
               min={5}
               max={180}
               onChange={(e) => setMinutes(parseInt(e.target.value, 10) || 0)}
-              className="w-24 rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-24 rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] px-3 py-2 font-mono text-sm tabular-nums text-[var(--kh-ink)] outline-none transition focus:border-[var(--kh-primary)] focus:ring-2 focus:ring-[var(--kh-primary)]/30"
             />
           </div>
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
+              <label className="text-[11px] font-bold uppercase tracking-wide text-[var(--kh-ink-muted)]">
                 Esercizi ({exercises.length})
               </label>
               <button
                 type="button"
                 onClick={() => setPickerOpen(true)}
-                className="flex items-center gap-1 rounded-lg bg-emerald-600 px-2.5 py-1 text-[11px] font-bold text-white transition hover:bg-emerald-700"
+                className="flex items-center gap-1 rounded-lg bg-[var(--kh-primary)] px-2.5 py-1 text-[11px] font-bold text-white transition hover:bg-[var(--kh-primary-hover)]"
               >
                 <Plus className="h-3 w-3" />
                 Aggiungi
@@ -213,7 +213,7 @@ export default function SessionEditor({
             </div>
 
             {exercises.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-emerald-900/15 py-6 text-center text-xs text-[#111111]/50">
+              <p className="rounded-xl border border-dashed border-[var(--kh-hairline)] py-6 text-center text-xs text-[var(--kh-ink-subtle)]">
                 Nessun esercizio. Aggiungine almeno uno.
               </p>
             ) : (
@@ -221,15 +221,15 @@ export default function SessionEditor({
                 {exercises.map((ex) => (
                   <li
                     key={ex.id}
-                    className="rounded-xl border border-emerald-900/10 bg-[#FAF7F0] p-3"
+                    className="rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] p-3"
                   >
                     <div className="mb-2 flex items-start justify-between gap-2">
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-[#111111]">
+                        <p className="text-sm font-medium text-[var(--kh-ink)]">
                           {ex.exerciseName}
                         </p>
                         {ex.notes && !ex.showNotes && (
-                          <p className="mt-0.5 flex items-start gap-1 text-[11px] italic text-[#111111]/60">
+                          <p className="mt-0.5 flex items-start gap-1 text-[11px] italic text-[var(--kh-ink-muted)]">
                             <StickyNote className="mt-0.5 h-3 w-3 shrink-0" />
                             <span className="line-clamp-1">{ex.notes}</span>
                           </p>
@@ -238,7 +238,7 @@ export default function SessionEditor({
                       <button
                         type="button"
                         onClick={() => removeEx(ex.id)}
-                        className="rounded-lg p-1 text-[#111111]/40 transition hover:bg-red-50 hover:text-red-600"
+                        className="rounded-lg p-1 text-[var(--kh-ink-subtle)] transition hover:bg-red-500/10 hover:text-red-500"
                         aria-label="Rimuovi"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -248,7 +248,7 @@ export default function SessionEditor({
                     {/* Controlli set/reps + toggle nota */}
                     <div className="flex flex-wrap items-center gap-3">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase text-[#111111]/60">
+                        <span className="text-[10px] font-bold uppercase text-[var(--kh-ink-subtle)]">
                           Set
                         </span>
                         <Stepper
@@ -257,7 +257,7 @@ export default function SessionEditor({
                         />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase text-[#111111]/60">
+                        <span className="text-[10px] font-bold uppercase text-[var(--kh-ink-subtle)]">
                           Reps
                         </span>
                         <Stepper
@@ -271,10 +271,10 @@ export default function SessionEditor({
                         onClick={() =>
                           updateEx(ex.id, { showNotes: !ex.showNotes })
                         }
-                        className={`ml-auto flex items-center gap-1 rounded-md px-2 py-1 text-[10px] font-bold uppercase transition ${
+                        className={`ml-auto flex items-center gap-1 rounded-md border px-2 py-1 text-[10px] font-bold uppercase transition ${
                           ex.showNotes || ex.notes
-                            ? "bg-amber-50 text-amber-700 hover:bg-amber-100"
-                            : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                            ? "border-amber-500/40 bg-amber-500/10 text-amber-600"
+                            : "border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] text-[var(--kh-ink-muted)] hover:text-[var(--kh-ink)]"
                         }`}
                       >
                         <StickyNote className="h-3 w-3" />
@@ -290,7 +290,7 @@ export default function SessionEditor({
                         placeholder="Es. Attento alla spalla destra, scendere lento"
                         rows={2}
                         maxLength={200}
-                        className="mt-2 w-full resize-none rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-xs text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-amber-300"
+                        className="mt-2 w-full resize-none rounded-lg border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] px-3 py-2 text-xs text-[var(--kh-ink)] outline-none transition placeholder:text-[var(--kh-ink-subtle)] focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
                       />
                     )}
                   </li>
@@ -303,7 +303,7 @@ export default function SessionEditor({
             type="button"
             onClick={handleSave}
             disabled={!canSave}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--kh-primary)] py-3 text-sm font-bold text-white shadow-[var(--kh-glow-primary)] transition hover:bg-[var(--kh-primary-hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
           >
             <Save className="h-4 w-4" />
             {session ? "Salva modifiche" : "Crea sessione"}

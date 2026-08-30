@@ -27,18 +27,18 @@ export default function SessionList() {
 
   return (
     <>
-      <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
+      <section className="rounded-2xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-6 shadow-[var(--kh-card-shadow)]">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Dumbbell className="h-4 w-4 text-[#111111]" />
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
+            <Dumbbell className="h-4 w-4 text-[var(--kh-primary)]" />
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--kh-ink-muted)]">
               Le mie sessioni ({plan?.sessions?.length || 0})
             </h2>
           </div>
           <button
             type="button"
             onClick={openNew}
-            className="flex items-center gap-1 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-emerald-700"
+            className="flex items-center gap-1 rounded-lg bg-[var(--kh-primary)] px-3 py-1.5 text-xs font-bold text-white shadow-[var(--kh-glow-primary)] transition hover:bg-[var(--kh-primary-hover)]"
           >
             <Plus className="h-3.5 w-3.5" />
             Nuova
@@ -46,7 +46,7 @@ export default function SessionList() {
         </div>
 
         {(plan?.sessions?.length || 0) === 0 ? (
-          <p className="py-6 text-center text-sm text-[#111111]/50">
+          <p className="py-6 text-center text-sm text-[var(--kh-ink-subtle)]">
             Nessuna sessione. Creane una per iniziare a costruire la scheda.
           </p>
         ) : (
@@ -63,12 +63,12 @@ export default function SessionList() {
               return (
                 <li
                   key={s.id}
-                  className="rounded-xl border border-emerald-900/10 bg-white p-3"
+                  className="rounded-xl border border-[var(--kh-hairline)] bg-[var(--kh-surface-2)] p-3"
                 >
                   <div className="mb-2 flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-bold text-[#111111]">{s.name}</p>
-                      <p className="text-xs font-medium text-[#111111]/60">
+                      <p className="text-sm font-bold text-[var(--kh-ink)]">{s.name}</p>
+                      <p className="text-xs font-medium text-[var(--kh-ink-muted)]">
                         {s.focus} · ~{s.estimatedMinutes} min
                       </p>
                     </div>
@@ -76,7 +76,7 @@ export default function SessionList() {
                       <button
                         type="button"
                         onClick={() => openEdit(s)}
-                        className="rounded-lg border border-emerald-900/10 bg-white p-2 text-emerald-700 transition hover:bg-emerald-50"
+                        className="rounded-lg border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-2 text-[var(--kh-primary)] transition hover:border-[var(--kh-primary)]"
                         aria-label="Modifica"
                       >
                         <Pencil className="h-3.5 w-3.5" />
@@ -84,7 +84,7 @@ export default function SessionList() {
                       <button
                         type="button"
                         onClick={() => setConfirmDelete(s.id)}
-                        className="rounded-lg border border-emerald-900/10 bg-white p-2 text-red-600 transition hover:bg-red-50"
+                        className="rounded-lg border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] p-2 text-red-500 transition hover:border-red-500/50 hover:bg-red-500/10"
                         aria-label="Elimina"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -93,7 +93,7 @@ export default function SessionList() {
                   </div>
 
                   {preview && (
-                    <p className="truncate text-[11px] font-medium text-[#111111]/50">
+                    <p className="truncate text-[11px] font-medium text-[var(--kh-ink-subtle)]">
                       {preview}
                       {extra}
                     </p>
@@ -101,10 +101,10 @@ export default function SessionList() {
 
                   {/* Conferma inline eliminazione */}
                   {confirmDelete === s.id && (
-                    <div className="mt-3 rounded-lg bg-red-50 p-3">
+                    <div className="mt-3 rounded-xl border border-red-500/30 bg-red-500/10 p-3">
                       <div className="mb-2 flex items-start gap-2">
-                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
-                        <p className="text-xs text-red-900">
+                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
+                        <p className="text-xs text-[var(--kh-ink)]">
                           Eliminare questa sessione? Verrà rimossa anche dai
                           giorni in cui era assegnata.
                         </p>
@@ -113,7 +113,7 @@ export default function SessionList() {
                         <button
                           type="button"
                           onClick={() => setConfirmDelete(null)}
-                          className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-[#111111]"
+                          className="rounded-lg border border-[var(--kh-hairline)] bg-[var(--kh-surface-1)] py-1.5 text-xs font-bold text-[var(--kh-ink-muted)] transition hover:text-[var(--kh-ink)]"
                         >
                           Annulla
                         </button>
@@ -123,7 +123,7 @@ export default function SessionList() {
                             deleteSession(s.id);
                             setConfirmDelete(null);
                           }}
-                          className="rounded-lg bg-red-600 py-1.5 text-xs font-bold text-white"
+                          className="rounded-lg bg-red-600 py-1.5 text-xs font-bold text-white transition hover:bg-red-700"
                         >
                           Elimina
                         </button>
