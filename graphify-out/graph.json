@@ -13,7 +13,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_compositioncart_cartitem",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "cartitem"
     },
     {
@@ -26,7 +26,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_compositioncart_compositioncartprops",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "compositioncartprops"
     },
     {
@@ -39,7 +39,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_exercisebrowser_exercisebrowserprops",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisebrowserprops"
     },
     {
@@ -52,7 +52,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_page_cartitem",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "cartitem"
     },
     {
@@ -65,7 +65,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_exercisepicker_exercisepickerprops",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisepickerprops"
     },
     {
@@ -78,7 +78,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessioneditor_editableexercise",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "editableexercise"
     },
     {
@@ -91,7 +91,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessioneditor_sessioneditorprops",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessioneditorprops"
     },
     {
@@ -104,20 +104,20 @@
       "_origin": "ast",
       "id": "app_today_components_modal_modalprops",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "modalprops"
     },
     {
       "label": "SessionSwitchModalProps",
       "file_type": "code",
       "source_file": "app/today/_components/WorkoutCard.tsx",
-      "source_location": "L231",
+      "source_location": "L230",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "id": "app_today_components_workoutcard_sessionswitchmodalprops",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessionswitchmodalprops"
     },
     {
@@ -130,7 +130,7 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_plancontextvalue",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "plancontextvalue"
     },
     {
@@ -143,34 +143,8 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_todayoverride",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "todayoverride"
-    },
-    {
-      "label": "ActivityLevel",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L7",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_types_activitylevel",
-      "community": 0,
-      "community_name": "types.ts",
-      "norm_label": "activitylevel"
-    },
-    {
-      "label": "Equipment",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L83",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_types_equipment",
-      "community": 0,
-      "community_name": "types.ts",
-      "norm_label": "equipment"
     },
     {
       "label": "ExerciseDefinition",
@@ -182,7 +156,7 @@
       "_origin": "ast",
       "id": "app_today_lib_types_exercisedefinition",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisedefinition"
     },
     {
@@ -195,7 +169,7 @@
       "_origin": "ast",
       "id": "app_today_lib_types_musclegroup",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "musclegroup"
     },
     {
@@ -208,34 +182,8 @@
       "_origin": "ast",
       "id": "app_today_lib_types_plannedexercise",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "plannedexercise"
-    },
-    {
-      "label": "Sex",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L5",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_types_sex",
-      "community": 0,
-      "community_name": "types.ts",
-      "norm_label": "sex"
-    },
-    {
-      "label": "WeeklyOverride",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L138",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_types_weeklyoverride",
-      "community": 0,
-      "community_name": "types.ts",
-      "norm_label": "weeklyoverride"
     },
     {
       "label": "WeeklyPlan",
@@ -247,7 +195,7 @@
       "_origin": "ast",
       "id": "app_today_lib_types_weeklyplan",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "weeklyplan"
     },
     {
@@ -260,7 +208,7 @@
       "_origin": "ast",
       "id": "app_today_lib_types_workoutsession",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "workoutsession"
     },
     {
@@ -381,19 +329,6 @@
       "norm_label": "prtype"
     },
     {
-      "label": "CompletedExercise",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L154",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_types_completedexercise",
-      "community": 2,
-      "community_name": "WorkoutSessionContext.tsx",
-      "norm_label": "completedexercise"
-    },
-    {
       "label": "CompletedSet",
       "file_type": "code",
       "source_file": "app/today/_lib/types.ts",
@@ -470,6 +405,71 @@
       "community": 2,
       "community_name": "WorkoutSessionContext.tsx",
       "norm_label": "workoutstats"
+    },
+    {
+      "label": "FoodDiaryProps",
+      "file_type": "code",
+      "source_file": "app/nutrition/_components/FoodDiary.tsx",
+      "source_location": "L13",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_nutrition_components_fooddiary_fooddiaryprops",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "fooddiaryprops"
+    },
+    {
+      "label": "Totals",
+      "file_type": "code",
+      "source_file": "app/nutrition/_components/FoodDiary.tsx",
+      "source_location": "L6",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_nutrition_components_fooddiary_totals",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "totals"
+    },
+    {
+      "label": "DailyKcal",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L34",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_dailykcal",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "dailykcal"
+    },
+    {
+      "label": "DiaryEntry",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L19",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_diaryentry",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "diaryentry"
+    },
+    {
+      "label": "Totals",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L27",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_totals",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "totals"
     },
     {
       "label": "ToggleProps",
@@ -576,58 +576,6 @@
       "norm_label": "weightunit"
     },
     {
-      "label": "WeightEntry",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L27",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_types_weightentry",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "weightentry"
-    },
-    {
-      "label": "WeightContextValue",
-      "file_type": "code",
-      "source_file": "app/today/_lib/WeightContext.tsx",
-      "source_location": "L18",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_weightcontext_weightcontextvalue",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "weightcontextvalue"
-    },
-    {
-      "label": "FoodDiaryProps",
-      "file_type": "code",
-      "source_file": "app/nutrition/_components/FoodDiary.tsx",
-      "source_location": "L13",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_nutrition_components_fooddiary_fooddiaryprops",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "fooddiaryprops"
-    },
-    {
-      "label": "Totals",
-      "file_type": "code",
-      "source_file": "app/nutrition/_components/FoodDiary.tsx",
-      "source_location": "L6",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_nutrition_components_fooddiary_totals",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "totals"
-    },
-    {
       "label": "FoodPickerProps",
       "file_type": "code",
       "source_file": "app/nutrition/_components/FoodPicker.tsx",
@@ -637,21 +585,8 @@
       "_origin": "ast",
       "id": "app_nutrition_components_foodpicker_foodpickerprops",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "foodpickerprops"
-    },
-    {
-      "label": "DailyKcal",
-      "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L34",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "id": "app_today_lib_diarycontext_dailykcal",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "dailykcal"
     },
     {
       "label": "DiaryContextValue",
@@ -663,34 +598,34 @@
       "_origin": "ast",
       "id": "app_today_lib_diarycontext_diarycontextvalue",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "diarycontextvalue"
     },
     {
-      "label": "DiaryEntry",
+      "label": "ActivityLevel",
       "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L19",
+      "source_file": "app/today/_lib/types.ts",
+      "source_location": "L7",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "app_today_lib_diarycontext_diaryentry",
+      "id": "app_today_lib_types_activitylevel",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "diaryentry"
+      "community_name": "types.ts",
+      "norm_label": "activitylevel"
     },
     {
-      "label": "Totals",
+      "label": "CompletedExercise",
       "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L27",
+      "source_file": "app/today/_lib/types.ts",
+      "source_location": "L154",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "id": "app_today_lib_diarycontext_totals",
+      "id": "app_today_lib_types_completedexercise",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "totals"
+      "community_name": "types.ts",
+      "norm_label": "completedexercise"
     },
     {
       "label": "DailyKcal",
@@ -702,8 +637,21 @@
       "_origin": "ast",
       "id": "app_today_lib_types_dailykcal",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "dailykcal"
+    },
+    {
+      "label": "Equipment",
+      "file_type": "code",
+      "source_file": "app/today/_lib/types.ts",
+      "source_location": "L83",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_types_equipment",
+      "community": 6,
+      "community_name": "types.ts",
+      "norm_label": "equipment"
     },
     {
       "label": "Food",
@@ -715,7 +663,7 @@
       "_origin": "ast",
       "id": "app_today_lib_types_food",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "food"
     },
     {
@@ -728,8 +676,21 @@
       "_origin": "ast",
       "id": "app_today_lib_types_macro",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "macro"
+    },
+    {
+      "label": "Sex",
+      "file_type": "code",
+      "source_file": "app/today/_lib/types.ts",
+      "source_location": "L5",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_types_sex",
+      "community": 6,
+      "community_name": "types.ts",
+      "norm_label": "sex"
     },
     {
       "label": "UserGoals",
@@ -741,7 +702,7 @@
       "_origin": "ast",
       "id": "app_today_lib_types_usergoals",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "usergoals"
     },
     {
@@ -754,8 +715,34 @@
       "_origin": "ast",
       "id": "app_today_lib_types_userprofile",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "userprofile"
+    },
+    {
+      "label": "WeeklyOverride",
+      "file_type": "code",
+      "source_file": "app/today/_lib/types.ts",
+      "source_location": "L138",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_types_weeklyoverride",
+      "community": 6,
+      "community_name": "types.ts",
+      "norm_label": "weeklyoverride"
+    },
+    {
+      "label": "WeightEntry",
+      "file_type": "code",
+      "source_file": "app/today/_lib/types.ts",
+      "source_location": "L27",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_types_weightentry",
+      "community": 6,
+      "community_name": "types.ts",
+      "norm_label": "weightentry"
     },
     {
       "label": "UserContextValue",
@@ -767,8 +754,21 @@
       "_origin": "ast",
       "id": "app_today_lib_usercontext_usercontextvalue",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "usercontextvalue"
+    },
+    {
+      "label": "WeightContextValue",
+      "file_type": "code",
+      "source_file": "app/today/_lib/WeightContext.tsx",
+      "source_location": "L18",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "id": "app_today_lib_weightcontext_weightcontextvalue",
+      "community": 6,
+      "community_name": "types.ts",
+      "norm_label": "weightcontextvalue"
     },
     {
       "label": "MuscleVolume",
@@ -805,7 +805,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_compositioncart_compositioncart",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "compositioncart()"
     },
     {
@@ -817,7 +817,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_compositioncart_stepper",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "stepper()"
     },
     {
@@ -829,7 +829,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_exercisebrowser_exercisebrowser",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisebrowser()"
     },
     {
@@ -841,7 +841,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_page_componipage",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "componipage()"
     },
     {
@@ -853,7 +853,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_exercisepicker_exercisepicker",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisepicker()"
     },
     {
@@ -865,7 +865,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessioneditor_sessioneditor",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessioneditor()"
     },
     {
@@ -877,7 +877,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessioneditor_stepper",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "stepper()"
     },
     {
@@ -889,7 +889,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessionlist_sessionlist",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessionlist()"
     },
     {
@@ -901,19 +901,19 @@
       "_origin": "ast",
       "id": "app_scheda_components_weekview_weekview",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "weekview()"
     },
     {
       "label": "SchedaPage()",
       "file_type": "code",
       "source_file": "app/scheda/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "_callable": true,
       "_origin": "ast",
       "id": "app_scheda_page_schedapage",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "schedapage()"
     },
     {
@@ -925,20 +925,32 @@
       "_origin": "ast",
       "id": "app_today_components_modal_modal",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "modal()"
     },
     {
       "label": "SessionSwitchModal()",
       "file_type": "code",
       "source_file": "app/today/_components/WorkoutCard.tsx",
-      "source_location": "L239",
+      "source_location": "L238",
       "_callable": true,
       "_origin": "ast",
       "id": "app_today_components_workoutcard_sessionswitchmodal",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessionswitchmodal()"
+    },
+    {
+      "label": "WorkoutCard()",
+      "file_type": "code",
+      "source_file": "app/today/_components/WorkoutCard.tsx",
+      "source_location": "L18",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_components_workoutcard_workoutcard",
+      "community": 0,
+      "community_name": "PlanContext.tsx",
+      "norm_label": "workoutcard()"
     },
     {
       "label": "PlanProvider()",
@@ -949,7 +961,7 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_planprovider",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "planprovider()"
     },
     {
@@ -961,7 +973,7 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_todaydayindex",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "todaydayindex()"
     },
     {
@@ -973,7 +985,7 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_todayiso",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "todayiso()"
     },
     {
@@ -985,7 +997,7 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_useplan",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "useplan()"
     },
     {
@@ -1088,13 +1100,25 @@
       "label": "StatsPage()",
       "file_type": "code",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L9",
+      "source_location": "L11",
       "_callable": true,
       "_origin": "ast",
       "id": "app_stats_page_statspage",
       "community": 1,
       "community_name": "useUser",
       "norm_label": "statspage()"
+    },
+    {
+      "label": "Header()",
+      "file_type": "code",
+      "source_file": "app/today/_components/Header.tsx",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_components_header_header",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "header()"
     },
     {
       "label": "useUser()",
@@ -1169,6 +1193,18 @@
       "norm_label": "formatshortdate()"
     },
     {
+      "label": "formatToday()",
+      "file_type": "code",
+      "source_file": "app/today/_lib/utils.ts",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_lib_utils_formattoday",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "formattoday()"
+    },
+    {
       "label": "useWeight()",
       "file_type": "code",
       "source_file": "app/today/_lib/WeightContext.tsx",
@@ -1179,6 +1215,30 @@
       "community": 1,
       "community_name": "useUser",
       "norm_label": "useweight()"
+    },
+    {
+      "label": "WeightProvider()",
+      "file_type": "code",
+      "source_file": "app/today/_lib/WeightContext.tsx",
+      "source_location": "L29",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_lib_weightcontext_weightprovider",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "weightprovider()"
+    },
+    {
+      "label": "TodayPage()",
+      "file_type": "code",
+      "source_file": "app/today/page.tsx",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_page_todaypage",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "todaypage()"
     },
     {
       "label": "middleware()",
@@ -1256,7 +1316,7 @@
       "label": "playBeep()",
       "file_type": "code",
       "source_file": "app/allenamento/_components/RestTimer.tsx",
-      "source_location": "L105",
+      "source_location": "L103",
       "_callable": true,
       "_origin": "ast",
       "id": "app_allenamento_components_resttimer_playbeep",
@@ -1316,7 +1376,7 @@
       "label": "ShellWithBack()",
       "file_type": "code",
       "source_file": "app/allenamento/page.tsx",
-      "source_location": "L224",
+      "source_location": "L223",
       "_callable": true,
       "_origin": "ast",
       "id": "app_allenamento_page_shellwithback",
@@ -1457,6 +1517,102 @@
       "norm_label": "workoutsessionprovider()"
     },
     {
+      "label": "FoodDiary()",
+      "file_type": "code",
+      "source_file": "app/nutrition/_components/FoodDiary.tsx",
+      "source_location": "L20",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_nutrition_components_fooddiary_fooddiary",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "fooddiary()"
+    },
+    {
+      "label": "NutritionPage()",
+      "file_type": "code",
+      "source_file": "app/nutrition/page.tsx",
+      "source_location": "L9",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_nutrition_page_nutritionpage",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "nutritionpage()"
+    },
+    {
+      "label": "MacroDonut()",
+      "file_type": "code",
+      "source_file": "app/today/_components/MacroDonut.tsx",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_components_macrodonut_macrodonut",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "macrodonut()"
+    },
+    {
+      "label": "NutritionCard()",
+      "file_type": "code",
+      "source_file": "app/today/_components/NutritionCard.tsx",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_components_nutritioncard_nutritioncard",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "nutritioncard()"
+    },
+    {
+      "label": "calcNutrients()",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L58",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_calcnutrients",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "calcnutrients()"
+    },
+    {
+      "label": "DiaryProvider()",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L69",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_diaryprovider",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "diaryprovider()"
+    },
+    {
+      "label": "todayISO()",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L53",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_todayiso",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "todayiso()"
+    },
+    {
+      "label": "useDiary()",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L172",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "app_today_lib_diarycontext_usediary",
+      "community": 21,
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "usediary()"
+    },
+    {
       "label": "AppearanceSection()",
       "file_type": "code",
       "source_file": "app/impostazioni/_components/AppearanceSection.tsx",
@@ -1544,7 +1700,7 @@
       "label": "SettingsPage()",
       "file_type": "code",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L10",
+      "source_location": "L12",
       "_callable": true,
       "_origin": "ast",
       "id": "app_impostazioni_page_settingspage",
@@ -1609,7 +1765,7 @@
       "_origin": "ast",
       "id": "app_components_appshell_appshell",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "appshell()"
     },
     {
@@ -1621,7 +1777,7 @@
       "_origin": "ast",
       "id": "app_components_bottomnav_bottomnav",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "bottomnav()"
     },
     {
@@ -1633,7 +1789,7 @@
       "_origin": "ast",
       "id": "app_components_serviceworker_serviceworker",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "serviceworker()"
     },
     {
@@ -1645,7 +1801,7 @@
       "_origin": "ast",
       "id": "app_components_sidebar_sidebar",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "sidebar()"
     },
     {
@@ -1657,7 +1813,7 @@
       "_origin": "ast",
       "id": "app_layout_rootlayout",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "rootlayout()"
     },
     {
@@ -1669,7 +1825,7 @@
       "_origin": "ast",
       "id": "app_lib_authcontext_authprovider",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "authprovider()"
     },
     {
@@ -1681,7 +1837,7 @@
       "_origin": "ast",
       "id": "app_lib_authcontext_useauth",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "useauth()"
     },
     {
@@ -1693,7 +1849,7 @@
       "_origin": "ast",
       "id": "app_login_page_loginpage",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "loginpage()"
     },
     {
@@ -1705,32 +1861,8 @@
       "_origin": "ast",
       "id": "app_page_home",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "home()"
-    },
-    {
-      "label": "BottomNav()",
-      "file_type": "code",
-      "source_file": "app/stats/_components/BottomNav.tsx",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_stats_components_bottomnav_bottomnav",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "bottomnav()"
-    },
-    {
-      "label": "Header()",
-      "file_type": "code",
-      "source_file": "app/today/_components/Header.tsx",
-      "source_location": "L21",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_components_header_header",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "header()"
     },
     {
       "label": "SettingsProvider()",
@@ -1741,7 +1873,7 @@
       "_origin": "ast",
       "id": "app_today_lib_settingscontext_settingsprovider",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "settingsprovider()"
     },
     {
@@ -1753,44 +1885,8 @@
       "_origin": "ast",
       "id": "app_today_lib_usercontext_userprovider",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "userprovider()"
-    },
-    {
-      "label": "formatToday()",
-      "file_type": "code",
-      "source_file": "app/today/_lib/utils.ts",
-      "source_location": "L6",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_lib_utils_formattoday",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "formattoday()"
-    },
-    {
-      "label": "WeightProvider()",
-      "file_type": "code",
-      "source_file": "app/today/_lib/WeightContext.tsx",
-      "source_location": "L29",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_lib_weightcontext_weightprovider",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "weightprovider()"
-    },
-    {
-      "label": "FoodDiary()",
-      "file_type": "code",
-      "source_file": "app/nutrition/_components/FoodDiary.tsx",
-      "source_location": "L19",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_nutrition_components_fooddiary_fooddiary",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "fooddiary()"
     },
     {
       "label": "FoodPicker()",
@@ -1801,116 +1897,8 @@
       "_origin": "ast",
       "id": "app_nutrition_components_foodpicker_foodpicker",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "foodpicker()"
-    },
-    {
-      "label": "NutritionPage()",
-      "file_type": "code",
-      "source_file": "app/nutrition/page.tsx",
-      "source_location": "L9",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_nutrition_page_nutritionpage",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "nutritionpage()"
-    },
-    {
-      "label": "MacroDonut()",
-      "file_type": "code",
-      "source_file": "app/today/_components/MacroDonut.tsx",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_components_macrodonut_macrodonut",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "macrodonut()"
-    },
-    {
-      "label": "NutritionCard()",
-      "file_type": "code",
-      "source_file": "app/today/_components/NutritionCard.tsx",
-      "source_location": "L14",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_components_nutritioncard_nutritioncard",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "nutritioncard()"
-    },
-    {
-      "label": "WorkoutCard()",
-      "file_type": "code",
-      "source_file": "app/today/_components/WorkoutCard.tsx",
-      "source_location": "L18",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_components_workoutcard_workoutcard",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "workoutcard()"
-    },
-    {
-      "label": "calcNutrients()",
-      "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L58",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_lib_diarycontext_calcnutrients",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "calcnutrients()"
-    },
-    {
-      "label": "DiaryProvider()",
-      "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L69",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_lib_diarycontext_diaryprovider",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "diaryprovider()"
-    },
-    {
-      "label": "todayISO()",
-      "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L53",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_lib_diarycontext_todayiso",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "todayiso()"
-    },
-    {
-      "label": "useDiary()",
-      "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L172",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_lib_diarycontext_usediary",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "usediary()"
-    },
-    {
-      "label": "TodayPage()",
-      "file_type": "code",
-      "source_file": "app/today/page.tsx",
-      "source_location": "L5",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "app_today_page_todaypage",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "todaypage()"
     },
     {
       "label": "VolumeChart()",
@@ -1992,7 +1980,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_compositioncart",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "compositioncart.tsx"
     },
     {
@@ -2003,7 +1991,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_components_exercisebrowser",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisebrowser.tsx"
     },
     {
@@ -2014,7 +2002,7 @@
       "_origin": "ast",
       "id": "app_allenamento_componi_page",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "componi/page.tsx"
     },
     {
@@ -2025,7 +2013,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_exercisepicker",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisepicker.tsx"
     },
     {
@@ -2036,7 +2024,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessioneditor",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessioneditor.tsx"
     },
     {
@@ -2047,7 +2035,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_sessionlist",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "sessionlist.tsx"
     },
     {
@@ -2058,7 +2046,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_weekview",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "weekview.tsx"
     },
     {
@@ -2069,7 +2057,7 @@
       "_origin": "ast",
       "id": "app_scheda_components_weekview_displayorder",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "displayorder"
     },
     {
@@ -2080,7 +2068,7 @@
       "_origin": "ast",
       "id": "app_scheda_page",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "scheda/page.tsx"
     },
     {
@@ -2091,7 +2079,7 @@
       "_origin": "ast",
       "id": "app_today_components_modal",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "modal.tsx"
     },
     {
@@ -2102,7 +2090,7 @@
       "_origin": "ast",
       "id": "app_today_components_workoutcard",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "workoutcard.tsx"
     },
     {
@@ -2113,7 +2101,7 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "exercisedata.ts"
     },
     {
@@ -2124,7 +2112,7 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata_daylabels",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "daylabels"
     },
     {
@@ -2135,7 +2123,7 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata_daylabelsshort",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "daylabelsshort"
     },
     {
@@ -2146,7 +2134,7 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata_defaultsessions",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "defaultsessions"
     },
     {
@@ -2157,7 +2145,7 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata_defaultweeklyplan",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "defaultweeklyplan"
     },
     {
@@ -2168,8 +2156,19 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata_equipmentlabels",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "equipmentlabels"
+    },
+    {
+      "label": "exerciseDatabase",
+      "file_type": "code",
+      "source_file": "app/today/_lib/exerciseData.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "app_today_lib_exercisedata_exercisedatabase",
+      "community": 0,
+      "community_name": "PlanContext.tsx",
+      "norm_label": "exercisedatabase"
     },
     {
       "label": "muscleGroupLabels",
@@ -2179,7 +2178,7 @@
       "_origin": "ast",
       "id": "app_today_lib_exercisedata_musclegrouplabels",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "musclegrouplabels"
     },
     {
@@ -2190,7 +2189,7 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "plancontext.tsx"
     },
     {
@@ -2201,19 +2200,8 @@
       "_origin": "ast",
       "id": "app_today_lib_plancontext_plancontext",
       "community": 0,
-      "community_name": "types.ts",
+      "community_name": "PlanContext.tsx",
       "norm_label": "plancontext"
-    },
-    {
-      "label": "types.ts",
-      "file_type": "code",
-      "source_file": "app/today/_lib/types.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_today_lib_types",
-      "community": 0,
-      "community_name": "types.ts",
-      "norm_label": "types.ts"
     },
     {
       "label": "GoalsForm.tsx",
@@ -2315,6 +2303,17 @@
       "norm_label": "stats/page.tsx"
     },
     {
+      "label": "Header.tsx",
+      "file_type": "code",
+      "source_file": "app/today/_components/Header.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_today_components_header",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "header.tsx"
+    },
+    {
       "label": "activityLabels",
       "file_type": "code",
       "source_file": "app/today/_lib/data.ts",
@@ -2335,6 +2334,39 @@
       "community": 1,
       "community_name": "useUser",
       "norm_label": "utils.ts"
+    },
+    {
+      "label": "WeightContext.tsx",
+      "file_type": "code",
+      "source_file": "app/today/_lib/WeightContext.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_today_lib_weightcontext",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "weightcontext.tsx"
+    },
+    {
+      "label": "WeightContext",
+      "file_type": "code",
+      "source_file": "app/today/_lib/WeightContext.tsx",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "app_today_lib_weightcontext_weightcontext",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "weightcontext"
+    },
+    {
+      "label": "today/page.tsx",
+      "file_type": "code",
+      "source_file": "app/today/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "app_today_page",
+      "community": 1,
+      "community_name": "useUser",
+      "norm_label": "today/page.tsx"
     },
     {
       "label": "middleware.ts",
@@ -2678,92 +2710,125 @@
       "norm_label": "claude.md"
     },
     {
-      "label": "DESIGN.md",
-      "file_type": "document",
-      "source_file": "DESIGN.md",
+      "label": "FoodDiary.tsx",
+      "file_type": "code",
+      "source_file": "app/nutrition/_components/FoodDiary.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "design",
+      "id": "app_nutrition_components_fooddiary",
       "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "design.md"
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "fooddiary.tsx"
     },
     {
-      "label": "1. Modalit\u00e0 Azione (Live Workout)",
-      "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L148",
+      "label": "nutrition/page.tsx",
+      "file_type": "code",
+      "source_file": "app/nutrition/page.tsx",
+      "source_location": "L1",
       "_origin": "ast",
-      "id": "design_1_modalit\u00e0_azione_live_workout",
+      "id": "app_nutrition_page",
       "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "1. modalita azione (live workout)"
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "nutrition/page.tsx"
     },
     {
-      "label": "2. Modalit\u00e0 Riflessione (Log & Analytics)",
-      "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L152",
+      "label": "MacroDonut.tsx",
+      "file_type": "code",
+      "source_file": "app/today/_components/MacroDonut.tsx",
+      "source_location": "L1",
       "_origin": "ast",
-      "id": "design_2_modalit\u00e0_riflessione_log_analytics",
+      "id": "app_today_components_macrodonut",
       "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "2. modalita riflessione (log & analytics)"
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "macrodonut.tsx"
     },
     {
-      "label": "Do",
-      "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L158",
+      "label": "NutritionCard.tsx",
+      "file_type": "code",
+      "source_file": "app/today/_components/NutritionCard.tsx",
+      "source_location": "L1",
       "_origin": "ast",
-      "id": "design_do",
+      "id": "app_today_components_nutritioncard",
       "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "do"
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "nutritioncard.tsx"
     },
     {
-      "label": "Do's and Don'ts per il Tema Chiaro",
-      "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L156",
+      "label": "DiaryContext.tsx",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L1",
       "_origin": "ast",
-      "id": "design_do_s_and_don_ts_per_il_tema_chiaro",
+      "id": "app_today_lib_diarycontext",
       "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "do's and don'ts per il tema chiaro"
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "diarycontext.tsx"
     },
     {
-      "label": "Don't",
-      "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L163",
+      "label": "DiaryContext",
+      "file_type": "code",
+      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_location": "L49",
       "_origin": "ast",
-      "id": "design_don_t",
+      "id": "app_today_lib_diarycontext_diarycontext",
       "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "don't"
+      "community_name": "DiaryContext.tsx",
+      "norm_label": "diarycontext"
     },
     {
-      "label": "L'Architettura a Doppio Stato e Tema",
+      "label": "SKILL.md",
       "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L146",
+      "source_file": "SKILL.md",
+      "source_location": "L1",
       "_origin": "ast",
-      "id": "design_l_architettura_a_doppio_stato_e_tema",
-      "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "l'architettura a doppio stato e tema"
+      "id": "skill",
+      "community": 22,
+      "community_name": "Web Interface Guidelines",
+      "norm_label": "skill.md"
     },
     {
-      "label": "Overview",
+      "label": "Guidelines Source",
       "file_type": "document",
-      "source_file": "DESIGN.md",
-      "source_location": "L138",
+      "source_file": "SKILL.md",
+      "source_location": "L21",
       "_origin": "ast",
-      "id": "design_overview",
-      "community": 21,
-      "community_name": "DESIGN.md",
-      "norm_label": "overview"
+      "id": "skill_guidelines_source",
+      "community": 22,
+      "community_name": "Web Interface Guidelines",
+      "norm_label": "guidelines source"
+    },
+    {
+      "label": "How It Works",
+      "file_type": "document",
+      "source_file": "SKILL.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "skill_how_it_works",
+      "community": 22,
+      "community_name": "Web Interface Guidelines",
+      "norm_label": "how it works"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": "SKILL.md",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "skill_usage",
+      "community": 22,
+      "community_name": "Web Interface Guidelines",
+      "norm_label": "usage"
+    },
+    {
+      "label": "Web Interface Guidelines",
+      "file_type": "document",
+      "source_file": "SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "skill_web_interface_guidelines",
+      "community": 22,
+      "community_name": "Web Interface Guidelines",
+      "norm_label": "web interface guidelines"
     },
     {
       "label": "AppearanceSection.tsx",
@@ -3202,19 +3267,19 @@
       "_origin": "ast",
       "id": "app_components_appshell",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "appshell.tsx"
     },
     {
-      "label": "app/_components/BottomNav.tsx",
+      "label": "BottomNav.tsx",
       "file_type": "code",
       "source_file": "app/_components/BottomNav.tsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "app_components_bottomnav",
       "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "app/_components/bottomnav.tsx"
+      "community_name": "layout.tsx",
+      "norm_label": "bottomnav.tsx"
     },
     {
       "label": "items",
@@ -3224,7 +3289,7 @@
       "_origin": "ast",
       "id": "app_components_bottomnav_items",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "items"
     },
     {
@@ -3235,7 +3300,7 @@
       "_origin": "ast",
       "id": "app_components_serviceworker",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "serviceworker.tsx"
     },
     {
@@ -3246,7 +3311,7 @@
       "_origin": "ast",
       "id": "app_components_sidebar",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "sidebar.tsx"
     },
     {
@@ -3257,7 +3322,7 @@
       "_origin": "ast",
       "id": "app_components_sidebar_items",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "items"
     },
     {
@@ -3268,7 +3333,7 @@
       "_origin": "ast",
       "id": "app_layout",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "layout.tsx"
     },
     {
@@ -3279,7 +3344,7 @@
       "_origin": "ast",
       "id": "app_layout_metadata",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "metadata"
     },
     {
@@ -3290,7 +3355,7 @@
       "_origin": "ast",
       "id": "app_layout_viewport",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "viewport"
     },
     {
@@ -3301,7 +3366,7 @@
       "_origin": "ast",
       "id": "app_lib_authcontext",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "authcontext.tsx"
     },
     {
@@ -3312,7 +3377,7 @@
       "_origin": "ast",
       "id": "app_lib_authcontext_authcontext",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "authcontext"
     },
     {
@@ -3323,7 +3388,7 @@
       "_origin": "ast",
       "id": "app_lib_supabase_client",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "client.ts"
     },
     {
@@ -3334,7 +3399,7 @@
       "_origin": "ast",
       "id": "app_lib_supabase_client_supabase",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "supabase"
     },
     {
@@ -3345,7 +3410,7 @@
       "_origin": "ast",
       "id": "app_login_page",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "login/page.tsx"
     },
     {
@@ -3356,96 +3421,8 @@
       "_origin": "ast",
       "id": "app_page",
       "community": 5,
-      "community_name": "UserContext.tsx",
+      "community_name": "layout.tsx",
       "norm_label": "app/page.tsx"
-    },
-    {
-      "label": "stats/_components/BottomNav.tsx",
-      "file_type": "code",
-      "source_file": "app/stats/_components/BottomNav.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_stats_components_bottomnav",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "stats/_components/bottomnav.tsx"
-    },
-    {
-      "label": "items",
-      "file_type": "code",
-      "source_file": "app/stats/_components/BottomNav.tsx",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "app_stats_components_bottomnav_items",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "items"
-    },
-    {
-      "label": "Header.tsx",
-      "file_type": "code",
-      "source_file": "app/today/_components/Header.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_today_components_header",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "header.tsx"
-    },
-    {
-      "label": "UserContext.tsx",
-      "file_type": "code",
-      "source_file": "app/today/_lib/UserContext.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_today_lib_usercontext",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "usercontext.tsx"
-    },
-    {
-      "label": "UserContext",
-      "file_type": "code",
-      "source_file": "app/today/_lib/UserContext.tsx",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "app_today_lib_usercontext_usercontext",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "usercontext"
-    },
-    {
-      "label": "WeightContext.tsx",
-      "file_type": "code",
-      "source_file": "app/today/_lib/WeightContext.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_today_lib_weightcontext",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "weightcontext.tsx"
-    },
-    {
-      "label": "WeightContext",
-      "file_type": "code",
-      "source_file": "app/today/_lib/WeightContext.tsx",
-      "source_location": "L27",
-      "_origin": "ast",
-      "id": "app_today_lib_weightcontext_weightcontext",
-      "community": 5,
-      "community_name": "UserContext.tsx",
-      "norm_label": "weightcontext"
-    },
-    {
-      "label": "FoodDiary.tsx",
-      "file_type": "code",
-      "source_file": "app/nutrition/_components/FoodDiary.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_nutrition_components_fooddiary",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "fooddiary.tsx"
     },
     {
       "label": "FoodPicker.tsx",
@@ -3455,7 +3432,7 @@
       "_origin": "ast",
       "id": "app_nutrition_components_foodpicker",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "foodpicker.tsx"
     },
     {
@@ -3466,41 +3443,8 @@
       "_origin": "ast",
       "id": "app_nutrition_components_foodpicker_categorylabels",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "categorylabels"
-    },
-    {
-      "label": "nutrition/page.tsx",
-      "file_type": "code",
-      "source_file": "app/nutrition/page.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_nutrition_page",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "nutrition/page.tsx"
-    },
-    {
-      "label": "MacroDonut.tsx",
-      "file_type": "code",
-      "source_file": "app/today/_components/MacroDonut.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_today_components_macrodonut",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "macrodonut.tsx"
-    },
-    {
-      "label": "NutritionCard.tsx",
-      "file_type": "code",
-      "source_file": "app/today/_components/NutritionCard.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_today_components_nutritioncard",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "nutritioncard.tsx"
     },
     {
       "label": "data.ts",
@@ -3510,7 +3454,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "data.ts"
     },
     {
@@ -3521,7 +3465,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data_dailykcalhistory",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "dailykcalhistory"
     },
     {
@@ -3532,7 +3476,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data_defaultgoals",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "defaultgoals"
     },
     {
@@ -3543,7 +3487,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data_defaultprofile",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "defaultprofile"
     },
     {
@@ -3554,7 +3498,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data_fooddatabase",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "fooddatabase"
     },
     {
@@ -3565,7 +3509,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data_kcalgoal",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "kcalgoal"
     },
     {
@@ -3576,7 +3520,7 @@
       "_origin": "ast",
       "id": "app_today_lib_data_macros",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "macros"
     },
     {
@@ -3587,41 +3531,41 @@
       "_origin": "ast",
       "id": "app_today_lib_data_weighthistory",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
+      "community_name": "types.ts",
       "norm_label": "weighthistory"
     },
     {
-      "label": "DiaryContext.tsx",
+      "label": "types.ts",
       "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
+      "source_file": "app/today/_lib/types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_today_lib_diarycontext",
+      "id": "app_today_lib_types",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "diarycontext.tsx"
+      "community_name": "types.ts",
+      "norm_label": "types.ts"
     },
     {
-      "label": "DiaryContext",
+      "label": "UserContext.tsx",
       "file_type": "code",
-      "source_file": "app/today/_lib/DiaryContext.tsx",
-      "source_location": "L49",
-      "_origin": "ast",
-      "id": "app_today_lib_diarycontext_diarycontext",
-      "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "diarycontext"
-    },
-    {
-      "label": "today/page.tsx",
-      "file_type": "code",
-      "source_file": "app/today/page.tsx",
+      "source_file": "app/today/_lib/UserContext.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "app_today_page",
+      "id": "app_today_lib_usercontext",
       "community": 6,
-      "community_name": "DiaryContext.tsx",
-      "norm_label": "today/page.tsx"
+      "community_name": "types.ts",
+      "norm_label": "usercontext.tsx"
+    },
+    {
+      "label": "UserContext",
+      "file_type": "code",
+      "source_file": "app/today/_lib/UserContext.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "app_today_lib_usercontext_usercontext",
+      "community": 6,
+      "community_name": "types.ts",
+      "norm_label": "usercontext"
     },
     {
       "label": "package.json",
@@ -3919,17 +3863,6 @@
       "community": 8,
       "community_name": "volumeStats.ts",
       "norm_label": "periodlabels"
-    },
-    {
-      "label": "exerciseDatabase",
-      "file_type": "code",
-      "source_file": "app/today/_lib/exerciseData.ts",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "app_today_lib_exercisedata_exercisedatabase",
-      "community": 8,
-      "community_name": "volumeStats.ts",
-      "norm_label": "exercisedatabase"
     },
     {
       "label": "volumeStats.ts",
@@ -4675,7 +4608,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/today/_components/Header.tsx",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_today_components_header_header",
@@ -5874,7 +5807,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -5886,7 +5819,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -5898,7 +5831,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -5910,7 +5843,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L6",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -5922,7 +5855,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -6606,7 +6539,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/scheda/page.tsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_scheda_page",
@@ -6618,7 +6551,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/scheda/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_scheda_page",
@@ -6810,7 +6743,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -6822,7 +6755,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -6834,7 +6767,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -6846,7 +6779,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L6",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -6858,7 +6791,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -8178,7 +8111,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -8190,7 +8123,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -8202,7 +8135,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -8214,7 +8147,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L6",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -8226,7 +8159,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -8826,7 +8759,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/scheda/page.tsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_scheda_page",
@@ -8838,7 +8771,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/scheda/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_scheda_page",
@@ -8982,7 +8915,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -8994,7 +8927,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -9006,7 +8939,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -9018,7 +8951,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L6",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -9030,7 +8963,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -9658,7 +9591,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/allenamento/_components/RestTimer.tsx",
-      "source_location": "L105",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_allenamento_components_resttimer",
@@ -9823,7 +9756,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/allenamento/page.tsx",
-      "source_location": "L224",
+      "source_location": "L223",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_allenamento_page",
@@ -9999,7 +9932,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/impostazioni/page.tsx",
-      "source_location": "L10",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_impostazioni_page",
@@ -10131,7 +10064,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/nutrition/_components/FoodDiary.tsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_nutrition_components_fooddiary",
@@ -10362,33 +10295,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/scheda/page.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_scheda_page",
       "target": "app_scheda_page_schedapage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/stats/_components/BottomNav.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_stats_components_bottomnav",
-      "target": "app_stats_components_bottomnav_items",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "app/stats/_components/BottomNav.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_stats_components_bottomnav",
-      "target": "app_stats_components_bottomnav_bottomnav",
       "confidence_score": 1.0
     },
     {
@@ -10483,7 +10394,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/stats/page.tsx",
-      "source_location": "L9",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_stats_page",
@@ -10560,7 +10471,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/today/_components/WorkoutCard.tsx",
-      "source_location": "L231",
+      "source_location": "L230",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_today_components_workoutcard",
@@ -10571,7 +10482,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/today/_components/WorkoutCard.tsx",
-      "source_location": "L239",
+      "source_location": "L238",
       "weight": 1.0,
       "_origin": "ast",
       "source": "app_today_components_workoutcard",
@@ -11747,83 +11658,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L138",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design",
-      "target": "design_overview",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L146",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design",
-      "target": "design_l_architettura_a_doppio_stato_e_tema",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L156",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design",
-      "target": "design_do_s_and_don_ts_per_il_tema_chiaro",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L158",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design_do_s_and_don_ts_per_il_tema_chiaro",
-      "target": "design_do",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L163",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design_do_s_and_don_ts_per_il_tema_chiaro",
-      "target": "design_don_t",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L148",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design_l_architettura_a_doppio_stato_e_tema",
-      "target": "design_1_modalit\u00e0_azione_live_workout",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "DESIGN.md",
-      "source_location": "L152",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "design_l_architettura_a_doppio_stato_e_tema",
-      "target": "design_2_modalit\u00e0_riflessione_log_analytics",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "eslint.config.mjs",
       "source_location": "L5",
       "weight": 1.0,
@@ -12176,6 +12010,50 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "skill",
+      "target": "skill_web_interface_guidelines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SKILL.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "skill_web_interface_guidelines",
+      "target": "skill_how_it_works",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SKILL.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "skill_web_interface_guidelines",
+      "target": "skill_guidelines_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "SKILL.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "skill_web_interface_guidelines",
+      "target": "skill_usage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "tsconfig.json",
       "source_location": "L2",
       "weight": 1.0,
@@ -12405,20 +12283,8 @@
       "_origin": "ast",
       "source": "app_components_sidebar",
       "target": "app_page_home"
-    },
-    {
-      "relation": "indirect_call",
-      "context": "collection",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "app/stats/_components/BottomNav.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "app_stats_components_bottomnav",
-      "target": "app_page_home"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c8ab480c007f589420fbe2a08e0fd3864539e15a"
+  "built_at_commit": "a1695da60041210653aa4af103e398d969731ea5"
 }

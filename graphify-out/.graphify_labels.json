@@ -1,11 +1,11 @@
 {
-  "0": "types.ts",
+  "0": "PlanContext.tsx",
   "1": "useUser",
   "2": "WorkoutSessionContext.tsx",
   "3": "SettingsContext.tsx",
   "4": "compilerOptions",
-  "5": "UserContext.tsx",
-  "6": "DiaryContext.tsx",
+  "5": "layout.tsx",
+  "6": "types.ts",
   "7": "dependencies",
   "8": "volumeStats.ts",
   "9": "devDependencies",
@@ -20,5 +20,6 @@
   "18": "sw.js",
   "19": "README.md",
   "20": "CLAUDE.md",
-  "21": "DESIGN.md"
+  "21": "DiaryContext.tsx",
+  "22": "Web Interface Guidelines"
 }

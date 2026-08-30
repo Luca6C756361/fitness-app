@@ -1,32 +1,32 @@
 {
   "app/_components/BottomNav.tsx": {
-    "mtime": 1788062749.0310075,
-    "ast_hash": "59d468bba184ac063ffd05df8a692a8a",
+    "mtime": 1788081567.7218318,
+    "ast_hash": "d8c961b7329e06e124994a7149fd7d3f",
     "semantic_hash": ""
   },
   "app/_components/Sidebar.tsx": {
-    "mtime": 1788068101.8735528,
-    "ast_hash": "310f8cee7be7eec2083cc66cbe7e55dc",
+    "mtime": 1788081548.1454675,
+    "ast_hash": "2aba427580c13c933879a5c0cd5af61c",
     "semantic_hash": ""
   },
   "app/allenamento/_components/ExerciseSetCard.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "811f4de65ba08c4779dff8c148294570",
+    "mtime": 1788081077.275769,
+    "ast_hash": "4405fbf05999454aff342c14052409e4",
     "semantic_hash": ""
   },
   "app/allenamento/_components/RestPresetPicker.tsx": {
-    "mtime": 1785891373.6678224,
-    "ast_hash": "ef2755e6ce5754363617ae0e7d13ddd8",
-    "semantic_hash": "ef2755e6ce5754363617ae0e7d13ddd8"
+    "mtime": 1788083992.1277373,
+    "ast_hash": "4526e8e0253b5a9bbec29c5fd62026b7",
+    "semantic_hash": ""
   },
   "app/allenamento/_components/RestTimer.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "410fcdae37a333603d80555e73fb5eae",
+    "mtime": 1788074117.4221327,
+    "ast_hash": "783c5bf5fa1366b7aed97f2ea4c91475",
     "semantic_hash": ""
   },
   "app/allenamento/_components/SessionTimer.tsx": {
-    "mtime": 1788068101.8780878,
-    "ast_hash": "1343ea114cb1e56fc318e4fe9a92e175",
+    "mtime": 1788074053.5121658,
+    "ast_hash": "c783a1722459bc123d19985dbfa862a1",
     "semantic_hash": ""
   },
   "app/allenamento/componi/_components/CompositionCart.tsx": {
@@ -45,43 +45,43 @@
     "semantic_hash": ""
   },
   "app/allenamento/page.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "b6cec6d880736ec33c5ee80c66b257d5",
+    "mtime": 1788081149.943933,
+    "ast_hash": "57594399738fd277b247e474781d36f5",
     "semantic_hash": ""
   },
   "app/impostazioni/_components/AppearanceSection.tsx": {
-    "mtime": 1785698785.3686843,
-    "ast_hash": "388d118b4c63eef792cd29c3b37f12f0",
-    "semantic_hash": "388d118b4c63eef792cd29c3b37f12f0"
+    "mtime": 1788085991.7703364,
+    "ast_hash": "84ab14b3d80d08cf9d6fa002f20629ff",
+    "semantic_hash": ""
   },
   "app/impostazioni/_components/LanguageSection.tsx": {
-    "mtime": 1785698790.0065238,
-    "ast_hash": "70e3d43e3fdbbfa9febbf55b3b903c0b",
-    "semantic_hash": "70e3d43e3fdbbfa9febbf55b3b903c0b"
+    "mtime": 1788086012.6084692,
+    "ast_hash": "2e9d45efaa25c590bda054a25005e1de",
+    "semantic_hash": ""
   },
   "app/impostazioni/_components/NotificationsSection.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "9903db1da1885ab08facc8dd08c85318",
+    "mtime": 1788086036.7763329,
+    "ast_hash": "62d602b8ae28bfc90914b3704182627b",
     "semantic_hash": ""
   },
   "app/impostazioni/_components/ResetSection.tsx": {
-    "mtime": 1787015191.8036935,
-    "ast_hash": "a73b2a20c213b69577933da23edd645c",
-    "semantic_hash": "a73b2a20c213b69577933da23edd645c"
+    "mtime": 1788086099.478558,
+    "ast_hash": "48f3bc731d804e4d753472eb6c15ac86",
+    "semantic_hash": ""
   },
   "app/impostazioni/_components/Toggle.tsx": {
-    "mtime": 1785698784.508467,
-    "ast_hash": "28eac5a5ba411830aa8a6ddee7fd670f",
-    "semantic_hash": "28eac5a5ba411830aa8a6ddee7fd670f"
+    "mtime": 1788086024.8879814,
+    "ast_hash": "ddf782eebb8c9bf24c0317fed3c45f4e",
+    "semantic_hash": ""
   },
   "app/impostazioni/_components/UnitsSection.tsx": {
-    "mtime": 1785698789.018122,
-    "ast_hash": "bfa776e0de3b9cc2fb6c54b6b6b99c57",
-    "semantic_hash": "bfa776e0de3b9cc2fb6c54b6b6b99c57"
+    "mtime": 1788086003.4927642,
+    "ast_hash": "83d48919de732a65c6119e80e49f45ea",
+    "semantic_hash": ""
   },
   "app/impostazioni/page.tsx": {
-    "mtime": 1788068101.8735528,
-    "ast_hash": "9dbaadf9ef7754e3e062add9307a1129",
+    "mtime": 1788085981.973274,
+    "ast_hash": "0223fdba47e7690ce6e596b539ab7c44",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -90,18 +90,18 @@
     "semantic_hash": ""
   },
   "app/nutrition/_components/FoodDiary.tsx": {
-    "mtime": 1788068101.884087,
-    "ast_hash": "3d8532bcc6a387165a56eeea2f075486",
+    "mtime": 1788084275.2425628,
+    "ast_hash": "acab99a56e440a7dafd665ad3358f215",
     "semantic_hash": ""
   },
   "app/nutrition/_components/FoodPicker.tsx": {
-    "mtime": 1788068101.884087,
-    "ast_hash": "01de26fe8c1e001babd3af1377b0d758",
+    "mtime": 1788084306.2543514,
+    "ast_hash": "4ed156f64c63cc87a4249ae61d3d7b27",
     "semantic_hash": ""
   },
   "app/nutrition/page.tsx": {
-    "mtime": 1788068101.8830867,
-    "ast_hash": "da1f1322d478bee13fbdc4ee399dbb28",
+    "mtime": 1788084866.7818673,
+    "ast_hash": "4e3186fa173455466944953433e61d25",
     "semantic_hash": ""
   },
   "app/page.tsx": {
@@ -110,103 +110,98 @@
     "semantic_hash": "1e489b26bb597dc97f8d44954dd042da"
   },
   "app/profilo/_components/GoalsForm.tsx": {
-    "mtime": 1788068101.8810878,
-    "ast_hash": "3fe8c0a4013d3f9eecc544b54191a4b2",
+    "mtime": 1788085426.066656,
+    "ast_hash": "823f1a57d041e081a516cdb5b1a97574",
     "semantic_hash": ""
   },
   "app/profilo/_components/ProfileForm.tsx": {
-    "mtime": 1788068101.8810878,
-    "ast_hash": "68dd4931e6f86be83d94dd4511de06e7",
+    "mtime": 1788085408.2981603,
+    "ast_hash": "cb0a2b60355e66417f3d20e9da578c9b",
     "semantic_hash": ""
   },
   "app/profilo/_components/StatsCard.tsx": {
-    "mtime": 1788068101.8820877,
-    "ast_hash": "22b8fe412af62cb1c1e883b5152950bd",
+    "mtime": 1788085393.3672864,
+    "ast_hash": "c2a3a8adc2e30406baf471966a30b8d8",
     "semantic_hash": ""
   },
   "app/profilo/_components/WeightHistoryChart.tsx": {
-    "mtime": 1788068101.8820877,
-    "ast_hash": "e568bc01c90e3d7e49ca6a86d706057b",
+    "mtime": 1788085443.6805623,
+    "ast_hash": "0966fb7b4e9461c4e33f00f6dec74c0b",
     "semantic_hash": ""
   },
   "app/profilo/page.tsx": {
-    "mtime": 1788068101.8810878,
-    "ast_hash": "860a8177bb6352e1eca5f25682031eeb",
+    "mtime": 1788085411.8379326,
+    "ast_hash": "3dafa302b4400c9564e7ddedf4da6f47",
     "semantic_hash": ""
   },
   "app/scheda/_components/ExercisePicker.tsx": {
-    "mtime": 1788068101.884087,
-    "ast_hash": "2b066e22b21fff7440dbcae6f51ff5ff",
+    "mtime": 1788085724.7369547,
+    "ast_hash": "24eff633a8dd7e9268c63c0b4921c8f7",
     "semantic_hash": ""
   },
   "app/scheda/_components/SessionEditor.tsx": {
-    "mtime": 1788068101.884087,
-    "ast_hash": "ad2048e3a99a988ff56fb4deaeefcd37",
+    "mtime": 1788085677.4155645,
+    "ast_hash": "6acdb0b350816806b45f65b7f9896be8",
     "semantic_hash": ""
   },
   "app/scheda/_components/SessionList.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "4ed4591ecaf371ad9c38f02720bfe181",
+    "mtime": 1788085697.7406127,
+    "ast_hash": "d3554e69f79195827d4571b6616fff12",
     "semantic_hash": ""
   },
   "app/scheda/_components/WeekView.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "772cd7331b4576937af21fd2690bdac7",
+    "mtime": 1788085657.6398642,
+    "ast_hash": "60e94d36bab845e5b6de3b9b0c2ec552",
     "semantic_hash": ""
   },
   "app/scheda/page.tsx": {
-    "mtime": 1788068101.884087,
-    "ast_hash": "e414577797109fd4b3f96fa2285fdbe1",
+    "mtime": 1788085637.9917302,
+    "ast_hash": "2de18b9f6d2082d9b7afc1c1bf7d0527",
     "semantic_hash": ""
   },
-  "app/stats/_components/BottomNav.tsx": {
-    "mtime": 1785619581.3701775,
-    "ast_hash": "63847f92be496dd389e676e034935deb",
-    "semantic_hash": "63847f92be496dd389e676e034935deb"
-  },
   "app/stats/_components/KcalWeekChart.tsx": {
-    "mtime": 1788068101.87708,
-    "ast_hash": "0557733226aaa24831a85d9effc31a5b",
+    "mtime": 1788084912.481525,
+    "ast_hash": "4d2437045a75d0d6bb3825e5a2be025c",
     "semantic_hash": ""
   },
   "app/stats/_components/WeightRangeChart.tsx": {
-    "mtime": 1787023782.9363942,
-    "ast_hash": "8b0bf3e1acd0bd1311f761d6c902d8df",
-    "semantic_hash": "8b0bf3e1acd0bd1311f761d6c902d8df"
+    "mtime": 1788084937.1332283,
+    "ast_hash": "d748f83fce106557f3b91372018b4d6d",
+    "semantic_hash": ""
   },
   "app/stats/_components/WorkoutStreakCard.tsx": {
-    "mtime": 1788068126.8227715,
-    "ast_hash": "a3d15fb13cde965f55a77a5be93d3fa2",
+    "mtime": 1788084880.385762,
+    "ast_hash": "0a7f43956edfb2b6d6887f97a7a12a3e",
     "semantic_hash": ""
   },
   "app/stats/page.tsx": {
-    "mtime": 1788068101.8735528,
-    "ast_hash": "2cc7edff8d89bd452456d6aecb9145bd",
+    "mtime": 1788084859.9294288,
+    "ast_hash": "c5453dd5edece3ef98cb73c8a1d6e905",
     "semantic_hash": ""
   },
   "app/today/_components/Header.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "e3e8830fca80e35762c6ffbf50d32fac",
+    "mtime": 1788081246.455946,
+    "ast_hash": "91944a11ee7b71761ff5573d4fb03952",
     "semantic_hash": ""
   },
   "app/today/_components/MacroDonut.tsx": {
-    "mtime": 1788070100.8667343,
-    "ast_hash": "893b2571825e22ab1377699d7a12171e",
+    "mtime": 1788083271.7971864,
+    "ast_hash": "4587664ff756e84f2b92daf4dbe713ec",
     "semantic_hash": ""
   },
   "app/today/_components/Modal.tsx": {
-    "mtime": 1788068101.8735528,
-    "ast_hash": "3674a9877a740e8341d540cc8e7640ae",
+    "mtime": 1788084019.1230328,
+    "ast_hash": "241cf9fbb18273b07424c5e735970243",
     "semantic_hash": ""
   },
   "app/today/_components/NutritionCard.tsx": {
-    "mtime": 1788069685.8514197,
-    "ast_hash": "acff274aa47d7deb5af1c6ac0b95c898",
+    "mtime": 1788083180.8553066,
+    "ast_hash": "24f23fea635396273a307ebf42957f59",
     "semantic_hash": ""
   },
   "app/today/_components/WorkoutCard.tsx": {
-    "mtime": 1788072099.2693498,
-    "ast_hash": "a48a71979b73a67c0820836e2ce40ec3",
+    "mtime": 1788081714.429044,
+    "ast_hash": "68b383aa47d4a0e955ec321f114eedff",
     "semantic_hash": ""
   },
   "app/today/_lib/DiaryContext.tsx": {
@@ -260,8 +255,8 @@
     "semantic_hash": "7cfdd887d241891dc2770f9e099089da"
   },
   "app/today/page.tsx": {
-    "mtime": 1788067361.5199163,
-    "ast_hash": "d6ac337c3d7f7b0c5ba3d44d4039dec2",
+    "mtime": 1788073708.6098921,
+    "ast_hash": "49f55b96ca8531f0f489d640fc83cc62",
     "semantic_hash": ""
   },
   "eslint.config.mjs": {
@@ -345,8 +340,8 @@
     "semantic_hash": "7b039be551304756b7d8d18d290a66dc"
   },
   "app/allenamento/_components/PRToast.tsx": {
-    "mtime": 1788068054.5040507,
-    "ast_hash": "a7aff146e731698007153017f3853933",
+    "mtime": 1788084041.1898997,
+    "ast_hash": "1414a8e1a0faa4c53570478ebcf51db2",
     "semantic_hash": ""
   },
   "app/login/page.tsx": {
@@ -355,13 +350,13 @@
     "semantic_hash": ""
   },
   "app/stats/_components/PersonalRecordsCard.tsx": {
-    "mtime": 1788068101.8780878,
-    "ast_hash": "a57b4467d18cd79506856f8423d6447a",
+    "mtime": 1788084969.9674225,
+    "ast_hash": "5fcfee761af37fb1c378024a254dcb24",
     "semantic_hash": ""
   },
   "app/stats/_components/VolumeChart.tsx": {
-    "mtime": 1788068126.8171294,
-    "ast_hash": "51b5b3a1573d2c061138097f796ef4f0",
+    "mtime": 1788084957.184682,
+    "ast_hash": "4c12c758351fb935df7a51d3ba673291",
     "semantic_hash": ""
   },
   "app/today/_lib/prStats.ts": {
@@ -404,11 +399,6 @@
     "ast_hash": "c268d7979274452ff61e5fdbcc8640f3",
     "semantic_hash": ""
   },
-  "DESIGN.md": {
-    "mtime": 1788072339.283486,
-    "ast_hash": "0305b4dee9953b54c073f15045f3ea72",
-    "semantic_hash": ""
-  },
   "public/offline.html": {
     "mtime": 1787883337.031786,
     "ast_hash": "4e8940309a7410d7f1ee70e41ceaf7e4",
@@ -427,6 +417,11 @@
   "public/icons/icon-maskable-512.png": {
     "mtime": 1787883042.4967053,
     "ast_hash": "1bc75f4ee2e7539f7baf9a58d330a1fc",
+    "semantic_hash": ""
+  },
+  "SKILL.md": {
+    "mtime": 1788086970.9786277,
+    "ast_hash": "aa11f55f1225da0a142d416aef42f95d",
     "semantic_hash": ""
   }
 }
