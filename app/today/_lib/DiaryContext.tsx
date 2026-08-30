@@ -5,7 +5,16 @@ import type { Food } from "./types";
 import { supabase } from "../../_lib/supabase/client";       // <-- NUOVO
 import { useAuth } from "../../_lib/AuthContext";            // <-- NUOVO
 
-
+/*
+ * DiaryContext: gestione centralizzata del diario alimentare.
+ * Ogni voce ha una data (ISO YYYY-MM-DD). Salva in localStorage.
+ *
+ * Espone:
+ * - addEntry / removeEntry
+ * - todayEntries: voci di oggi
+ * - todayTotals: totali kcal/carbo/prot/grassi di oggi
+ * - dailyKcalHistory: kcal per gli ultimi 7 giorni (per grafico stats)
+ */
 
 export interface DiaryEntry {
   id: string;                    // era number: ora è l'uuid generato da Postgres

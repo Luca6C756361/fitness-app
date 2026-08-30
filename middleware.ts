@@ -21,10 +21,17 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user && !request.nextUrl.pathname.startsWith("/login")) {
+  const isLogin = request.nextUrl.pathname.startsWith("/login");
+
+  if (!user && !isLogin) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+  if (user && isLogin) {                                        // <-- NUOVO
+    return NextResponse.redirect(new URL("/today", request.url));
+  }
   return response;
+
+  
 }
 
 export const config = {
