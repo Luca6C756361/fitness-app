@@ -19,18 +19,21 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+   const { data: { user } } = await supabase.auth.getUser();
 
   const isLogin = request.nextUrl.pathname.startsWith("/login");
 
-  if (!user && !isLogin) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-  if (user && isLogin) {                                        // <-- NUOVO
-    return NextResponse.redirect(new URL("/today", request.url));
-  }
-  return response;
+  /** I cookie rinnovati vivono su `response`: un redirect li perderebbe. */
+  const redirectTo = (path: string) => {
+    const redirect = NextResponse.redirect(new URL(path, request.url));
+    response.cookies.getAll().forEach((c) => redirect.cookies.set(c));   // <-- LA CHIAVE
+    return redirect;
+  };
 
+  if (!user && !isLogin) return redirectTo("/login");
+  if (user && isLogin) return redirectTo("/today");
+
+  return response;
   
 }
 

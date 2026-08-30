@@ -25,7 +25,7 @@ const items = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-
+  if (pathname.startsWith("/login")) return null;   // <-- NUOVO
   const handleLogout = async () => {                   // <-- NUOVO
     await supabase.auth.signOut();
     window.location.href = "/login";

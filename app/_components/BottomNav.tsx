@@ -26,7 +26,7 @@ const items = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-
+  if (pathname.startsWith("/login")) return null;   // <-- NUOVO
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-emerald-900/10 bg-white/95 backdrop-blur-sm md:hidden">
       <div className="mx-auto flex max-w-5xl items-center justify-around px-1 py-2">
