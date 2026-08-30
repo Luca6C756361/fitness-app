@@ -10,6 +10,7 @@ import { AuthProvider } from "./_lib/AuthContext";
 import BottomNav from "./_components/BottomNav";
 import Sidebar from "./_components/Sidebar";
 import ServiceWorker from "./_components/ServiceWorker";   // <-- NUOVO
+import AppShell from "./_components/AppShell";   // <-- NUOVO
 
 export const metadata: Metadata = {
   title: "Fitness App",
@@ -49,7 +50,7 @@ export default function RootLayout({
                   <PlanProvider>
                     <WorkoutSessionProvider>
                       <Sidebar />
-                      <div className="md:pl-56">{children}</div>
+                       <AppShell>{children}</AppShell>      {/* <-- MODIFICATA */}
                       <BottomNav />
                     </WorkoutSessionProvider>
                   </PlanProvider>
