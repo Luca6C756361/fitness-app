@@ -46,7 +46,7 @@ export default function NutritionCard() {
         <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm">
           <Apple className="h-5 w-5" />
         </span>
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
           Obiettivo calorico
         </h2>
       </div>
@@ -65,13 +65,13 @@ export default function NutritionCard() {
                     className="h-2.5 w-2.5 rounded-full"
                     style={{ backgroundColor: m.color }}
                   />
-                  <span className="text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
                     {m.label}
                   </span>
                 </span>
-                <span className="text-xs font-bold text-emerald-950 tabular-nums">
+                <span className="text-xs font-bold text-[#111111] tabular-nums">
                   {m.current}
-                  <span className="font-medium text-emerald-800/50">
+                  <span className="font-medium text-[#111111]/50">
                     {" "}/ {m.goal}g
                   </span>
                 </span>
@@ -98,7 +98,7 @@ export default function NutritionCard() {
         </Link>
         <Link
           href="/nutrition"
-          className="flex items-center justify-center gap-2 rounded-xl border border-emerald-900/10 bg-white py-3 text-sm font-bold text-emerald-800 shadow-sm transition hover:bg-emerald-50"
+          className="flex items-center justify-center gap-2 rounded-xl border border-emerald-900/10 bg-white py-3 text-sm font-bold text-[#111111] shadow-sm transition hover:bg-emerald-50"
         >
           <ListChecks className="h-4 w-4" />
           Dettagli pasti

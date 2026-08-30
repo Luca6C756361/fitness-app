@@ -21,7 +21,7 @@ export default function WeekView() {
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center gap-2">
         <CalendarDays className="h-4 w-4 text-emerald-700" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
           Piano settimanale
         </h2>
       </div>
@@ -49,11 +49,11 @@ export default function WeekView() {
             >
               {/* Giorno */}
               <div className="w-24 shrink-0">
-                <p className="text-sm font-bold text-emerald-950">
+                <p className="text-sm font-bold text-[#111111]">
                   {dayLabels[dayIndex]}
                 </p>
                 {isToday && (
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-teal-700">
+                  <p className="text-[10px] font-bold uppercase tracking-wide text-[#111111]">
                     Oggi
                   </p>
                 )}
@@ -66,7 +66,7 @@ export default function WeekView() {
                   onChange={(e) =>
                     overrideDay(dayIndex, e.target.value || null)
                   }
-                  className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+                  className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
                 >
                   <option value="">— Riposo —</option>
                   {plan?.sessions?.map((s) => (
@@ -76,7 +76,7 @@ export default function WeekView() {
                   ))}
                 </select>
                 {session && (
-                  <p className="mt-1 text-[11px] text-emerald-800/50">
+                  <p className="mt-1 text-[11px] text-[#111111]/50">
                     {session.exercises.length} esercizi · ~
                     {session.estimatedMinutes} min
                   </p>
@@ -87,7 +87,7 @@ export default function WeekView() {
         })}
       </ul>
 
-      <p className="mt-3 text-[11px] text-emerald-800/50">
+      <p className="mt-3 text-[11px] text-[#111111]/50">
         Le modifiche qui aggiornano la scheda base per tutte le settimane.
       </p>
     </section>

@@ -58,7 +58,7 @@ export default function PRToast() {
           <p className="text-[11px] font-bold uppercase tracking-widest text-amber-700">
             Record personale!
           </p>
-          <p className="truncate text-sm font-bold text-emerald-950">
+          <p className="truncate text-sm font-bold text-[#111111]">
             {lastPR.name}
           </p>
 

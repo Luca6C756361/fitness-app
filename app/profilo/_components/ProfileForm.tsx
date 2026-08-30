@@ -49,37 +49,37 @@ export default function ProfileForm() {
 
   return (
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#111111]/70">
         Dati anagrafici
       </h2>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
             Nome
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
             Età
           </label>
           <input
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
             Sesso
           </label>
           <div className="flex gap-2">
@@ -91,7 +91,7 @@ export default function ProfileForm() {
                 className={`flex-1 rounded-xl border py-2.5 text-sm font-bold transition ${
                   sex === s
                     ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-                    : "border-emerald-900/10 bg-white text-emerald-800/60 hover:bg-emerald-50/50"
+                    : "border-emerald-900/10 bg-white text-[#111111]/60 hover:bg-emerald-50/50"
                 }`}
               >
                 {s === "M" ? "Uomo" : "Donna"}
@@ -101,19 +101,19 @@ export default function ProfileForm() {
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
             Altezza (cm)
           </label>
           <input
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
           />
         </div>
 
         <div>
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
             Peso (kg)
           </label>
           <input
@@ -121,21 +121,21 @@ export default function ProfileForm() {
             step="0.1"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
           />
-          <p className="mt-1 text-[10px] font-medium text-emerald-800/50">
+          <p className="mt-1 text-[10px] font-medium text-[#111111]/50">
             Salvando registri una nuova misurazione di oggi.
           </p>
         </div>
 
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
             Livello di attività
           </label>
           <select
             value={activity}
             onChange={(e) => setActivity(e.target.value as ActivityLevel)}
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
           >
             {(Object.keys(activityLabels) as ActivityLevel[]).map((key) => (
               <option key={key} value={key}>

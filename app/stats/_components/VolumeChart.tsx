@@ -63,8 +63,8 @@ export default function VolumeChart() {
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Dumbbell className="h-4 w-4 text-teal-700" />
-          <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+          <Dumbbell className="h-4 w-4 text-[#111111]" />
+          <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
             Volume per gruppo muscolare
           </h2>
         </div>
@@ -77,8 +77,8 @@ export default function VolumeChart() {
               onClick={() => setPeriod(p)}
               className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide transition ${
                 period === p
-                  ? "bg-white text-emerald-800 shadow-sm"
-                  : "text-emerald-800/50 hover:text-emerald-800"
+                  ? "bg-white text-[#111111] shadow-sm"
+                  : "text-[#111111]/50 hover:text-[#111111]"
               }`}
             >
               {p === "week" ? "Sett." : "Mese"}
@@ -87,10 +87,10 @@ export default function VolumeChart() {
         </div>
       </div>
 
-      <p className="mb-4 flex items-center gap-2 text-sm font-medium text-emerald-800/60">
+      <p className="mb-4 flex items-center gap-2 text-sm font-medium text-[#111111]/60">
         <span>
           Totale ultimi {periodLabels[period]}:{" "}
-          <span className="font-bold text-emerald-950 tabular-nums">
+          <span className="font-bold text-[#111111] tabular-nums">
             {total.toLocaleString("it-IT")} kg
           </span>
         </span>
@@ -115,10 +115,10 @@ export default function VolumeChart() {
 
       {data.length === 0 ? (
         <div className="rounded-xl bg-[#FAF7F0] p-6 text-center">
-          <p className="text-sm font-medium text-emerald-800/60">
+          <p className="text-sm font-medium text-[#111111]/60">
             Nessun carico registrato negli ultimi {periodLabels[period]}.
           </p>
-          <p className="mt-1 text-xs text-emerald-800/40">
+          <p className="mt-1 text-xs text-[#111111]/40">
             Completa un allenamento per vedere qui il volume.
           </p>
         </div>

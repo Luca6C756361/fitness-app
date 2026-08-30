@@ -30,8 +30,8 @@ export default function SessionList() {
       <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Dumbbell className="h-4 w-4 text-teal-700" />
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+            <Dumbbell className="h-4 w-4 text-[#111111]" />
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
               Le mie sessioni ({plan?.sessions?.length || 0})
             </h2>
           </div>
@@ -46,7 +46,7 @@ export default function SessionList() {
         </div>
 
         {(plan?.sessions?.length || 0) === 0 ? (
-          <p className="py-6 text-center text-sm text-emerald-800/50">
+          <p className="py-6 text-center text-sm text-[#111111]/50">
             Nessuna sessione. Creane una per iniziare a costruire la scheda.
           </p>
         ) : (
@@ -67,8 +67,8 @@ export default function SessionList() {
                 >
                   <div className="mb-2 flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-bold text-emerald-950">{s.name}</p>
-                      <p className="text-xs font-medium text-emerald-800/60">
+                      <p className="text-sm font-bold text-[#111111]">{s.name}</p>
+                      <p className="text-xs font-medium text-[#111111]/60">
                         {s.focus} · ~{s.estimatedMinutes} min
                       </p>
                     </div>
@@ -93,7 +93,7 @@ export default function SessionList() {
                   </div>
 
                   {preview && (
-                    <p className="truncate text-[11px] font-medium text-emerald-800/50">
+                    <p className="truncate text-[11px] font-medium text-[#111111]/50">
                       {preview}
                       {extra}
                     </p>
@@ -113,7 +113,7 @@ export default function SessionList() {
                         <button
                           type="button"
                           onClick={() => setConfirmDelete(null)}
-                          className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-emerald-800"
+                          className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-[#111111]"
                         >
                           Annulla
                         </button>

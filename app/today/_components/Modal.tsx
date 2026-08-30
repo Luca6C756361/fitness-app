@@ -39,11 +39,11 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
       >
         {/* Intestazione */}
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-bold text-emerald-950">{title}</h3>
+          <h3 className="text-lg font-bold text-[#111111]">{title}</h3>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1.5 text-emerald-800/60 transition hover:bg-emerald-50 hover:text-emerald-950"
+            className="rounded-lg p-1.5 text-[#111111]/60 transition hover:bg-emerald-50 hover:text-[#111111]"
             aria-label="Chiudi"
           >
             <X className="h-5 w-5" />

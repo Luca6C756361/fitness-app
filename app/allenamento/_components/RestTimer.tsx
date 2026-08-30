@@ -60,21 +60,21 @@ export default function RestTimer({
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Timer className="h-4 w-4 text-teal-600" />
-          <p className="text-xs font-bold uppercase tracking-widest text-teal-700">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#111111]">
             Recupero
           </p>
         </div>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg p-1 text-emerald-800/50 transition hover:bg-emerald-50 hover:text-emerald-800"
+          className="rounded-lg p-1 text-[#111111]/50 transition hover:bg-emerald-50 hover:text-[#111111]"
           aria-label="Annulla recupero"
         >
           <X className="h-4 w-4" />
         </button>
       </div>
 
-      <p className="mb-2 text-center font-mono text-3xl font-bold text-emerald-950 tabular-nums">
+      <p className="mb-2 text-center font-mono text-3xl font-bold text-[#111111] tabular-nums">
         {formatTime(remaining)}
       </p>
 
@@ -91,7 +91,7 @@ export default function RestTimer({
         <button
           type="button"
           onClick={() => onExtend(15)}
-          className="w-full rounded-xl bg-teal-50 py-2 text-xs font-bold text-teal-700 transition hover:bg-teal-100"
+          className="w-full rounded-xl bg-teal-50 py-2 text-xs font-bold text-[#111111] transition hover:bg-teal-100"
         >
           <Plus className="mr-1 inline h-3.5 w-3.5" />
           Aggiungi 15s

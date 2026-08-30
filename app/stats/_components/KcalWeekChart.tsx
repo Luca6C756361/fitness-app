@@ -35,15 +35,15 @@ export default function KcalWeekChart() {
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-1 flex items-center gap-2">
         <Flame className="h-4 w-4 text-amber-600" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
           Calorie ultimi 7 giorni
         </h2>
       </div>
-      <p className="mb-4 text-sm font-medium text-emerald-800/60">
+      <p className="mb-4 text-sm font-medium text-[#111111]/60">
         Media (giorni con pasti registrati):{" "}
-        <span className="font-bold text-emerald-950 tabular-nums">{avg} kcal</span>{" "}
+        <span className="font-bold text-[#111111] tabular-nums">{avg} kcal</span>{" "}
         · Target{" "}
-        <span className="font-bold text-emerald-950 tabular-nums">
+        <span className="font-bold text-[#111111] tabular-nums">
           {goals.kcalTarget} kcal
         </span>
       </p>

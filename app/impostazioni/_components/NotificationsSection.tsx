@@ -52,7 +52,7 @@ export default function NotificationsSection() {
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center gap-2">
         <Bell className="h-4 w-4 text-amber-600" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
           Notifiche
         </h2>
       </div>
@@ -60,7 +60,7 @@ export default function NotificationsSection() {
       {/* Stato permessi + bottone attivazione */}
       {!granted && (
         <div className="mb-4 rounded-xl bg-emerald-50 p-4">
-          <p className="mb-3 text-sm font-medium text-emerald-950">
+          <p className="mb-3 text-sm font-medium text-[#111111]">
             {denied
               ? "Le notifiche sono bloccate. Sblocca dalle impostazioni del browser."
               : "Attiva i permessi del browser per ricevere i promemoria."}
@@ -81,7 +81,7 @@ export default function NotificationsSection() {
         <div className="flex items-center justify-between rounded-xl bg-[#FAF7F0] px-4 py-3">
           <span className="flex items-center gap-2.5">
             <Droplet className="h-4 w-4 text-sky-600" />
-            <span className="text-sm font-medium text-emerald-950">Acqua</span>
+            <span className="text-sm font-medium text-[#111111]">Acqua</span>
           </span>
           <Toggle
             checked={settings.notifications.water}
@@ -92,8 +92,8 @@ export default function NotificationsSection() {
 
         <div className="flex items-center justify-between rounded-xl bg-[#FAF7F0] px-4 py-3">
           <span className="flex items-center gap-2.5">
-            <Dumbbell className="h-4 w-4 text-teal-700" />
-            <span className="text-sm font-medium text-emerald-950">Allenamento</span>
+            <Dumbbell className="h-4 w-4 text-[#111111]" />
+            <span className="text-sm font-medium text-[#111111]">Allenamento</span>
           </span>
           <Toggle
             checked={settings.notifications.workout}
@@ -105,7 +105,7 @@ export default function NotificationsSection() {
         <div className="flex items-center justify-between rounded-xl bg-[#FAF7F0] px-4 py-3">
           <span className="flex items-center gap-2.5">
             <Apple className="h-4 w-4 text-red-600" />
-            <span className="text-sm font-medium text-emerald-950">Pasti</span>
+            <span className="text-sm font-medium text-[#111111]">Pasti</span>
           </span>
           <Toggle
             checked={settings.notifications.meals}
@@ -115,7 +115,7 @@ export default function NotificationsSection() {
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-emerald-800/50">
+      <p className="mt-3 text-xs text-[#111111]/50">
         I promemoria funzionano quando l'app è aperta nel browser.
       </p>
     </section>

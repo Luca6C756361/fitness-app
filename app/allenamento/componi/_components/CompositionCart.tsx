@@ -38,7 +38,7 @@ function Stepper({
       >
         <Minus className="h-3 w-3" />
       </button>
-      <span className="min-w-[2ch] text-center text-sm font-bold text-emerald-950 tabular-nums">
+      <span className="min-w-[2ch] text-center text-sm font-bold text-[#111111] tabular-nums">
         {value}
       </span>
       <button
@@ -68,14 +68,14 @@ export default function CompositionCart({
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center gap-2">
         <ListChecks className="h-4 w-4 text-emerald-700" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
           La tua composizione
         </h2>
       </div>
 
       {/* Nome sessione */}
       <div className="mb-4">
-        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/60">
+        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/60">
           Nome sessione
         </label>
         <input
@@ -83,7 +83,7 @@ export default function CompositionCart({
           value={sessionName}
           onChange={(e) => onSessionNameChange(e.target.value)}
           placeholder="Es. Allenamento veloce"
-          className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+          className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
         />
       </div>
 
@@ -91,26 +91,26 @@ export default function CompositionCart({
       {items.length > 0 && (
         <div className="mb-4 flex gap-2 rounded-xl bg-emerald-50 p-3 text-center">
           <div className="flex-1">
-            <p className="text-[10px] font-bold uppercase text-emerald-800/60">
+            <p className="text-[10px] font-bold uppercase text-[#111111]/60">
               Esercizi
             </p>
-            <p className="text-sm font-bold text-emerald-950 tabular-nums">
+            <p className="text-sm font-bold text-[#111111] tabular-nums">
               {items.length}
             </p>
           </div>
           <div className="flex-1">
-            <p className="text-[10px] font-bold uppercase text-emerald-800/60">
+            <p className="text-[10px] font-bold uppercase text-[#111111]/60">
               Set totali
             </p>
-            <p className="text-sm font-bold text-emerald-950 tabular-nums">
+            <p className="text-sm font-bold text-[#111111] tabular-nums">
               {totalSets}
             </p>
           </div>
           <div className="flex-1">
-            <p className="text-[10px] font-bold uppercase text-emerald-800/60">
+            <p className="text-[10px] font-bold uppercase text-[#111111]/60">
               Stima
             </p>
-            <p className="text-sm font-bold text-emerald-950 tabular-nums">
+            <p className="text-sm font-bold text-[#111111] tabular-nums">
               ~{estimatedMinutes}′
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function CompositionCart({
 
       {/* Lista */}
       {items.length === 0 ? (
-        <p className="py-8 text-center text-sm text-emerald-800/50">
+        <p className="py-8 text-center text-sm text-[#111111]/50">
           Aggiungi esercizi dalla lista a fianco per iniziare a comporre.
         </p>
       ) : (
@@ -130,13 +130,13 @@ export default function CompositionCart({
               className="rounded-xl border border-emerald-900/10 bg-white p-3"
             >
               <div className="mb-2 flex items-start justify-between gap-2">
-                <p className="text-sm font-medium text-emerald-950">
+                <p className="text-sm font-medium text-[#111111]">
                   {item.exerciseName}
                 </p>
                 <button
                   type="button"
                   onClick={() => onRemove(item.id)}
-                  className="rounded-lg p-1 text-emerald-800/40 transition hover:bg-red-50 hover:text-red-600"
+                  className="rounded-lg p-1 text-[#111111]/40 transition hover:bg-red-50 hover:text-red-600"
                   aria-label="Rimuovi"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -146,7 +146,7 @@ export default function CompositionCart({
               {/* Controlli set/reps */}
               <div className="flex gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wide text-emerald-800/60">
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-[#111111]/60">
                     Set
                   </span>
                   <Stepper
@@ -155,7 +155,7 @@ export default function CompositionCart({
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wide text-emerald-800/60">
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-[#111111]/60">
                     Reps
                   </span>
                   <Stepper

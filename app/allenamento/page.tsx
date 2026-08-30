@@ -41,7 +41,7 @@ export default function AllenamentoPage() {
     return (
       <ShellWithBack>
         <div className="rounded-2xl border border-emerald-900/5 bg-white p-8 text-center shadow-sm">
-          <p className="mb-4 text-sm text-emerald-800/60">
+          <p className="mb-4 text-sm text-[#111111]/60">
             Nessuna sessione in programma oggi.
           </p>
           <Link
@@ -60,10 +60,10 @@ export default function AllenamentoPage() {
     return (
       <ShellWithBack subtitle={isTodayComposed ? "Sessione composta" : "Sessione proposta"}>
         <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-          <h2 className="mb-1 text-xl font-bold text-emerald-950">
+          <h2 className="mb-1 text-xl font-bold text-[#111111]">
             {todaySession.name}
           </h2>
-          <p className="mb-4 flex items-center gap-1.5 text-sm font-medium text-emerald-800/60">
+          <p className="mb-4 flex items-center gap-1.5 text-sm font-medium text-[#111111]/60">
             <Clock className="h-3.5 w-3.5" />
             {todaySession.focus} · ~{todaySession.estimatedMinutes} min ·{" "}
             {todaySession.exercises.length} esercizi
@@ -78,18 +78,18 @@ export default function AllenamentoPage() {
                   className="rounded-xl bg-[#FAF7F0] px-4 py-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-2 text-sm font-medium text-emerald-950">
+                    <span className="flex items-center gap-2 text-sm font-medium text-[#111111]">
                       {def?.name ?? "?"}
                       {pe.notes && (
                         <StickyNote className="h-3.5 w-3.5 shrink-0 text-amber-600" />
                       )}
                     </span>
-                    <span className="rounded-full bg-teal-100 px-2.5 py-1 text-xs font-bold text-teal-700 tabular-nums">
+                    <span className="rounded-full bg-teal-100 px-2.5 py-1 text-xs font-bold text-[#111111] tabular-nums">
                       {pe.sets} × {pe.reps}
                     </span>
                   </div>
                   {pe.notes && (
-                    <p className="mt-1 text-[11px] italic text-emerald-800/60">
+                    <p className="mt-1 text-[11px] italic text-[#111111]/60">
                       {pe.notes}
                     </p>
                   )}
@@ -154,7 +154,7 @@ export default function AllenamentoPage() {
       <SessionTimer onTick={setDurationSec} onStop={() => setDurationSec(durationSec)} />
 
       <div className="rounded-2xl border border-emerald-900/5 bg-white p-4 shadow-sm">
-        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-emerald-800/60">
+        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-[#111111]/60">
           <span>Progresso</span>
           <span className="tabular-nums">
             {totalCompleted} / {totalTargetSets} set
@@ -241,7 +241,7 @@ function ShellWithBack({
               className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
               aria-label="Annulla sessione"
             >
-              <ArrowLeft className="h-4 w-4 text-emerald-800" />
+              <ArrowLeft className="h-4 w-4 text-[#111111]" />
             </button>
           ) : (
             <Link
@@ -249,15 +249,15 @@ function ShellWithBack({
               className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
               aria-label="Torna alla dashboard"
             >
-              <ArrowLeft className="h-4 w-4 text-emerald-800" />
+              <ArrowLeft className="h-4 w-4 text-[#111111]" />
             </Link>
           )}
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-emerald-950">
+            <h1 className="text-2xl font-bold tracking-tight text-[#111111]">
               Allenamento
             </h1>
             {subtitle && (
-              <p className="text-sm font-medium text-emerald-800/60">{subtitle}</p>
+              <p className="text-sm font-medium text-[#111111]/60">{subtitle}</p>
             )}
           </div>
         </div>

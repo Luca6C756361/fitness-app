@@ -43,7 +43,7 @@ function Stepper({
       >
         <Minus className="h-3 w-3" />
       </button>
-      <span className="min-w-[2ch] text-center text-sm font-bold text-emerald-950 tabular-nums">
+      <span className="min-w-[2ch] text-center text-sm font-bold text-[#111111] tabular-nums">
         {value}
       </span>
       <button
@@ -158,7 +158,7 @@ export default function SessionEditor({
       >
         <div className="space-y-4">
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
               Nome sessione
             </label>
             <input
@@ -166,12 +166,12 @@ export default function SessionEditor({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Es. Push — Petto, Spalle, Tricipiti"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
               Focus muscolare
             </label>
             <input
@@ -179,12 +179,12 @@ export default function SessionEditor({
               value={focus}
               onChange={(e) => setFocus(e.target.value)}
               placeholder="Es. Petto · Spalle · Tricipiti"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
               Durata stimata (min)
             </label>
             <input
@@ -193,13 +193,13 @@ export default function SessionEditor({
               min={5}
               max={180}
               onChange={(e) => setMinutes(parseInt(e.target.value, 10) || 0)}
-              className="w-24 rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-24 rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-[#111111] tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+              <label className="text-[11px] font-bold uppercase tracking-wide text-[#111111]/70">
                 Esercizi ({exercises.length})
               </label>
               <button
@@ -213,7 +213,7 @@ export default function SessionEditor({
             </div>
 
             {exercises.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-emerald-900/15 py-6 text-center text-xs text-emerald-800/50">
+              <p className="rounded-xl border border-dashed border-emerald-900/15 py-6 text-center text-xs text-[#111111]/50">
                 Nessun esercizio. Aggiungine almeno uno.
               </p>
             ) : (
@@ -225,11 +225,11 @@ export default function SessionEditor({
                   >
                     <div className="mb-2 flex items-start justify-between gap-2">
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-emerald-950">
+                        <p className="text-sm font-medium text-[#111111]">
                           {ex.exerciseName}
                         </p>
                         {ex.notes && !ex.showNotes && (
-                          <p className="mt-0.5 flex items-start gap-1 text-[11px] italic text-emerald-800/60">
+                          <p className="mt-0.5 flex items-start gap-1 text-[11px] italic text-[#111111]/60">
                             <StickyNote className="mt-0.5 h-3 w-3 shrink-0" />
                             <span className="line-clamp-1">{ex.notes}</span>
                           </p>
@@ -238,7 +238,7 @@ export default function SessionEditor({
                       <button
                         type="button"
                         onClick={() => removeEx(ex.id)}
-                        className="rounded-lg p-1 text-emerald-800/40 transition hover:bg-red-50 hover:text-red-600"
+                        className="rounded-lg p-1 text-[#111111]/40 transition hover:bg-red-50 hover:text-red-600"
                         aria-label="Rimuovi"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -248,7 +248,7 @@ export default function SessionEditor({
                     {/* Controlli set/reps + toggle nota */}
                     <div className="flex flex-wrap items-center gap-3">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase text-emerald-800/60">
+                        <span className="text-[10px] font-bold uppercase text-[#111111]/60">
                           Set
                         </span>
                         <Stepper
@@ -257,7 +257,7 @@ export default function SessionEditor({
                         />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase text-emerald-800/60">
+                        <span className="text-[10px] font-bold uppercase text-[#111111]/60">
                           Reps
                         </span>
                         <Stepper
@@ -290,7 +290,7 @@ export default function SessionEditor({
                         placeholder="Es. Attento alla spalla destra, scendere lento"
                         rows={2}
                         maxLength={200}
-                        className="mt-2 w-full resize-none rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-xs text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-amber-300"
+                        className="mt-2 w-full resize-none rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-xs text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-amber-300"
                       />
                     )}
                   </li>

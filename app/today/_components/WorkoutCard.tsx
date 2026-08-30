@@ -50,34 +50,34 @@ export default function WorkoutCard() {
 
   if (!todaySession) {
     return (
-      <section className="flex flex-col rounded-2xl border border-teal-900/5 bg-gradient-to-br from-[#E8F3EE] to-[#DCEFEA] p-6 shadow-sm">
+      <section className="flex flex-col rounded-none bg-[#f5f5f5] p-6">
         <div className="mb-4 flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 text-teal-700 shadow-sm">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#111111]">
             <Dumbbell className="h-5 w-5" />
           </span>
           <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-teal-800/70">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[#707072]">
               Allenamento del giorno
             </h2>
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-teal-600/60">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[#707072]">
               Giorno di riposo
             </p>
           </div>
         </div>
-        <p className="mb-4 text-sm text-emerald-800/60">
+        <p className="mb-4 text-sm text-[#111111]/60">
           Nessuna sessione in programma oggi. Vuoi allenarti comunque?
         </p>
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => setSwitchOpen(true)}
-            className="rounded-xl border border-teal-900/10 bg-white/70 py-3 text-sm font-bold text-teal-700 transition hover:bg-white"
+            className="rounded-full border border-[#111111] bg-transparent py-3 text-sm font-bold text-[#111111] transition hover:bg-[#f5f5f5]"
           >
             Scegli sessione
           </button>
           <Link
             href="/allenamento/componi"
-            className="flex items-center justify-center gap-1 rounded-xl bg-teal-600 py-3 text-sm font-bold text-white transition hover:bg-teal-700"
+            className="flex items-center justify-center gap-1 rounded-full bg-[#111111] py-3 text-sm font-bold text-white transition hover:bg-[#2c2c2c]"
           >
             <Wand2 className="h-4 w-4" />
             Componi
@@ -100,7 +100,7 @@ export default function WorkoutCard() {
       <section className="flex flex-col rounded-2xl border border-teal-900/5 bg-gradient-to-br from-[#E8F3EE] to-[#DCEFEA] p-6 shadow-sm">
         <div className="mb-5 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 text-teal-700 shadow-sm">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 text-[#111111] shadow-sm">
               <Dumbbell className="h-5 w-5" />
             </span>
             <div>
@@ -123,31 +123,31 @@ export default function WorkoutCard() {
             <button
               type="button"
               onClick={() => setMenuOpen((o) => !o)}
-              className="rounded-lg p-1.5 text-emerald-800/60 transition hover:bg-white/60 hover:text-emerald-950"
+              className="rounded-full p-1.5 text-[#707072] transition hover:bg-white hover:text-[#111111]"
               aria-label="Opzioni sessione"
             >
               <MoreVertical className="h-4 w-4" />
             </button>
 
             {menuOpen && (
-              <div className="absolute right-0 top-full z-30 mt-2 w-64 overflow-hidden rounded-xl border border-emerald-900/10 bg-white shadow-lg">
+              <div className="absolute right-0 top-full z-30 mt-2 w-64 overflow-hidden rounded-none border-t-2 border-[#111111] bg-white">
                 <button
                   type="button"
                   onClick={() => {
                     setMenuOpen(false);
                     setSwitchOpen(true);
                   }}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-emerald-950 transition hover:bg-emerald-50"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[#111111] transition hover:bg-[#f5f5f5]"
                 >
-                  <Dumbbell className="h-4 w-4 text-teal-700" />
+                  <Dumbbell className="h-4 w-4 text-[#111111]" />
                   Scegli un'altra sessione
                 </button>
                 <Link
                   href="/allenamento/componi"
                   onClick={() => setMenuOpen(false)}
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-emerald-950 transition hover:bg-emerald-50"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[#111111] transition hover:bg-[#f5f5f5]"
                 >
-                  <Wand2 className="h-4 w-4 text-teal-700" />
+                  <Wand2 className="h-4 w-4 text-[#111111]" />
                   Componi al volo
                 </Link>
                 {isTodayComposed && (
@@ -159,7 +159,7 @@ export default function WorkoutCard() {
                         resetTodayOverride();
                         setMenuOpen(false);
                       }}
-                      className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-emerald-800 transition hover:bg-emerald-50"
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-medium text-[#111111] transition hover:bg-[#f5f5f5]"
                     >
                       <Undo2 className="h-4 w-4" />
                       Ripristina proposta
@@ -172,11 +172,9 @@ export default function WorkoutCard() {
         </div>
 
         <div className="mb-4">
-          <h3 className="text-lg font-bold text-emerald-950">{todaySession.name}</h3>
-          <p className="text-sm font-medium text-emerald-800/60">
-            {todaySession.focus}
-          </p>
-          <p className="mt-1 flex items-center gap-1.5 text-xs font-medium text-emerald-800/50">
+          <h3 className="text-lg font-bold text-[#111111]">{todaySession.name}</h3>
+          <p className="text-sm font-medium text-[#707072]">{todaySession.focus}</p>
+          <p className="mt-1 flex items-center gap-1.5 text-xs font-medium text-[#707072]">
             <Clock className="h-3 w-3" />
             {todaySession.exercises.length} esercizi · ~{todaySession.estimatedMinutes} min
           </p>
@@ -186,12 +184,9 @@ export default function WorkoutCard() {
           {todaySession.exercises.map((pe) => {
             const def = getExerciseDef(pe.exerciseId);
             return (
-              <li
-                key={pe.id}
-                className="rounded-xl bg-white/60 px-4 py-3"
-              >
+             <li key={pe.id} className="border-t border-[#cacacb] px-0 py-3 first:border-t-0">
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2 text-sm font-medium text-emerald-950">
+                  <span className="flex items-center gap-2 text-sm font-bold text-[#111111]">
                     {def?.name ?? "?"}
                     {pe.notes && (
                       <StickyNote
@@ -200,13 +195,13 @@ export default function WorkoutCard() {
                       />
                     )}
                   </span>
-                  <span className="rounded-full bg-teal-100 px-2.5 py-1 text-xs font-bold text-teal-700 tabular-nums">
+                  <span className="rounded-full bg-teal-100 px-2.5 py-1 text-xs font-bold text-[#111111] tabular-nums">
                     {pe.sets} × {pe.reps}
                   </span>
                 </div>
                 {/* Nota inline (compatta) */}
                 {pe.notes && (
-                  <p className="mt-1 pl-0 text-[11px] italic text-emerald-800/60">
+                  <p className="mt-1 pl-0 text-[11px] italic text-[#111111]/60">
                     {pe.notes}
                   </p>
                 )}
@@ -254,7 +249,7 @@ function SessionSwitchModal({
 }: SessionSwitchModalProps) {
   return (
     <Modal open={open} onClose={onClose} title="Scegli una sessione">
-      <p className="mb-4 text-xs text-emerald-800/60">
+      <p className="mb-4 text-xs text-[#111111]/60">
         La scelta sostituisce la proposta di oggi. La scheda base resta invariata.
       </p>
       <ul className="space-y-2">
@@ -265,18 +260,18 @@ function SessionSwitchModal({
               <button
                 type="button"
                 onClick={() => onChoose(s.id)}
-                className={`flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left transition ${
+                className={`flex w-full items-center justify-between gap-3 rounded-none border px-4 py-3 text-left transition ${
                   isCurrent
-                    ? "border-teal-300 bg-teal-50"
-                    : "border-emerald-900/10 bg-white hover:bg-emerald-50/50"
+                    ? "border-2 border-[#111111] bg-white"
+                    : "border-[#cacacb] bg-white hover:bg-[#f5f5f5]"
                 }`}
               >
                 <div className="min-w-0">
-                  <p className="text-sm font-bold text-emerald-950">{s.name}</p>
-                  <p className="truncate text-xs text-emerald-800/60">{s.focus}</p>
+                  <p className="text-sm font-bold text-[#111111]">{s.name}</p>
+                  <p className="truncate text-xs text-[#111111]/60">{s.focus}</p>
                 </div>
                 {isCurrent && (
-                  <span className="flex items-center gap-1 rounded-full bg-teal-100 px-2 py-0.5 text-[10px] font-bold uppercase text-teal-700">
+                  <span className="flex items-center gap-1 text-[10px] font-bold uppercase text-[#111111]">
                     <Check className="h-3 w-3" />
                     Attuale
                   </span>
@@ -286,7 +281,7 @@ function SessionSwitchModal({
           );
         })}
         {(sessions?.length || 0) === 0 && (
-          <p className="py-6 text-center text-sm text-emerald-800/50">
+          <p className="py-6 text-center text-sm text-[#111111]/50">
             Nessuna sessione nella scheda.
           </p>
         )}

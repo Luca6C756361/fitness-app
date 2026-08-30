@@ -16,13 +16,13 @@ export default function StatsPage() {
             className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
             aria-label="Torna alla dashboard"
           >
-            <ArrowLeft className="h-4 w-4 text-emerald-800" />
+            <ArrowLeft className="h-4 w-4 text-[#111111]" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-emerald-950">
+            <h1 className="text-2xl font-bold tracking-tight text-[#111111]">
               Statistiche
             </h1>
-            <p className="text-sm font-medium text-emerald-800/60">
+            <p className="text-sm font-medium text-[#111111]/60">
               L'andamento nel tempo
             </p>
           </div>

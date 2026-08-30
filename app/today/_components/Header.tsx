@@ -55,33 +55,33 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between gap-4">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-emerald-950">
+        <h1 className="text-3xl font-bold tracking-tight text-[#111111]">
           TODAY
         </h1>
-        <p className="mt-0.5 min-h-[1.25rem] text-sm font-medium text-emerald-800/60">
+        <p className="mt-0.5 min-h-[1.25rem] text-sm font-medium text-[#111111]/60">
           {today}
         </p>
       </div>
 
       <div className="flex items-center gap-3">
         <div className="relative hidden md:block">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#111111]/40" />
           <input
             type="search"
             placeholder="Cerca alimenti, esercizi…"
-            className="w-56 rounded-full border border-emerald-900/10 bg-white/80 py-2 pl-9 pr-4 text-sm text-emerald-950 placeholder:text-emerald-800/40 shadow-sm outline-none transition focus:w-64 focus:ring-2 focus:ring-teal-300/60"
+            className="w-56 rounded-full border border-emerald-900/10 bg-white/80 py-2 pl-9 pr-4 text-sm text-[#111111] placeholder:text-[#111111]/40 shadow-sm outline-none transition focus:w-64 focus:ring-2 focus:ring-teal-300/60"
           />
         </div>
 
         <div className="flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/80 py-1.5 pl-2.5 pr-3.5 shadow-sm">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 text-teal-700">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 text-[#111111]">
             <Scale className="h-4 w-4" />
           </span>
           <div className="leading-tight">
-            <span className="block text-sm font-bold text-emerald-950 tabular-nums">
+            <span className="block text-sm font-bold text-[#111111] tabular-nums">
               {weight.toFixed(1)} kg
             </span>
-            <span className="block text-[10px] font-medium uppercase tracking-wide text-emerald-800/50">
+            <span className="block text-[10px] font-medium uppercase tracking-wide text-[#111111]/50">
               Peso
             </span>
           </div>
@@ -118,7 +118,7 @@ export default function Header() {
               className="h-11 w-11 rounded-full border-2 border-white object-cover shadow-sm"
             />
             <ChevronDown
-              className={`h-4 w-4 text-emerald-800/50 transition-transform ${
+              className={`h-4 w-4 text-[#111111]/50 transition-transform ${
                 menuOpen ? "rotate-180" : ""
               }`}
             />
@@ -127,17 +127,17 @@ export default function Header() {
           {menuOpen && (
             <div className="absolute right-0 top-full z-40 mt-2 w-56 overflow-hidden rounded-xl border border-emerald-900/10 bg-white shadow-lg">
               <div className="border-b border-emerald-900/5 bg-emerald-50/50 px-4 py-3">
-                <p className="text-xs font-medium uppercase tracking-wide text-emerald-800/50">
+                <p className="text-xs font-medium uppercase tracking-wide text-[#111111]/50">
                   Ciao
                 </p>
-                <p className="text-sm font-bold text-emerald-950">{profile.name}</p>
+                <p className="text-sm font-bold text-[#111111]">{profile.name}</p>
               </div>
 
               <nav className="py-1">
                 <Link
                   href="/profilo"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-emerald-950 transition hover:bg-emerald-50"
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-[#111111] transition hover:bg-emerald-50"
                 >
                   <User className="h-4 w-4 text-emerald-700" />
                   Profilo
@@ -145,7 +145,7 @@ export default function Header() {
                 <Link
                   href="/impostazioni"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-emerald-950 transition hover:bg-emerald-50"
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-[#111111] transition hover:bg-emerald-50"
                 >
                   <Settings className="h-4 w-4 text-emerald-700" />
                   Impostazioni

@@ -62,7 +62,7 @@ export default function WeightHistoryChart() {
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <TrendingDown className="h-4 w-4 text-emerald-700" />
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-[#111111]/70">
               Storico peso
             </h2>
           </div>
@@ -79,7 +79,7 @@ export default function WeightHistoryChart() {
         {/* Grafico */}
         <div className="h-56 w-full">
           {entries.length === 0 ? (
-            <div className="flex h-full items-center justify-center text-sm text-emerald-800/50">
+            <div className="flex h-full items-center justify-center text-sm text-[#111111]/50">
               Nessuna misurazione ancora. Aggiungine una!
             </div>
           ) : (
@@ -134,7 +134,7 @@ export default function WeightHistoryChart() {
         {/* Lista misurazioni (max 5 più recenti) */}
         {sortedForList.length > 0 && (
           <div className="mt-5">
-            <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-emerald-800/60">
+            <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-[#111111]/60">
               Misurazioni recenti
             </p>
             <ul className="space-y-1.5">
@@ -144,17 +144,17 @@ export default function WeightHistoryChart() {
                   className="flex items-center justify-between rounded-lg border border-emerald-900/10 bg-white px-3 py-2"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-medium text-emerald-800/60 tabular-nums">
+                    <span className="text-xs font-medium text-[#111111]/60 tabular-nums">
                       {formatShortDate(e.date)}
                     </span>
-                    <span className="text-sm font-bold text-emerald-950 tabular-nums">
+                    <span className="text-sm font-bold text-[#111111] tabular-nums">
                       {e.weight.toFixed(1)} kg
                     </span>
                   </div>
                   <button
                     type="button"
                     onClick={() => removeEntry(e.date)}
-                    className="rounded-lg p-1.5 text-emerald-800/40 transition hover:bg-red-50 hover:text-red-600"
+                    className="rounded-lg p-1.5 text-[#111111]/40 transition hover:bg-red-50 hover:text-red-600"
                     aria-label="Elimina misurazione"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -170,7 +170,7 @@ export default function WeightHistoryChart() {
       <Modal open={addOpen} onClose={() => setAddOpen(false)} title="Nuova misurazione">
         <div className="space-y-4">
           <div>
-            <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
               Data
             </label>
             <input
@@ -178,11 +178,11 @@ export default function WeightHistoryChart() {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               max={new Date().toISOString().slice(0, 10)}
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#111111]/70">
               Peso (kg)
             </label>
             <input
@@ -191,9 +191,9 @@ export default function WeightHistoryChart() {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               placeholder="75.4"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-emerald-900/10 bg-white px-4 py-2.5 text-sm text-[#111111] placeholder:text-[#111111]/30 outline-none focus:ring-2 focus:ring-emerald-300"
             />
-            <p className="mt-1 text-[10px] font-medium text-emerald-800/50">
+            <p className="mt-1 text-[10px] font-medium text-[#111111]/50">
               Se esiste già una misurazione per questa data, verrà aggiornata.
             </p>
           </div>

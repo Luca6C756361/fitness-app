@@ -37,7 +37,7 @@ export default function Sidebar() {
         <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm">
           <Activity className="h-5 w-5" />
         </span>
-        <span className="text-lg font-bold tracking-tight text-emerald-950">
+        <span className="text-lg font-bold tracking-tight text-[#111111]">
           FitApp
         </span>
       </div>
@@ -53,7 +53,7 @@ export default function Sidebar() {
               className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
                 active
                   ? "bg-emerald-50 text-emerald-700"
-                  : "text-emerald-800/60 hover:bg-emerald-50/60 hover:text-emerald-800"
+                  : "text-[#111111]/60 hover:bg-emerald-50/60 hover:text-[#111111]"
               }`}
             >
               <Icon className="h-4 w-4" />

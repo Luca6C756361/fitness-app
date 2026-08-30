@@ -43,19 +43,19 @@ export default function ExerciseBrowser({
 
   return (
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#111111]/70">
         Database esercizi
       </h2>
 
       {/* Ricerca */}
       <div className="relative mb-3">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#111111]/40" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Cerca (es. panca, squat, curl)…"
-          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-emerald-950 placeholder:text-emerald-800/40 outline-none focus:ring-2 focus:ring-emerald-300"
+          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-[#111111] placeholder:text-[#111111]/40 outline-none focus:ring-2 focus:ring-emerald-300"
         />
       </div>
 
@@ -67,7 +67,7 @@ export default function ExerciseBrowser({
           className={`rounded-full px-3 py-1 text-xs font-bold transition ${
             muscle === "all"
               ? "bg-emerald-600 text-white"
-              : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+              : "bg-emerald-50 text-[#111111]/70 hover:bg-emerald-100"
           }`}
         >
           Tutti
@@ -80,7 +80,7 @@ export default function ExerciseBrowser({
             className={`rounded-full px-3 py-1 text-xs font-bold transition ${
               muscle === m
                 ? "bg-emerald-600 text-white"
-                : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                : "bg-emerald-50 text-[#111111]/70 hover:bg-emerald-100"
             }`}
           >
             {muscleGroupLabels[m] ?? m}
@@ -91,7 +91,7 @@ export default function ExerciseBrowser({
       {/* Lista */}
       <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
         {filtered.length === 0 ? (
-          <p className="py-6 text-center text-sm text-emerald-800/50">
+          <p className="py-6 text-center text-sm text-[#111111]/50">
             Nessun esercizio trovato.
           </p>
         ) : (
@@ -103,8 +103,8 @@ export default function ExerciseBrowser({
                 className="flex items-center justify-between rounded-xl border border-emerald-900/10 bg-white px-3 py-2.5"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-emerald-950">{ex.name}</p>
-                  <p className="text-xs text-emerald-800/50">
+                  <p className="text-sm font-medium text-[#111111]">{ex.name}</p>
+                  <p className="text-xs text-[#111111]/50">
                     {muscleGroupLabels[ex.primaryMuscle]} ·{" "}
                     {equipmentLabels[ex.equipment]}
                   </p>

@@ -58,10 +58,10 @@ export default function MacroDonut() {
         <span className="text-[11px] font-semibold uppercase tracking-widest text-emerald-700/70">
           Kcal mancanti
         </span>
-        <span className="mt-1 text-3xl font-bold text-emerald-950 tabular-nums">
+        <span className="mt-1 text-3xl font-bold text-[#111111] tabular-nums">
           {Math.round(remaining)}
         </span>
-        <span className="text-sm font-medium text-emerald-800/60 tabular-nums">
+        <span className="text-sm font-medium text-[#111111]/60 tabular-nums">
           / {goals.kcalTarget}
         </span>
       </div>

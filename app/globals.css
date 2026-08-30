@@ -43,7 +43,7 @@ html[data-theme="dark"] .bg-\[\#FAF7F0\] {
 }
 
 /* Testo emerald-950 (nero) → panna chiara */
-html[data-theme="dark"] .text-emerald-950 {
+html[data-theme="dark"] [class*="text-[#111111]"] {
   color: #ecfdf5;
 }
 

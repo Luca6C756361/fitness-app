@@ -68,19 +68,19 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
 
   return (
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-[#111111]/70">
         Cerca alimento
       </h2>
 
       {/* Barra di ricerca */}
       <div className="relative mb-3">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#111111]/40" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Cerca (es. pollo, avena, mela)…"
-          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-emerald-950 placeholder:text-emerald-800/40 outline-none focus:ring-2 focus:ring-emerald-300"
+          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-[#111111] placeholder:text-[#111111]/40 outline-none focus:ring-2 focus:ring-emerald-300"
         />
       </div>
 
@@ -92,7 +92,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
           className={`rounded-full px-3 py-1 text-xs font-bold transition ${
             selectedCategory === "all"
               ? "bg-emerald-600 text-white"
-              : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+              : "bg-emerald-50 text-[#111111]/70 hover:bg-emerald-100"
           }`}
         >
           Tutti
@@ -105,7 +105,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
             className={`rounded-full px-3 py-1 text-xs font-bold transition ${
               selectedCategory === cat
                 ? "bg-emerald-600 text-white"
-                : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                : "bg-emerald-50 text-[#111111]/70 hover:bg-emerald-100"
             }`}
           >
             {categoryLabels[cat]}
@@ -116,7 +116,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
       {/* Lista alimenti */}
       <div className="max-h-64 space-y-1.5 overflow-y-auto pr-1">
         {filtered.length === 0 ? (
-          <p className="py-6 text-center text-sm text-emerald-800/50">
+          <p className="py-6 text-center text-sm text-[#111111]/50">
             Nessun alimento trovato.
           </p>
         ) : (
@@ -131,8 +131,8 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
                   : "border-emerald-900/10 bg-white hover:bg-emerald-50/50"
               }`}
             >
-              <span className="text-sm font-medium text-emerald-950">{f.name}</span>
-              <span className="text-xs font-bold text-emerald-800/60 tabular-nums">
+              <span className="text-sm font-medium text-[#111111]">{f.name}</span>
+              <span className="text-xs font-bold text-[#111111]/60 tabular-nums">
                 {f.kcal} kcal / {f.unit}
               </span>
             </button>
@@ -143,12 +143,12 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
       {/* Pannello porzione + preview + aggiungi */}
       {selectedFood && (
         <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/50 p-4">
-          <p className="mb-3 text-sm font-bold text-emerald-950">
+          <p className="mb-3 text-sm font-bold text-[#111111]">
             {selectedFood.name}
           </p>
 
           <div className="mb-3 flex items-center gap-2">
-            <label className="text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="text-xs font-bold uppercase tracking-wide text-[#111111]/70">
               Quantità
             </label>
             <input
@@ -157,7 +157,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
               onChange={(e) => setQuantity(e.target.value)}
               className="w-24 rounded-lg border border-emerald-900/10 bg-white px-2 py-1 text-sm tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
             />
-            <span className="text-sm font-medium text-emerald-800/70">
+            <span className="text-sm font-medium text-[#111111]/70">
               {selectedFood.unit === "100g" ? "grammi" : "pezzi"}
             </span>
           </div>
@@ -165,26 +165,26 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
           {preview && (
             <div className="mb-3 grid grid-cols-4 gap-2 text-center">
               <div>
-                <p className="text-[10px] font-bold uppercase text-emerald-800/60">Kcal</p>
-                <p className="text-sm font-bold text-emerald-950 tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Kcal</p>
+                <p className="text-sm font-bold text-[#111111] tabular-nums">
                   {preview.kcal}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase text-emerald-800/60">Carbo</p>
-                <p className="text-sm font-bold text-emerald-950 tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Carbo</p>
+                <p className="text-sm font-bold text-[#111111] tabular-nums">
                   {preview.carbs}g
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase text-emerald-800/60">Prot</p>
-                <p className="text-sm font-bold text-emerald-950 tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Prot</p>
+                <p className="text-sm font-bold text-[#111111] tabular-nums">
                   {preview.protein}g
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase text-emerald-800/60">Grassi</p>
-                <p className="text-sm font-bold text-emerald-950 tabular-nums">
+                <p className="text-[10px] font-bold uppercase text-[#111111]/60">Grassi</p>
+                <p className="text-sm font-bold text-[#111111] tabular-nums">
                   {preview.fat}g
                 </p>
               </div>
