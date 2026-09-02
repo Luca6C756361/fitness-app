@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../../_lib/supabase/client";   // <-- NUOVO
 import { useAuth } from "../../_lib/AuthContext";        // <-- NUOVO
+import { REST_DEFAULT_SECONDS } from "../../allenamento/_lib/restPresets";
 
 export type Theme = "light" | "dark";
 export type WeightUnit = "kg" | "lb";
@@ -22,6 +23,9 @@ export interface Settings {
     workout: boolean;
     meals: boolean;
   };
+  /** Preset globale di recupero tra serie, in secondi. Fallback quando un
+   *  esercizio non ha un recupero personalizzato. */
+  restDefaultSeconds: number;
 }
 
 const defaultSettings: Settings = {
@@ -31,6 +35,7 @@ const defaultSettings: Settings = {
   energyUnit: "kcal",
   language: "it",
   notifications: { enabled: false, water: true, workout: true, meals: true },
+  restDefaultSeconds: REST_DEFAULT_SECONDS,
 };
 
 interface SettingsContextValue {
@@ -64,7 +69,9 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
         .single();
 
       if (error) console.error("[settings]", error.message);
-      // merge coi default: gestisce chiavi nuove aggiunte dopo il primo salvataggio
+      // merge coi default: gestisce chiavi nuove aggiunte dopo il primo salvataggio.
+      // Nessuna migrazione necessaria per restDefaultSeconds: i profili salvati
+      // prima di oggi non hanno la chiave e la ereditano da defaultSettings qui.
       if (data?.settings) setSettings({ ...defaultSettings, ...data.settings });
       setLoading(false);
     })();
@@ -110,6 +117,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       supabase.from("weight_entries").delete().eq("user_id", user.id),
       supabase.from("workout_logs").delete().eq("user_id", user.id),
       supabase.from("active_sessions").delete().eq("user_id", user.id),
+      supabase.from("custom_exercises").delete().eq("user_id", user.id),
     ]);
 
     await supabase
@@ -123,6 +131,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       .eq("id", user.id);
 
     localStorage.removeItem("fitness-app:todayOverride");
+    localStorage.removeItem("fitness-app:customExercises");
 
     window.location.href = "/today";   // reload completo: ricarica tutti i Context
   };

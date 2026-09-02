@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Check, CheckCircle2, Undo2, Zap, Copy, StickyNote } from "lucide-react";
+import { Check, CheckCircle2, Undo2, Zap, Copy, StickyNote, Timer } from "lucide-react";
 import type { CompletedSet } from "../../today/_lib/types";
+import { formatRestLabel } from "../_lib/restPresets";
+import RestPicker from "../../scheda/_components/RestPicker";
 
 interface ExerciseSetCardProps {
   index: number;
@@ -20,6 +22,18 @@ interface ExerciseSetCardProps {
    * l'utente deve poter sempre sovrascriverlo.
    */
   suggestedWeight?: number;
+  /** Recupero effettivo (già risolto: per-esercizio oppure default globale). */
+  restSeconds?: number;
+  /** true se il recupero è un override per-esercizio (snapshot o impostato oggi). */
+  restIsCustom?: boolean;
+  /**
+   * Default globale "grezzo" (settings.restDefaultSeconds), per l'etichetta
+   * "Globale (Xs)" del RestPicker incorporato — restSeconds da solo non
+   * basta quando è già un override per-esercizio.
+   */
+  restGlobalDefault?: number;
+  /** Override "solo per oggi". null = torna al default globale. */
+  onRestChange?: (seconds: number | null) => void;
 }
 
 type Mode = "simple" | "advanced";
@@ -34,6 +48,10 @@ export default function ExerciseSetCard({
   onUndo,
   notes,
   suggestedWeight,
+  restSeconds,
+  restIsCustom,
+  restGlobalDefault,
+  onRestChange,
 }: ExerciseSetCardProps) {
   const [singleWeight, setSingleWeight] = useState(
     suggestedWeight !== undefined ? String(suggestedWeight) : ""
@@ -42,6 +60,7 @@ export default function ExerciseSetCard({
     Array.from({ length: targetReps }, () => "")
   );
   const [mode, setMode] = useState<Mode>("simple");
+  const [showRestPicker, setShowRestPicker] = useState(false);
 
   const isFullyDone = completedSets.length >= targetSets;
 
@@ -90,9 +109,50 @@ export default function ExerciseSetCard({
             )}
           </div>
           <h3 className="text-base font-bold text-emerald-950">{name}</h3>
-          <p className="text-xs font-medium text-emerald-800/50 tabular-nums">
-            {targetSets} × {targetReps}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-xs font-medium text-emerald-800/50 tabular-nums">
+              {targetSets} × {targetReps}
+            </p>
+            {restSeconds !== undefined && (
+              <button
+                type="button"
+                onClick={() => onRestChange && setShowRestPicker((v) => !v)}
+                disabled={!onRestChange}
+                title={
+                  restIsCustom
+                    ? "Recupero impostato per questo esercizio"
+                    : "Recupero predefinito"
+                }
+                aria-label={
+                  restIsCustom
+                    ? "Recupero impostato per questo esercizio"
+                    : "Recupero predefinito"
+                }
+                className={`flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold uppercase transition ${
+                  restIsCustom
+                    ? "bg-teal-50 text-teal-700"
+                    : "bg-emerald-50 text-emerald-800/60"
+                } ${onRestChange ? "cursor-pointer hover:opacity-80" : "cursor-default"}`}
+              >
+                <Timer className="h-3 w-3" />
+                {formatRestLabel(restSeconds)}
+              </button>
+            )}
+          </div>
+
+          {onRestChange && showRestPicker && (
+            <div className="mt-2">
+              <RestPicker
+                value={restIsCustom ? restSeconds : undefined}
+                globalDefault={restGlobalDefault ?? restSeconds ?? 0}
+                onChange={(s) => onRestChange(s ?? null)}
+              />
+              <p className="mt-1 text-[10px] text-emerald-800/50">
+                Vale solo per la sessione di oggi. Per cambiarlo in modo
+                permanente modifica la scheda.
+              </p>
+            </div>
+          )}
 
           {/* Nota promemoria: banner giallo se presente */}
           {notes && (

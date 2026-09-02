@@ -5,6 +5,7 @@ import { Timer, X, Plus, Maximize2, SkipForward } from "lucide-react";
 import { formatTime } from "./SessionTimer";
 import { useCountdown } from "../_lib/useDeadline";
 import { useWakeLock } from "../_lib/useWakeLock";
+import { REST_PRESETS } from "../_lib/restPresets";
 import FocusShell from "./FocusShell";
 import FocusButton from "./FocusButton";
 
@@ -29,8 +30,6 @@ interface RestTimerProps {
   /** Apre automaticamente il Focus quando parte un nuovo recupero. */
   focusByDefault?: boolean;
 }
-
-const PRESETS = [60, 90, 120, 180];
 
 export default function RestTimer({
   active,
@@ -233,4 +232,4 @@ function vibrate() {
 }
 
 /** Preset esportati per uso nel selettore. */
-export { PRESETS as REST_PRESETS };
+export { REST_PRESETS };

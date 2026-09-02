@@ -1,9 +1,19 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { supabase } from "../../_lib/supabase/client";   // <-- NUOVO
 import { useAuth } from "../../_lib/AuthContext";        // <-- NUOVO
 import { defaultWeeklyPlan, exerciseDatabase } from "./exerciseData";
+import {
+  CUSTOM_CACHE_KEY,
+  mergeExercises,
+  validateExercise,
+  fetchCustomExercises,
+  insertCustomExercise,
+  deleteCustomExercise,
+  type CustomExerciseInput,
+  type ValidationError,
+} from "./customExercises";
 import type {
   WeeklyPlan,
   WorkoutSession,
@@ -47,6 +57,24 @@ interface PlanContextValue {
   deleteSession: (sessionId: string) => Promise<void>;
 
   exercises: ExerciseDefinition[];
+  customExercises: ExerciseDefinition[];                         // <-- NUOVO
+  exercisesLoading: boolean;                                     // <-- NUOVO
+  createExercise: (
+    input: CustomExerciseInput
+  ) => Promise<{ ok: boolean; exercise?: ExerciseDefinition; error?: ValidationError | "network" }>; // <-- NUOVO
+  deleteExercise: (id: string) => Promise<{ ok: boolean; usedIn?: string[] }>; // <-- NUOVO
+}
+
+/** Legge la cache locale degli esercizi custom. Mai un throw: [] su qualsiasi errore. */
+function readCustomCache(): ExerciseDefinition[] {
+  try {
+    const raw = localStorage.getItem(CUSTOM_CACHE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
 }
 
 const PlanContext = createContext<PlanContextValue | null>(null);
@@ -74,11 +102,20 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
   const [dayIndex, setDayIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasPersistedPlan, setHasPersistedPlan] = useState(false);
+  const [customExercises, setCustomExercises] = useState<ExerciseDefinition[]>([]);
+  const [exercisesLoading, setExercisesLoading] = useState(true);
 
   // Il giorno corrente si calcola SOLO lato client: new Date() nel render
   // darebbe un indice diverso su server e browser → hydration mismatch.
   useEffect(() => {
     setDayIndex(todayDayIndex());
+  }, []);
+
+  // Cache locale degli esercizi custom: stesso pattern anti-hydration di dayIndex
+  // (stato iniziale [], idratazione dentro un effect al mount — il file è "use client"
+  // ma viene comunque pre-renderizzato sul server, dove localStorage non esiste).
+  useEffect(() => {
+    setCustomExercises(readCustomCache());
   }, []);
 
   // plan → DB
@@ -109,6 +146,36 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
         setHasPersistedPlan(false);
       }
       setLoading(false);
+    })();
+  }, [user]);
+
+  // customExercises → DB, con cache localStorage e resilienza offline
+  useEffect(() => {
+    if (!user) {
+      setCustomExercises([]);
+      try {
+        localStorage.removeItem(CUSTOM_CACHE_KEY);
+      } catch {
+        /* ignora */
+      }
+      setExercisesLoading(false);
+      return;
+    }
+    setExercisesLoading(true);
+    (async () => {
+      const rows = await fetchCustomExercises(user.id);
+      // fetchCustomExercises non lancia mai: in caso di errore ritorna [].
+      // Se siamo offline un risultato vuoto è quasi certamente un fallimento di
+      // rete, non "l'utente non ha esercizi custom": la cache già idratata resta valida.
+      if (rows.length > 0 || navigator.onLine) {
+        setCustomExercises(rows);
+        try {
+          localStorage.setItem(CUSTOM_CACHE_KEY, JSON.stringify(rows));
+        } catch {
+          /* quota piena: ignora */
+        }
+      }
+      setExercisesLoading(false);
     })();
   }, [user]);
 
@@ -149,7 +216,18 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
   };
 
   const getSessionById = (id: string) => (plan.sessions ?? []).find((s) => s.id === id);
-  const getExerciseDef = (id: string) => exerciseDatabase.find((e) => e.id === id);
+
+  // Lista fusa: statici + custom. Consumata da ExercisePicker, ExerciseBrowser,
+  // SessionEditor, WorkoutCard, SessionList e /allenamento senza modifiche.
+  const exercises = useMemo(
+    () => mergeExercises(exerciseDatabase, customExercises),
+    [customExercises]
+  );
+
+  // getExerciseDef DEVE cercare nella lista fusa: senza questo, ogni esercizio
+  // custom appare come "?" ovunque (fallback `?? "?"` presente in 5 file).
+  const exerciseIndex = useMemo(() => new Map(exercises.map((e) => [e.id, e])), [exercises]);
+  const getExerciseDef = useCallback((id: string) => exerciseIndex.get(id), [exerciseIndex]);
 
   const todaySession = useMemo<WorkoutSession | null>(() => {
     if (todayOverride) return todayOverride.session;
@@ -209,6 +287,75 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
     await persistPlan({ ...plan, weekMap: nextMap });
   };
 
+  /** Creazione ottimistica: id temporaneo finché il DB non risponde con quello reale. */
+  const createExercise = async (
+    input: CustomExerciseInput
+  ): Promise<{ ok: boolean; exercise?: ExerciseDefinition; error?: ValidationError | "network" }> => {
+    if (!user) return { ok: false, error: "network" };
+
+    const validationError = validateExercise(input, exercises);
+    if (validationError) return { ok: false, error: validationError };
+
+    const tempId = `tmp-${Date.now()}`;
+    const temp: ExerciseDefinition = {
+      id: tempId,
+      name: input.name.trim(),
+      primaryMuscle: input.primaryMuscle,
+      secondaryMuscles: input.secondaryMuscles,
+      equipment: input.equipment,
+      source: "custom",
+      createdAt: new Date().toISOString(),
+    };
+    const withTemp = [temp, ...customExercises];
+    setCustomExercises(withTemp);
+
+    const result = await insertCustomExercise(user.id, input);
+
+    if (result.error || !result.exercise) {
+      setCustomExercises(customExercises); // rollback: rimuove il temporaneo
+      return { ok: false, error: result.error ?? "network" };
+    }
+
+    const next = withTemp.map((e) => (e.id === tempId ? result.exercise! : e));
+    setCustomExercises(next);
+    try {
+      localStorage.setItem(CUSTOM_CACHE_KEY, JSON.stringify(next));
+    } catch {
+      /* quota piena: ignora */
+    }
+
+    return { ok: true, exercise: result.exercise };
+  };
+
+  /** plan è jsonb: nessuna FK. Blocca la cancellazione se l'esercizio è referenziato in una sessione. */
+  const deleteExercise = async (id: string): Promise<{ ok: boolean; usedIn?: string[] }> => {
+    if (!user) return { ok: false };
+
+    const usedIn = (plan.sessions ?? [])
+      .filter((s) => s.exercises.some((pe) => pe.exerciseId === id))
+      .map((s) => s.name);
+    if (usedIn.length > 0) return { ok: false, usedIn };
+
+    const previous = customExercises;
+    const next = customExercises.filter((e) => e.id !== id);
+    setCustomExercises(next);
+
+    const success = await deleteCustomExercise(user.id, id);
+
+    if (!success) {
+      setCustomExercises(previous);
+      return { ok: false };
+    }
+
+    try {
+      localStorage.setItem(CUSTOM_CACHE_KEY, JSON.stringify(next));
+    } catch {
+      /* quota piena: ignora */
+    }
+
+    return { ok: true };
+  };
+
   return (
     <PlanContext.Provider
       value={{
@@ -225,7 +372,11 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
         updateSession,
         createSession,
         deleteSession,
-        exercises: exerciseDatabase,
+        exercises,
+        customExercises,
+        exercisesLoading,
+        createExercise,
+        deleteExercise,
       }}
     >
       {children}

@@ -110,6 +110,10 @@ export interface ExerciseDefinition {
   equipment: Equipment;
   /** Demo di esecuzione. Opzionale: oggi nessun esercizio la valorizza. */
   media?: { kind: "video" | "lottie" | "image"; src: string; poster?: string };
+  /* --- Esercizi custom — campi opzionali, retrocompatibili --- */
+  source?: "default" | "custom";
+  /** ISO, solo per i custom. */
+  createdAt?: string;
 }
 
 /** Un esercizio all'interno di una sessione (con set e reps di default). */
@@ -120,6 +124,13 @@ export interface PlannedExercise {
   reps: number;
   /** Peso suggerito (opzionale). L'utente lo modifica durante il workout. */
   suggestedWeight?: number;
+  /**
+   * Recupero pianificato per questo esercizio, in secondi.
+   * undefined = usa il default globale (settings.restDefaultSeconds).
+   * NON confondere con CompletedSet.restSeconds, che è il recupero
+   * effettivamente osservato dopo un set.
+   */
+  restSeconds?: number;
   notes?: string;
 }
 

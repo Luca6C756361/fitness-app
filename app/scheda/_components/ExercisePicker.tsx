@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Search, Plus, Info } from "lucide-react";
+import { Search, Plus, Info, Sparkles } from "lucide-react";
 import Modal from "../../today/_components/Modal";
 import ExerciseMediaSlot from "../../today/_components/ExerciseMediaSlot";
 import { usePlan } from "../../today/_lib/PlanContext";
@@ -9,6 +9,7 @@ import {
   muscleGroupLabels,
   equipmentLabels,
 } from "../../today/_lib/exerciseData";
+import CustomExerciseForm from "./CustomExerciseForm";
 import type { ExerciseDefinition, MuscleGroup } from "../../today/_lib/types";
 
 /**
@@ -45,6 +46,7 @@ export default function ExercisePicker({
   const [query, setQuery] = useState("");
   const [muscle, setMuscle] = useState<MuscleGroup | "all">("all");
   const [previewId, setPreviewId] = useState<string | null>(null);
+  const [createOpen, setCreateOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -70,6 +72,7 @@ export default function ExercisePicker({
   }, [exercises, query, muscle, excludeIds]);
 
   return (
+    <>
     <Modal open={open} onClose={onClose} title={title} size="lg">
       {/* Ricerca */}
       <div className="relative mb-3">
@@ -112,6 +115,16 @@ export default function ExercisePicker({
         ))}
       </div>
 
+      {/* Crea esercizio custom */}
+      <button
+        type="button"
+        onClick={() => setCreateOpen(true)}
+        className="mb-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-50 py-2.5 text-[11px] font-bold uppercase tracking-wide text-emerald-700 transition hover:bg-emerald-100"
+      >
+        <Sparkles className="h-3.5 w-3.5" />
+        Crea esercizio
+      </button>
+
       {/* Lista */}
       <div className="max-h-[55dvh] space-y-1.5 overflow-y-auto pr-1">
         {filtered.length === 0 ? (
@@ -152,8 +165,13 @@ export default function ExercisePicker({
                     className="h-14 w-14 shrink-0 !aspect-square"
                   />
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-emerald-950">
-                      {ex.name}
+                    <p className="flex items-center gap-1.5 truncate text-sm font-semibold text-emerald-950">
+                      <span className="truncate">{ex.name}</span>
+                      {ex.source === "custom" && (
+                        <span className="shrink-0 rounded-full bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold uppercase text-teal-700">
+                          Custom
+                        </span>
+                      )}
                     </p>
                     <p className="text-xs text-emerald-800/50">
                       {muscleGroupLabels[ex.primaryMuscle]} ·{" "}
@@ -185,5 +203,17 @@ export default function ExercisePicker({
         )}
       </div>
     </Modal>
+
+    <CustomExerciseForm
+      open={createOpen}
+      onClose={() => setCreateOpen(false)}
+      onCreated={(ex) => {
+        // Creato per usarlo subito, non per ritrovarlo in fondo alla lista.
+        onSelect(ex);
+        setCreateOpen(false);
+        onClose();
+      }}
+    />
+    </>
   );
 }

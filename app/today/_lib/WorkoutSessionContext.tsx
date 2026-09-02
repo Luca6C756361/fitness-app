@@ -24,6 +24,9 @@ interface ActiveExercise {
   targetSets: number;
   targetReps: number;
   sets: CompletedSet[]; // set completati finora
+  /** Recupero in secondi fotografato dal piano all'avvio, o impostato al volo
+   *  durante la sessione. undefined = default globale. */
+  restSeconds?: number;
 }
 
 interface ActiveSession {
@@ -52,6 +55,8 @@ interface WorkoutSessionContextValue {
   removeLastSet: (exerciseIndex: number) => void;
   cancelSession: () => void;
   finishSession: (durationSeconds: number) => Promise<DetailedWorkoutLog | null>;
+  /** Override "solo per oggi" del recupero di un esercizio. null = torna al default globale. */
+  setExerciseRest: (exerciseIndex: number, seconds: number | null) => void;
 }
 
 const WorkoutSessionContext = createContext<WorkoutSessionContextValue | null>(null);
@@ -163,12 +168,16 @@ export function WorkoutSessionProvider({ children }: { children: React.ReactNode
     const activeSession: ActiveSession = {
       sessionName: session.name,
       startedAt: Date.now(),
+      // restSeconds è uno SNAPSHOT preso qui: da questo momento la sessione
+      // non rilegge più il piano (una riga active_sessions salvata prima di
+      // oggi non ha questo campo → undefined → fallback al default globale).
       exercises: session.exercises.map((pe) => ({
         exerciseId: pe.exerciseId,
         name: getName(pe.exerciseId),
         targetSets: pe.sets,
         targetReps: pe.reps,
         sets: [],
+        restSeconds: pe.restSeconds,
       })),
     };
     persistActive(activeSession);
@@ -201,6 +210,19 @@ export function WorkoutSessionProvider({ children }: { children: React.ReactNode
       ...active,
       exercises: active.exercises.map((ex, i) =>
         i === exerciseIndex ? { ...ex, sets: ex.sets.slice(0, -1) } : ex
+      ),
+    };
+    persistActive(next);
+  };
+
+  /** Override "solo per oggi": null = torna al default globale. Nessuna query
+   *  nuova, persistActive fa già l'upsert su active_sessions. */
+  const setExerciseRest = (exerciseIndex: number, seconds: number | null) => {
+    if (!active) return;
+    const next: ActiveSession = {
+      ...active,
+      exercises: active.exercises.map((e, i) =>
+        i === exerciseIndex ? { ...e, restSeconds: seconds ?? undefined } : e
       ),
     };
     persistActive(next);
@@ -309,6 +331,7 @@ export function WorkoutSessionProvider({ children }: { children: React.ReactNode
         removeLastSet,
         cancelSession,
         finishSession,
+        setExerciseRest,
       }}
     >
       {children}

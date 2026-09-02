@@ -13,6 +13,7 @@ import {
   StickyNote,
 } from "lucide-react";
 import { usePlan } from "../today/_lib/PlanContext";
+import { useSettings } from "../today/_lib/SettingsContext";
 import { useWorkoutSession } from "../today/_lib/WorkoutSessionContext";
 import SessionTimer from "./_components/SessionTimer";
 import RestTimer from "./_components/RestTimer";
@@ -24,6 +25,7 @@ import PRToast from "./_components/PRToast";
 export default function AllenamentoPage() {
   const router = useRouter();
   const { todaySession, isTodayComposed, getExerciseDef } = usePlan();
+  const { settings, updateSettings } = useSettings();
   const {
     active,
     startSession,
@@ -31,9 +33,13 @@ export default function AllenamentoPage() {
     removeLastSet,
     cancelSession,
     finishSession,
+    setExerciseRest,
   } = useWorkoutSession();
 
-  const [restDefault, setRestDefault] = useState(90);
+  // Preset globale persistito su profiles.settings (prima si azzerava a ogni
+  // ricarica: era uno useState locale). updateSettings è già ottimistico con
+  // rollback, come ovunque nel repo.
+  const restDefault = settings.restDefaultSeconds;
   const [restActive, setRestActive] = useState<number | null>(null);
   const [durationSec, setDurationSec] = useState(0);
 
@@ -99,7 +105,10 @@ export default function AllenamentoPage() {
           </ul>
         </section>
 
-        <RestPresetPicker value={restDefault} onChange={setRestDefault} />
+        <RestPresetPicker
+          value={restDefault}
+          onChange={(s) => updateSettings({ restDefaultSeconds: s })}
+        />
 
         <button
           type="button"
@@ -129,7 +138,11 @@ export default function AllenamentoPage() {
   const handleCompleteSet = (exIndex: number, set: CompletedSet) => {
     addSet(exIndex, set);
     if (totalCompleted + 1 < totalTargetSets) {
-      setRestActive(restDefault);
+      // Da active.exercises, NON da todaySession.exercises[exIndex]: todaySession
+      // può cambiare o svuotarsi a metà sessione (PlanContext scarta
+      // todayOverride al cambio di data), active no.
+      const perExercise = active?.exercises[exIndex]?.restSeconds;
+      setRestActive(perExercise ?? restDefault);
     }
   };
 
@@ -185,6 +198,10 @@ export default function AllenamentoPage() {
               onUndo={() => removeLastSet(i)}
               notes={plannedNote}
               suggestedWeight={plannedSuggestedWeight}
+              restSeconds={ex.restSeconds ?? restDefault}
+              restIsCustom={ex.restSeconds !== undefined}
+              restGlobalDefault={restDefault}
+              onRestChange={(s) => setExerciseRest(i, s)}
             />
           );
         })}

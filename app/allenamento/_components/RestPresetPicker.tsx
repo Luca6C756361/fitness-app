@@ -2,6 +2,7 @@
 
 import { Timer } from "lucide-react";
 import { REST_PRESETS } from "./RestTimer";
+import { formatRestLabel } from "../_lib/restPresets";
 
 interface RestPresetPickerProps {
   value: number;
@@ -33,7 +34,7 @@ export default function RestPresetPicker({
                 : "text-emerald-800/50 hover:text-emerald-800"
             }`}
           >
-            {s < 60 ? `${s}s` : `${s / 60}m${s % 60 ? `${s % 60}s` : ""}`}
+            {formatRestLabel(s)}
           </button>
         ))}
       </div>

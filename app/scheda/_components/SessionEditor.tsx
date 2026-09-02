@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, Trash2, Minus, Save, StickyNote, X, GripVertical, Replace } from "lucide-react";
+import { Plus, Trash2, Minus, Save, StickyNote, X, GripVertical, Replace, Timer } from "lucide-react";
 import {
   DndContext, closestCenter, PointerSensor, TouchSensor, KeyboardSensor,
   useSensor, useSensors, type DragEndEvent,
@@ -14,7 +14,9 @@ import { CSS } from "@dnd-kit/utilities";
 import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
 import Modal from "../../today/_components/Modal";
 import { usePlan } from "../../today/_lib/PlanContext";
+import { useSettings } from "../../today/_lib/SettingsContext";
 import { useProgression } from "../../today/_lib/useProgression";
+import { formatRestLabel } from "../../allenamento/_lib/restPresets";
 import type { ProgressionSuggestion } from "../../today/_lib/progressionStats";
 import type {
   WorkoutSession,
@@ -24,6 +26,7 @@ import type {
 } from "../../today/_lib/types";
 import ExercisePicker from "./ExercisePicker";
 import ProgressionHint from "./ProgressionHint";
+import RestPicker from "./RestPicker";
 
 interface SessionEditorProps {
   open: boolean;
@@ -34,6 +37,7 @@ interface SessionEditorProps {
 interface EditableExercise extends PlannedExercise {
   exerciseName: string;
   showNotes: boolean; // UI: la textarea note è nascosta di default per non appesantire
+  showRest: boolean; // UI: il picker recupero è chiuso di default
 }
 
 function Stepper({
@@ -111,6 +115,7 @@ export default function SessionEditor({
   session,
 }: SessionEditorProps) {
   const { updateSession, createSession, getExerciseDef } = usePlan();
+  const { settings } = useSettings();
   const { suggestFor } = useProgression();
 
   const [name, setName] = useState("");
@@ -153,6 +158,7 @@ export default function SessionEditor({
           exerciseName: getExerciseDef(pe.exerciseId)?.name ?? "?",
           // Se ha già una nota, mostra la textarea aperta
           showNotes: !!pe.notes,
+          showRest: !!pe.restSeconds,
         }))
       );
     } else {
@@ -173,6 +179,7 @@ export default function SessionEditor({
         sets: 3,
         reps: 10,
         showNotes: false,
+        showRest: false,
       },
     ]);
   };
@@ -233,6 +240,11 @@ export default function SessionEditor({
       // Salviamo il carico suggerito applicato solo se valorizzato
       ...(typeof e.suggestedWeight === "number" && e.suggestedWeight > 0
         ? { suggestedWeight: e.suggestedWeight }
+        : {}),
+      // Salviamo il recupero personalizzato solo se valorizzato (mai 0: nullish
+      // non falsy, uno zero in jsonb produrrebbe un timer che scade all'istante)
+      ...(typeof e.restSeconds === "number" && e.restSeconds > 0
+        ? { restSeconds: e.restSeconds }
         : {}),
     }));
 
@@ -408,6 +420,18 @@ export default function SessionEditor({
                       )}
                       <button
                         type="button"
+                        onClick={() => updateEx(ex.id, { showRest: !ex.showRest })}
+                        className={
+                          ex.restSeconds !== undefined
+                            ? "flex items-center gap-1 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold uppercase text-teal-700 hover:bg-teal-100"
+                            : "flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase text-emerald-700 hover:bg-emerald-100"
+                        }
+                      >
+                        <Timer className="h-3 w-3" />
+                        {ex.restSeconds !== undefined ? formatRestLabel(ex.restSeconds) : "Recupero"}
+                      </button>
+                      <button
+                        type="button"
                         onClick={() =>
                           updateEx(ex.id, { showNotes: !ex.showNotes })
                         }
@@ -421,6 +445,14 @@ export default function SessionEditor({
                         {ex.notes ? "Nota" : "+ Nota"}
                       </button>
                     </div>
+
+                    {ex.showRest && (
+                      <RestPicker
+                        value={ex.restSeconds}
+                        globalDefault={settings.restDefaultSeconds}
+                        onChange={(s) => updateEx(ex.id, { restSeconds: s })}
+                      />
+                    )}
 
                     <ProgressionHint suggestion={suggestion} onApply={applySuggestion(ex.id)} />
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { usePlan } from "../../today/_lib/PlanContext";
 import type { ExerciseDefinition } from "../../today/_lib/types";
 import ExerciseBrowser from "./_components/ExerciseBrowser";
@@ -25,11 +25,25 @@ interface CartItem {
 }
 
 export default function ComponiPage() {
-  const { exercises, composeToday } = usePlan();
+  const { exercises, composeToday, deleteExercise } = usePlan();
   const router = useRouter();
 
   const [items, setItems] = useState<CartItem[]>([]);
   const [sessionName, setSessionName] = useState("Sessione personalizzata");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteWarning, setDeleteWarning] = useState<string | null>(null);
+
+  const handleDeleteExercise = async (id: string) => {
+    setDeletingId(id);
+    setDeleteWarning(null);
+    const result = await deleteExercise(id);
+    setDeletingId(null);
+    if (!result.ok && result.usedIn) {
+      setDeleteWarning(
+        `Usato in: ${result.usedIn.join(", ")}. Rimuovilo da quelle sessioni prima di eliminarlo.`
+      );
+    }
+  };
 
   const addExercise = (ex: ExerciseDefinition) => {
     // Evita duplicati: se già presente, non aggiunge
@@ -90,11 +104,20 @@ export default function ComponiPage() {
           </div>
         </div>
 
+        {deleteWarning && (
+          <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+            <p className="text-xs font-medium text-amber-900">{deleteWarning}</p>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <ExerciseBrowser
             exercises={exercises}
             onAdd={addExercise}
             addedIds={items.map((i) => i.exerciseId)}
+            onDelete={handleDeleteExercise}
+            deletingId={deletingId}
           />
           <CompositionCart
             items={items}
