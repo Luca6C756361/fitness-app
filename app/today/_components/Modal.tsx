@@ -13,9 +13,22 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  /** "md" (default, identico a oggi) o "lg" per contenuti più ricchi. */
+  size?: "md" | "lg";
 }
 
-export default function Modal({ open, onClose, title, children }: ModalProps) {
+const SIZE_CLASSES: Record<NonNullable<ModalProps["size"]>, string> = {
+  md: "max-w-md",
+  lg: "max-w-2xl",
+};
+
+export default function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  size = "md",
+}: ModalProps) {
   // Chiudi con il tasto ESC
   useEffect(() => {
     if (!open) return;
@@ -35,7 +48,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+        className={`w-full max-h-[90dvh] overflow-y-auto rounded-2xl bg-white p-6 shadow-xl ${SIZE_CLASSES[size]}`}
       >
         {/* Intestazione */}
         <div className="mb-4 flex items-center justify-between">

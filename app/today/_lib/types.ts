@@ -108,6 +108,8 @@ export interface ExerciseDefinition {
   primaryMuscle: MuscleGroup;
   secondaryMuscles: MuscleGroup[];
   equipment: Equipment;
+  /** Demo di esecuzione. Opzionale: oggi nessun esercizio la valorizza. */
+  media?: { kind: "video" | "lottie" | "image"; src: string; poster?: string };
 }
 
 /** Un esercizio all'interno di una sessione (con set e reps di default). */
