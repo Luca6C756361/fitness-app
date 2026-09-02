@@ -31,6 +31,8 @@ import type {
 interface PlanContextValue {
   plan: WeeklyPlan;
   loading: boolean;                                              // <-- NUOVO
+  /** true SOLO se la colonna `plan` conteneva un oggetto valido (mai su fallback legacy). */
+  hasPersistedPlan: boolean;                                     // <-- NUOVO
   todaySession: WorkoutSession | null;
   isTodayComposed: boolean;
   getSessionById: (id: string) => WorkoutSession | undefined;
@@ -71,6 +73,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
   const [todayOverride, setTodayOverride] = useState<TodayOverride | null>(null);
   const [dayIndex, setDayIndex] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasPersistedPlan, setHasPersistedPlan] = useState(false);
 
   // Il giorno corrente si calcola SOLO lato client: new Date() nel render
   // darebbe un indice diverso su server e browser → hydration mismatch.
@@ -82,6 +85,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!user) {
       setPlan(defaultWeeklyPlan);
+      setHasPersistedPlan(false);
       setLoading(false);
       return;
     }
@@ -97,8 +101,12 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
       const raw = data?.plan as Partial<WeeklyPlan> | null;
       if (raw && Array.isArray(raw.sessions) && Array.isArray(raw.weekMap)) {
         setPlan(raw as WeeklyPlan);
+        setHasPersistedPlan(true);
       } else {
+        // Fallback legacy: NON è un piano "scelto e vuoto", va tenuto distinto
+        // (decisione 4) perché l'empty state di /scheda non deve scattare qui.
         setPlan(defaultWeeklyPlan);
+        setHasPersistedPlan(false);
       }
       setLoading(false);
     })();
@@ -206,6 +214,7 @@ export function PlanProvider({ children }: { children: React.ReactNode }) {
       value={{
         plan,
         loading,
+        hasPersistedPlan,
         todaySession,
         isTodayComposed: todayOverride !== null,
         getSessionById,

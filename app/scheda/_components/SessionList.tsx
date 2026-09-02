@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Dumbbell, Pencil, Trash2, Plus, AlertTriangle } from "lucide-react";
+import { Dumbbell, Pencil, Trash2, Plus, AlertTriangle, ClipboardList, LayoutTemplate } from "lucide-react";
 import { usePlan } from "../../today/_lib/PlanContext";
 import type { WorkoutSession } from "../../today/_lib/types";
 import SessionEditor from "./SessionEditor";
+import TemplatePickerModal from "./TemplatePickerModal";
 
 /**
  * Lista delle sessioni della scheda.
@@ -14,10 +15,11 @@ import SessionEditor from "./SessionEditor";
  */
 
 export default function SessionList() {
-  const { plan, deleteSession, getExerciseDef } = usePlan();
+  const { plan, deleteSession, getExerciseDef, hasPersistedPlan } = usePlan();
   const [editing, setEditing] = useState<WorkoutSession | null>(null);
   const [creating, setCreating] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [templatePickerOpen, setTemplatePickerOpen] = useState(false);
 
   const openEdit = (s: WorkoutSession) => setEditing(s);
   const closeEdit = () => setEditing(null);
@@ -46,9 +48,42 @@ export default function SessionList() {
         </div>
 
         {(plan?.sessions?.length || 0) === 0 ? (
-          <p className="py-6 text-center text-sm text-emerald-800/50">
-            Nessuna sessione. Creane una per iniziare a costruire la scheda.
-          </p>
+          hasPersistedPlan ? (
+            // hasPersistedPlan true + 0 sessioni = scelta reale dell'utente (onboarding
+            // "parto da zero" o scheda svuotata), non il fallback PPL legacy: qui l'empty
+            // state non è una bugia.
+            <div className="py-4 text-center">
+              <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50">
+                <ClipboardList className="h-5 w-5 text-emerald-600" />
+              </span>
+              <p className="mb-1 text-sm font-bold text-emerald-950">Nessuna scheda attiva</p>
+              <p className="mx-auto mb-4 max-w-xs text-xs text-emerald-800/60">
+                Costruiscila esercizio per esercizio, oppure parti da un template.
+              </p>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={openNew}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700"
+                >
+                  <Plus className="h-4 w-4" />
+                  Crea da zero
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTemplatePickerOpen(true)}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700"
+                >
+                  <LayoutTemplate className="h-4 w-4" />
+                  Scegli un template
+                </button>
+              </div>
+            </div>
+          ) : (
+            <p className="py-6 text-center text-sm text-emerald-800/50">
+              Nessuna sessione. Creane una per iniziare a costruire la scheda.
+            </p>
+          )
         ) : (
           <ul className="space-y-2">
             {plan.sessions.map((s) => {
@@ -140,6 +175,10 @@ export default function SessionList() {
       {/* Editor (uno per volta: edit o create) */}
       <SessionEditor open={editing !== null} onClose={closeEdit} session={editing} />
       <SessionEditor open={creating} onClose={closeNew} session={null} />
+      <TemplatePickerModal
+        open={templatePickerOpen}
+        onClose={() => setTemplatePickerOpen(false)}
+      />
     </>
   );
 }

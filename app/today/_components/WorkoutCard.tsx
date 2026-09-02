@@ -14,7 +14,12 @@ import {
   StickyNote,
 } from "lucide-react";
 import { usePlan } from "../_lib/PlanContext";
+import { useWorkoutSession } from "../_lib/WorkoutSessionContext";
+import { useUser } from "../_lib/UserContext";
+import { logVolume } from "../_lib/volumeStats";
+import { formatShortDate } from "../_lib/utils";
 import Modal from "./Modal";
+import ShareButton from "../../_components/ShareButton";
 
 export default function WorkoutCard() {
   const {
@@ -25,10 +30,34 @@ export default function WorkoutCard() {
     composeToday,
     resetTodayOverride,
   } = usePlan();
+  const { logs } = useWorkoutSession();
+  const { profile } = useUser();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [switchOpen, setSwitchOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Ultimo allenamento completato: alimenta la card condivisibile. Se non
+  // c'è nessun log, nessun bottone (niente "bottone morto").
+  const last = logs[0];
+  const shareData = last
+    ? {
+        title: last.sessionName,
+        subtitle: formatShortDate(last.date),
+        stats: [
+          { label: "Durata", value: `${Math.round(last.durationSeconds / 60)} min` },
+          {
+            label: "Volume",
+            value: `${Math.round(logVolume(last)).toLocaleString("it-IT")} kg`,
+          },
+          {
+            label: "Set",
+            value: String(last.exercises.reduce((s, e) => s + e.sets.length, 0)),
+          },
+        ],
+        userName: profile.name,
+      }
+    : null;
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -83,6 +112,12 @@ export default function WorkoutCard() {
             Componi
           </Link>
         </div>
+
+        {shareData && (
+          <div className="mt-3">
+            <ShareButton data={shareData} label="Condividi" />
+          </div>
+        )}
 
         <SessionSwitchModal
           open={switchOpen}
@@ -222,6 +257,12 @@ export default function WorkoutCard() {
           Inizia workout
           <ChevronRight className="h-4 w-4" />
         </Link>
+
+        {shareData && (
+          <div className="mt-3">
+            <ShareButton data={shareData} label="Condividi" />
+          </div>
+        )}
       </section>
 
       <SessionSwitchModal

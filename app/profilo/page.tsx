@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trophy, ChevronRight } from "lucide-react";
 import { useUser } from "../today/_lib/UserContext";
 import ProfileForm from "./_components/ProfileForm";
 import GoalsForm from "./_components/GoalsForm";
@@ -39,6 +39,16 @@ export default function ProfilePage() {
         </div>
 
         <StatsCard />
+
+        <Link
+          href="/profilo/achievements"
+          className="flex items-center gap-3 rounded-2xl border border-emerald-900/5 bg-white p-4 shadow-sm transition hover:bg-emerald-50/50"
+        >
+          <Trophy className="h-5 w-5 text-amber-600" />
+          <span className="flex-1 text-sm font-bold text-emerald-950">Traguardi</span>
+          <ChevronRight className="h-4 w-4 text-emerald-800/40" />
+        </Link>
+
         <WeightHistoryChart />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

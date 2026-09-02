@@ -16,6 +16,7 @@ const displayOrder = [1, 2, 3, 4, 5, 6, 0];
 export default function WeekView() {
   const { plan, overrideDay } = usePlan();
   const todayDayIndex = new Date().getDay();
+  const noSessions = (plan?.sessions?.length ?? 0) === 0;
 
   return (
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
@@ -25,6 +26,12 @@ export default function WeekView() {
           Piano settimanale
         </h2>
       </div>
+
+      {noSessions && (
+        <p className="mb-3 text-xs text-emerald-800/50">
+          Crea prima una sessione per poterla assegnare ai giorni.
+        </p>
+      )}
 
       <ul className="space-y-2">
   {displayOrder.map((dayIndex) => {
@@ -66,7 +73,8 @@ export default function WeekView() {
                   onChange={(e) =>
                     overrideDay(dayIndex, e.target.value || null)
                   }
-                  className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300"
+                  disabled={noSessions}
+                  className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <option value="">— Riposo —</option>
                   {plan?.sessions?.map((s) => (

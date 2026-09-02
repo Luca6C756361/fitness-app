@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import FoodPicker from "./_components/FoodPicker";
@@ -8,6 +9,9 @@ import { useDiary } from "../today/_lib/DiaryContext";
 
 export default function NutritionPage() {
   const { addEntry, todayEntries, removeEntry, todayTotals } = useDiary();
+  // Sollevato da FoodPicker: serve a FoodDiary per aprire lo scanner dalla
+  // sua CTA dell'empty state (decisione 5, ONBOARDING_TASK.md).
+  const [scannerOpen, setScannerOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-[#FAF7F0] px-4 py-6 pb-24 md:px-8 md:py-10">
@@ -31,11 +35,16 @@ export default function NutritionPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <FoodPicker onAdd={addEntry} />
+          <FoodPicker
+            onAdd={addEntry}
+            scannerOpen={scannerOpen}
+            onScannerOpenChange={setScannerOpen}
+          />
           <FoodDiary
             entries={todayEntries}
             totals={todayTotals}
             onRemove={removeEntry}
+            onStartScan={() => setScannerOpen(true)}
           />
         </div>
       </div>

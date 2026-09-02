@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ScanLine, Trash2, UtensilsCrossed } from "lucide-react";
 import type { DiaryEntry } from "../../today/_lib/DiaryContext";
+import FirstRunHint from "../../_components/FirstRunHint";
 
 interface Totals {
   kcal: number;
@@ -15,9 +16,11 @@ interface FoodDiaryProps {
   entries: DiaryEntry[];
   totals: Totals;
   onRemove: (id: string) => void | Promise<void>;   // <-- MODIFICATA (era: (id: number) => void)
+  /** Apre lo scanner (stato vive in app/nutrition/page.tsx). Senza prop, il bottone non si renderizza. */
+  onStartScan?: () => void;
 }
 /** Diario alimentare del giorno. */
-export default function FoodDiary({ entries, totals, onRemove }: FoodDiaryProps) {
+export default function FoodDiary({ entries, totals, onRemove, onStartScan }: FoodDiaryProps) {
   return (
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center gap-2">
@@ -55,11 +58,32 @@ export default function FoodDiary({ entries, totals, onRemove }: FoodDiaryProps)
       </div>
 
       {entries.length === 0 ? (
-        <p className="py-8 text-center text-sm text-emerald-800/50">
-          Nessun alimento aggiunto oggi.
-          <br />
-          Cerca qualcosa e clicca &quot;Aggiungi al diario&quot;.
-        </p>
+        <div className="py-4 text-center">
+          <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50">
+            <UtensilsCrossed className="h-5 w-5 text-emerald-600" />
+          </span>
+          <p className="mb-1 text-sm font-bold text-emerald-950">Il diario di oggi è vuoto</p>
+          <p className="mx-auto mb-4 max-w-xs text-xs text-emerald-800/60">
+            Scansiona un codice a barre o cerca un alimento per iniziare.
+          </p>
+          {onStartScan && (
+            <button
+              type="button"
+              onClick={onStartScan}
+              className="mx-auto flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700"
+            >
+              <ScanLine className="h-4 w-4" />
+              Scansiona un prodotto
+            </button>
+          )}
+          <div className="mx-auto mt-4 max-w-xs text-left">
+            <FirstRunHint
+              id="nutrition-picker"
+              arrow="up"
+              text="Puoi anche cercare tra gli alimenti qui sopra."
+            />
+          </div>
+        </div>
       ) : (
         <ul className="space-y-2">
           {entries.map((e) => {

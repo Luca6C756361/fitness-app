@@ -11,6 +11,7 @@ import BottomNav from "./_components/BottomNav";
 import Sidebar from "./_components/Sidebar";
 import ServiceWorker from "./_components/ServiceWorker";   // <-- NUOVO
 import AppShell from "./_components/AppShell";   // <-- NUOVO
+import OnboardingGate from "./_components/OnboardingGate";   // <-- NUOVO
 
 export const metadata: Metadata = {
   title: "Fitness App",
@@ -49,9 +50,11 @@ export default function RootLayout({
                 <DiaryProvider>
                   <PlanProvider>
                     <WorkoutSessionProvider>
-                      <Sidebar />
-                       <AppShell>{children}</AppShell>      {/* <-- MODIFICATA */}
-                      <BottomNav />
+                      <OnboardingGate>          {/* <-- NUOVO */}
+                        <Sidebar />
+                         <AppShell>{children}</AppShell>      {/* <-- MODIFICATA */}
+                        <BottomNav />
+                      </OnboardingGate>
                     </WorkoutSessionProvider>
                   </PlanProvider>
                 </DiaryProvider>

@@ -21,6 +21,9 @@ const macroLabels = { kcal: "Kcal", carbs: "Carbo", protein: "Prot", fat: "Grass
 
 interface FoodPickerProps {
   onAdd: (food: Food, quantity: number) => void;
+  /** Sollevato in app/nutrition/page.tsx: serve a FoodDiary per aprire lo scanner dalla sua CTA. */
+  scannerOpen: boolean;
+  onScannerOpenChange: (open: boolean) => void;
 }
 
 interface LookupState {
@@ -36,15 +39,14 @@ interface LookupState {
  * - selezione porzione (grammi o pezzi)
  * - anteprima kcal calcolate
  */
-export default function FoodPicker({ onAdd }: FoodPickerProps) {
+export default function FoodPicker({ onAdd, scannerOpen, onScannerOpenChange }: FoodPickerProps) {
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Food["category"] | "all">("all");
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
   const [quantity, setQuantity] = useState<string>("100");
   const [justAdded, setJustAdded] = useState(false);
 
-  // Scanner nutrizionale (Open Food Facts)
-  const [scannerOpen, setScannerOpen] = useState(false);
+  // Scanner nutrizionale (Open Food Facts) — stato sollevato al genitore
   const [scanned, setScanned] = useState<Food[]>([]); // prodotti OFF di questa sessione
   const [lookup, setLookup] = useState<LookupState>({ status: "idle" });
 
@@ -96,7 +98,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
   };
 
   const handleDetected = async (barcode: string) => {
-    setScannerOpen(false);
+    onScannerOpenChange(false);
     setLookup({ status: "loading", barcode });
 
     const cached = scanned.find((f) => f.barcode === barcode);
@@ -164,7 +166,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
         </div>
         <button
           type="button"
-          onClick={() => setScannerOpen(true)}
+          onClick={() => onScannerOpenChange(true)}
           aria-label="Scansiona codice a barre"
           className="flex shrink-0 items-center justify-center rounded-xl bg-emerald-600 px-3 py-2.5 text-white transition hover:bg-emerald-700"
         >
@@ -397,7 +399,7 @@ export default function FoodPicker({ onAdd }: FoodPickerProps) {
 
       <BarcodeScanner
         open={scannerOpen}
-        onClose={() => setScannerOpen(false)}
+        onClose={() => onScannerOpenChange(false)}
         onDetected={handleDetected}
       />
     </section>
