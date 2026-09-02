@@ -56,6 +56,15 @@ export interface Food {
   protein: number;
   fat: number;
   unit: "100g" | "pz";
+  /* --- Scanner nutrizionale (Open Food Facts) — campi opzionali, retrocompatibili --- */
+  brand?: string;
+  barcode?: string;
+  imageUrl?: string;
+  source?: "local" | "off";
+  /** Grammi di una porzione suggerita, ricavati da serving_size. */
+  servingHint?: number;
+  /** true se mancano macro e l'utente deve completarle a mano. */
+  incomplete?: boolean;
 }
 
 export interface DailyKcal {
