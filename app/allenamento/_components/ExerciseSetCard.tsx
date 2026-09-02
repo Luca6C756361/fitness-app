@@ -14,6 +14,12 @@ interface ExerciseSetCardProps {
   onUndo: () => void;
   /** Nota promemoria dell'esercizio (opzionale). */
   notes?: string;
+  /**
+   * Carico suggerito dal motore di sovraccarico progressivo (kg).
+   * Precompila SOLO il defaultValue del primo set in modalità "simple":
+   * l'utente deve poter sempre sovrascriverlo.
+   */
+  suggestedWeight?: number;
 }
 
 type Mode = "simple" | "advanced";
@@ -27,8 +33,11 @@ export default function ExerciseSetCard({
   onCompleteSet,
   onUndo,
   notes,
+  suggestedWeight,
 }: ExerciseSetCardProps) {
-  const [singleWeight, setSingleWeight] = useState("");
+  const [singleWeight, setSingleWeight] = useState(
+    suggestedWeight !== undefined ? String(suggestedWeight) : ""
+  );
   const [repWeights, setRepWeights] = useState<string[]>(
     Array.from({ length: targetReps }, () => "")
   );

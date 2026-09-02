@@ -170,8 +170,9 @@ export default function AllenamentoPage() {
 
       <div className="space-y-4">
         {active.exercises.map((ex, i) => {
-          // Recupero la nota dall'esercizio pianificato originale (stessa posizione)
+          // Recupero nota e carico suggerito dall'esercizio pianificato originale (stessa posizione)
           const plannedNote = todaySession.exercises[i]?.notes;
+          const plannedSuggestedWeight = todaySession.exercises[i]?.suggestedWeight;
           return (
             <ExerciseSetCard
               key={`${ex.exerciseId}-${i}`}
@@ -183,6 +184,7 @@ export default function AllenamentoPage() {
               onCompleteSet={(set) => handleCompleteSet(i, set)}
               onUndo={() => removeLastSet(i)}
               notes={plannedNote}
+              suggestedWeight={plannedSuggestedWeight}
             />
           );
         })}

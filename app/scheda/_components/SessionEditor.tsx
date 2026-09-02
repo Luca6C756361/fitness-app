@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, Trash2, Minus, Save, StickyNote } from "lucide-react";
+import { Plus, Trash2, Minus, Save, StickyNote, X } from "lucide-react";
 import Modal from "../../today/_components/Modal";
 import { usePlan } from "../../today/_lib/PlanContext";
+import { useProgression } from "../../today/_lib/useProgression";
+import type { ProgressionSuggestion } from "../../today/_lib/progressionStats";
 import type {
   WorkoutSession,
   PlannedExercise,
   ExerciseDefinition,
 } from "../../today/_lib/types";
 import ExercisePicker from "./ExercisePicker";
+import ProgressionHint from "./ProgressionHint";
 
 interface SessionEditorProps {
   open: boolean;
@@ -64,6 +67,7 @@ export default function SessionEditor({
   session,
 }: SessionEditorProps) {
   const { updateSession, createSession, getExerciseDef } = usePlan();
+  const { suggestFor } = useProgression();
 
   const [name, setName] = useState("");
   const [focus, setFocus] = useState("");
@@ -115,6 +119,17 @@ export default function SessionEditor({
     setExercises((prev) => prev.filter((e) => e.id !== id));
   };
 
+  /** Applica un suggerimento di sovraccarico progressivo: resta nel form finché non si preme "Salva modifiche". */
+  const applySuggestion = (exerciseId: string) => (s: ProgressionSuggestion) => {
+    if (s.kind === "hold" || s.kind === "none") return; // no-op
+    const current = exercises.find((e) => e.id === exerciseId);
+    if (s.kind === "weight" || s.kind === "deload") {
+      updateEx(exerciseId, { suggestedWeight: s.nextWeight, reps: s.nextReps ?? current?.reps });
+    } else if (s.kind === "reps") {
+      updateEx(exerciseId, { reps: s.nextReps!, suggestedWeight: s.nextWeight });
+    }
+  };
+
   const handleSave = () => {
     if (!name.trim() || exercises.length === 0) return;
 
@@ -125,6 +140,10 @@ export default function SessionEditor({
       reps: e.reps,
       // Salviamo la nota solo se non vuota
       ...(e.notes && e.notes.trim() ? { notes: e.notes.trim() } : {}),
+      // Salviamo il carico suggerito applicato solo se valorizzato
+      ...(typeof e.suggestedWeight === "number" && e.suggestedWeight > 0
+        ? { suggestedWeight: e.suggestedWeight }
+        : {}),
     }));
 
     if (session) {
@@ -218,7 +237,9 @@ export default function SessionEditor({
               </p>
             ) : (
               <ul className="space-y-2">
-                {exercises.map((ex) => (
+                {exercises.map((ex) => {
+                  const suggestion = suggestFor(ex.exerciseId, ex.sets, ex.reps);
+                  return (
                   <li
                     key={ex.id}
                     className="rounded-xl border border-emerald-900/10 bg-[#FAF7F0] p-3"
@@ -266,6 +287,19 @@ export default function SessionEditor({
                           max={50}
                         />
                       </div>
+                      {typeof ex.suggestedWeight === "number" && (
+                        <span className="flex items-center gap-1 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold uppercase text-teal-700">
+                          Carico {ex.suggestedWeight} kg
+                          <button
+                            type="button"
+                            onClick={() => updateEx(ex.id, { suggestedWeight: undefined })}
+                            aria-label="Rimuovi carico suggerito"
+                            className="rounded-full p-0.5 transition hover:bg-teal-100"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </span>
+                      )}
                       <button
                         type="button"
                         onClick={() =>
@@ -282,6 +316,8 @@ export default function SessionEditor({
                       </button>
                     </div>
 
+                    <ProgressionHint suggestion={suggestion} onApply={applySuggestion(ex.id)} />
+
                     {/* Textarea note (visibile su richiesta) */}
                     {ex.showNotes && (
                       <textarea
@@ -294,7 +330,8 @@ export default function SessionEditor({
                       />
                     )}
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             )}
           </div>
