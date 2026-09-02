@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, Plus, Info } from "lucide-react";
 import Modal from "../../today/_components/Modal";
 import ExerciseMediaSlot from "../../today/_components/ExerciseMediaSlot";
@@ -26,6 +26,10 @@ interface ExercisePickerProps {
   onClose: () => void;
   onSelect: (ex: ExerciseDefinition) => void;
   excludeIds?: string[];
+  /** Gruppo muscolare preselezionato all'apertura (es. sostituzione esercizio). */
+  prefilterMuscle?: MuscleGroup;
+  /** Titolo del modale. Default: "Aggiungi esercizio". */
+  title?: string;
 }
 
 export default function ExercisePicker({
@@ -33,12 +37,20 @@ export default function ExercisePicker({
   onClose,
   onSelect,
   excludeIds = [],
+  prefilterMuscle,
+  title = "Aggiungi esercizio",
 }: ExercisePickerProps) {
   const { exercises } = usePlan();
 
   const [query, setQuery] = useState("");
   const [muscle, setMuscle] = useState<MuscleGroup | "all">("all");
   const [previewId, setPreviewId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    setMuscle(prefilterMuscle ?? "all");
+    setQuery("");
+  }, [open, prefilterMuscle]);
 
   const availableMuscles = useMemo(() => {
     const set = new Set<MuscleGroup>();
@@ -58,7 +70,7 @@ export default function ExercisePicker({
   }, [exercises, query, muscle, excludeIds]);
 
   return (
-    <Modal open={open} onClose={onClose} title="Aggiungi esercizio" size="lg">
+    <Modal open={open} onClose={onClose} title={title} size="lg">
       {/* Ricerca */}
       <div className="relative mb-3">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />

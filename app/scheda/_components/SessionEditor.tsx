@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, Trash2, Minus, Save, StickyNote, X } from "lucide-react";
+import { Plus, Trash2, Minus, Save, StickyNote, X, GripVertical, Replace } from "lucide-react";
+import {
+  DndContext, closestCenter, PointerSensor, TouchSensor, KeyboardSensor,
+  useSensor, useSensors, type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy,
+  arrayMove, useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
 import Modal from "../../today/_components/Modal";
 import { usePlan } from "../../today/_lib/PlanContext";
 import { useProgression } from "../../today/_lib/useProgression";
@@ -10,6 +20,7 @@ import type {
   WorkoutSession,
   PlannedExercise,
   ExerciseDefinition,
+  MuscleGroup,
 } from "../../today/_lib/types";
 import ExercisePicker from "./ExercisePicker";
 import ProgressionHint from "./ProgressionHint";
@@ -61,6 +72,39 @@ function Stepper({
   );
 }
 
+function SortableRow({ id, children }: { id: string; children: React.ReactNode }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
+    useSortable({ id });
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 10 : undefined,
+    position: "relative",
+  };
+  return (
+    <li
+      ref={setNodeRef}
+      style={style}
+      className="rounded-xl border border-emerald-900/10 bg-white p-3"
+    >
+      <div className="flex gap-2">
+        <button
+          type="button"
+          {...attributes}
+          {...listeners}
+          style={{ touchAction: "none" }}
+          className="-ml-1 flex shrink-0 cursor-grab touch-none items-center px-1 text-emerald-800/30 transition hover:text-emerald-700 active:cursor-grabbing"
+          aria-label="Trascina per riordinare"
+        >
+          <GripVertical className="h-5 w-5" />
+        </button>
+        <div className="min-w-0 flex-1">{children}</div>
+      </div>
+    </li>
+  );
+}
+
 export default function SessionEditor({
   open,
   onClose,
@@ -73,7 +117,29 @@ export default function SessionEditor({
   const [focus, setFocus] = useState("");
   const [minutes, setMinutes] = useState(45);
   const [exercises, setExercises] = useState<EditableExercise[]>([]);
-  const [pickerOpen, setPickerOpen] = useState(false);
+  type PickerState =
+    | { mode: "closed" }
+    | { mode: "add" }
+    | { mode: "replace"; targetId: string; muscle?: MuscleGroup };
+
+  const [picker, setPicker] = useState<PickerState>({ mode: "closed" });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 180, tolerance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    setExercises((prev) => {
+      const from = prev.findIndex((e) => e.id === active.id);
+      const to = prev.findIndex((e) => e.id === over.id);
+      if (from === -1 || to === -1) return prev;
+      return arrayMove(prev, from, to);
+    });
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -109,6 +175,30 @@ export default function SessionEditor({
         showNotes: false,
       },
     ]);
+  };
+
+  const openReplace = (ex: EditableExercise) => {
+    setPicker({
+      mode: "replace",
+      targetId: ex.id,
+      muscle: getExerciseDef(ex.exerciseId)?.primaryMuscle,
+    });
+  };
+
+  // Spread-preserving: mantiene sets, reps, notes, showNotes e ogni campo futuro
+  // (es. suggestedWeight) della riga originale. Cambia solo l'esercizio.
+  const replaceExercise = (targetId: string, ex: ExerciseDefinition) => {
+    setExercises((prev) =>
+      prev.map((e) =>
+        e.id === targetId ? { ...e, exerciseId: ex.id, exerciseName: ex.name } : e
+      )
+    );
+  };
+
+  const handlePickerSelect = (ex: ExerciseDefinition) => {
+    if (picker.mode === "replace") replaceExercise(picker.targetId, ex);
+    else addExerciseFromPicker(ex);
+    setPicker({ mode: "closed" });
   };
 
   const updateEx = (id: string, patch: Partial<EditableExercise>) => {
@@ -223,7 +313,7 @@ export default function SessionEditor({
               </label>
               <button
                 type="button"
-                onClick={() => setPickerOpen(true)}
+                onClick={() => setPicker({ mode: "add" })}
                 className="flex items-center gap-1 rounded-lg bg-emerald-600 px-2.5 py-1 text-[11px] font-bold text-white transition hover:bg-emerald-700"
               >
                 <Plus className="h-3 w-3" />
@@ -236,14 +326,21 @@ export default function SessionEditor({
                 Nessun esercizio. Aggiungine almeno uno.
               </p>
             ) : (
-              <ul className="space-y-2">
-                {exercises.map((ex) => {
-                  const suggestion = suggestFor(ex.exerciseId, ex.sets, ex.reps);
-                  return (
-                  <li
-                    key={ex.id}
-                    className="rounded-xl border border-emerald-900/10 bg-[#FAF7F0] p-3"
-                  >
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+                onDragEnd={handleDragEnd}
+              >
+                <SortableContext
+                  items={exercises.map((e) => e.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  <ul className="space-y-2">
+                    {exercises.map((ex) => {
+                      const suggestion = suggestFor(ex.exerciseId, ex.sets, ex.reps);
+                      return (
+                      <SortableRow key={ex.id} id={ex.id}>
                     <div className="mb-2 flex items-start justify-between gap-2">
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-medium text-emerald-950">
@@ -256,6 +353,15 @@ export default function SessionEditor({
                           </p>
                         )}
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => openReplace(ex)}
+                        className="rounded-lg bg-teal-50 p-1.5 text-teal-700 transition hover:bg-teal-100"
+                        aria-label={`Sostituisci ${ex.exerciseName}`}
+                        title="Sostituisci esercizio"
+                      >
+                        <Replace className="h-3.5 w-3.5" />
+                      </button>
                       <button
                         type="button"
                         onClick={() => removeEx(ex.id)}
@@ -329,10 +435,12 @@ export default function SessionEditor({
                         className="mt-2 w-full resize-none rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-xs text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-amber-300"
                       />
                     )}
-                  </li>
-                  );
-                })}
-              </ul>
+                      </SortableRow>
+                      );
+                    })}
+                  </ul>
+                </SortableContext>
+              </DndContext>
             )}
           </div>
 
@@ -349,10 +457,16 @@ export default function SessionEditor({
       </Modal>
 
       <ExercisePicker
-        open={pickerOpen}
-        onClose={() => setPickerOpen(false)}
-        onSelect={addExerciseFromPicker}
-        excludeIds={exercises.map((e) => e.exerciseId)}
+        open={picker.mode !== "closed"}
+        onClose={() => setPicker({ mode: "closed" })}
+        onSelect={handlePickerSelect}
+        title={picker.mode === "replace" ? "Sostituisci esercizio" : "Aggiungi esercizio"}
+        prefilterMuscle={picker.mode === "replace" ? picker.muscle : undefined}
+        excludeIds={
+          picker.mode === "replace"
+            ? exercises.filter((e) => e.id !== picker.targetId).map((e) => e.exerciseId)
+            : exercises.map((e) => e.exerciseId)
+        }
       />
     </>
   );
