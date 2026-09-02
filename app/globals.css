@@ -10,53 +10,116 @@
  * usiamo un approccio pragmatico che copre l'intera app subito.
  */
 
+/* === TOKEN SEMANTICI — TEMA CHIARO (default) === */
+:root {
+  --surface-base:     #FAF7F0;
+  --surface:          #FFFFFF;
+  --surface-raised:   #FAF7F0;
+  --surface-accent:   #ECFDF5;
+
+  --fg-primary:       #022C22;   /* 15.15:1 su bianco */
+  --fg-secondary:     #0B5C48;   /* 7.96:1 */
+  --fg-muted:         #3D6B5C;   /* 6.08:1 */
+  --fg-placeholder:   #4A6F62;   /* 5.61:1 */
+  --fg-accent:        #0F766E;   /* 5.47:1 */
+  --fg-warning:       #96521A;   /* 5.97:1 */
+  --fg-danger:        #B91C1C;   /* 6.47:1 */
+
+  --border-subtle:    rgba(6, 78, 59, 0.10);
+  --border-strong:    #5C7A6D;   /* 4.71:1 — soglia non testuale 3:1 */
+
+  --pill-on:          #047857;
+  --pill-on-fg:       #FFFFFF;   /* 5.48:1 */
+}
+
+/* === TOKEN SEMANTICI — TEMA SCURO (stessi nomi, riassegnati) === */
+html[data-theme="dark"] {
+  --surface-base:     #0f1a15;
+  --surface:          #1a2620;
+  --surface-raised:   #223129;
+  --surface-accent:   #0C3A2C;
+
+  --fg-primary:       #ECFDF5;   /* 12.95:1 sul caso peggiore #223129 */
+  --fg-secondary:     #A7C7B8;   /* 7.47:1 */
+  --fg-muted:         #8FB3A4;   /* 5.95:1 */
+  --fg-placeholder:   #88A99A;   /* 5.32:1 */
+  --fg-accent:        #5EEAD4;   /* 9.22:1 */
+  --fg-warning:       #FCD34D;   /* 9.46:1 */
+  --fg-danger:        #FCA5A5;   /* 7.19:1 */
+
+  --border-subtle:    rgba(236, 253, 245, 0.10);
+  --border-strong:    #587F6F;   /* 3.49:1 su #1a2620 */
+
+  --pill-on:          #34D399;
+  --pill-on-fg:       #06281F;   /* 8.21:1 */
+}
+
+/* Espone i token a Tailwind 4 come classi utility (text-fg-secondary,
+   bg-surface-raised, border-border-strong, ...). `inline` è obbligatorio:
+   senza, Tailwind 4 congela il valore al build e il cambio di tema a
+   runtime smette di funzionare. */
+@theme inline {
+  --color-surface-base:   var(--surface-base);
+  --color-surface:        var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-accent: var(--surface-accent);
+  --color-fg-primary:     var(--fg-primary);
+  --color-fg-secondary:   var(--fg-secondary);
+  --color-fg-muted:       var(--fg-muted);
+  --color-fg-placeholder: var(--fg-placeholder);
+  --color-fg-accent:      var(--fg-accent);
+  --color-fg-warning:     var(--fg-warning);
+  --color-fg-danger:      var(--fg-danger);
+  --color-border-subtle:  var(--border-subtle);
+  --color-border-strong:  var(--border-strong);
+  --color-pill-on:        var(--pill-on);
+  --color-pill-on-fg:     var(--pill-on-fg);
+}
+
 /* === TEMA CHIARO (default) === */
 html, body {
-  background-color: #FAF7F0;
-  color: #002815;
+  background-color: var(--surface-base);
+  color: var(--fg-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* === TEMA SCURO === */
 html[data-theme="dark"] {
-  background-color: #0f1a15;
-}
-
-html[data-theme="dark"] body {
-  background-color: #0f1a15;
-  color: #13ff91;
+  background-color: var(--surface-base);
 }
 
 /* Sfondo panna (usato in main) → verde molto scuro */
 html[data-theme="dark"] main.bg-\[\#FAF7F0\] {
-  background-color: #0f1a15;
+  background-color: var(--surface-base);
 }
 
 /* Card bianche → grigio-verde scuro */
 html[data-theme="dark"] .bg-white {
-  background-color: #1a2620;
+  background-color: var(--surface);
 }
 
 /* Card interne panna → un tono sopra */
 html[data-theme="dark"] .bg-\[\#FAF7F0\] {
-  background-color: #223129;
+  background-color: var(--surface-raised);
 }
 
-/* Testo emerald-950 (nero) → panna chiara */
+/* Testo emerald-950 (nero) → panna chiara. Il valore coincide con
+   --fg-primary in tema scuro: resta il ponte verso la migrazione a token
+   dei componenti (micro-prompt 2), non va cancellato. */
 html[data-theme="dark"] .text-emerald-950 {
-  color: #ecfdf5;
+  color: var(--fg-primary);
 }
 
 /* Bordi sottili → più chiari sul dark */
 html[data-theme="dark"] .border-emerald-900\/10,
 html[data-theme="dark"] .border-emerald-900\/5,
 html[data-theme="dark"] .border-teal-900\/5 {
-  border-color: rgba(236, 253, 245, 0.1);
+  border-color: var(--border-subtle);
 }
 
 /* Sidebar */
 html[data-theme="dark"] aside.bg-white {
-  background-color: #1a2620;
+  background-color: var(--surface);
   border-color: rgba(236, 253, 245, 0.08);
 }
 
@@ -77,14 +140,32 @@ html[data-theme="dark"] .from-\[\#E8F3EE\] {
   --tw-gradient-from: #1e2b23;
 }
 html[data-theme="dark"] .to-\[\#DCEFEA\] {
-  --tw-gradient-to: #223129;
+  --tw-gradient-to: var(--surface-raised);
 }
 
 /* Input, textarea, select */
 html[data-theme="dark"] input,
 html[data-theme="dark"] textarea,
 html[data-theme="dark"] select {
-  background-color: #223129;
-  color: #ecfdf5;
-  border-color: rgba(236, 253, 245, 0.1);
+  background-color: var(--surface-raised);
+  color: var(--fg-primary);
+  border-color: var(--border-subtle);
+}
+
+/* Placeholder: unica fonte di verità per il colore, in ENTRAMBI i temi.
+   `opacity: 1` è obbligatorio — Firefox applica di default opacity .54 a
+   ::placeholder, che riporterebbe il rapporto sotto soglia anche col
+   token corretto. */
+input::placeholder,
+textarea::placeholder {
+  color: var(--fg-placeholder);
+  opacity: 1;
+}
+
+/* Focus visibile sui controlli interattivi (WCAG 2.4.7): oggi i bottoni
+   non ne hanno nessuno. :where() mantiene specificità 0, quindi nessuna
+   regola esistente viene sovrascritta. */
+:where(button, a, [role="button"]):focus-visible {
+  outline: 2px solid #6EE7B7;
+  outline-offset: 2px;
 }

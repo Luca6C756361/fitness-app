@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "a11y:contrast": "node scripts/contrast-check.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
