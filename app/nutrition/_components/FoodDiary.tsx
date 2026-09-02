@@ -1,6 +1,7 @@
 "use client";
 
-import { Trash2, UtensilsCrossed } from "lucide-react";
+import Image from "next/image";
+import { ScanLine, Trash2, UtensilsCrossed } from "lucide-react";
 import type { DiaryEntry } from "../../today/_lib/DiaryContext";
 
 interface Totals {
@@ -57,31 +58,52 @@ export default function FoodDiary({ entries, totals, onRemove }: FoodDiaryProps)
         <p className="py-8 text-center text-sm text-emerald-800/50">
           Nessun alimento aggiunto oggi.
           <br />
-          Cerca qualcosa e clicca "Aggiungi al diario".
+          Cerca qualcosa e clicca &quot;Aggiungi al diario&quot;.
         </p>
       ) : (
         <ul className="space-y-2">
           {entries.map((e) => {
             const factor = e.food.unit === "100g" ? e.quantity / 100 : e.quantity;
-            const kcal = Math.round(e.food.kcal * factor);
+            // Difesa dai NaN: le voci OFF possono avere macro mancanti nelle righe già salvate.
+            const rawKcal = e.food.kcal * factor;
+            const kcal = Number.isFinite(rawKcal) ? Math.round(rawKcal) : 0;
             return (
               <li
                 key={e.id}
                 className="flex items-center justify-between rounded-xl border border-emerald-900/10 bg-white px-4 py-3"
               >
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-emerald-950">
-                    {e.food.name}
-                  </p>
-                  <p className="text-xs font-medium text-emerald-800/50 tabular-nums">
-                    {e.time} · {e.quantity}
-                    {e.food.unit === "100g" ? "g" : " pz"} · {kcal} kcal
-                  </p>
+                <div className="flex min-w-0 flex-1 items-center gap-3">
+                  {e.food.imageUrl && (
+                    <Image
+                      src={e.food.imageUrl}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className="h-8 w-8 shrink-0 rounded-lg object-cover"
+                    />
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <span className="flex items-center gap-1.5">
+                      <span className="truncate text-sm font-medium text-emerald-950">
+                        {e.food.name}
+                      </span>
+                      {e.food.source === "off" && (
+                        <ScanLine className="h-3 w-3 shrink-0 text-teal-600" />
+                      )}
+                    </span>
+                    {e.food.brand && (
+                      <p className="truncate text-xs text-emerald-800/40">{e.food.brand}</p>
+                    )}
+                    <p className="text-xs font-medium text-emerald-800/50 tabular-nums">
+                      {e.time} · {e.quantity}
+                      {e.food.unit === "100g" ? "g" : " pz"} · {kcal} kcal
+                    </p>
+                  </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => onRemove(e.id)}
-                  className="ml-2 rounded-lg p-2 text-emerald-800/40 transition hover:bg-red-50 hover:text-red-600"
+                  className="ml-2 shrink-0 rounded-lg p-2 text-emerald-800/40 transition hover:bg-red-50 hover:text-red-600"
                   aria-label="Rimuovi"
                 >
                   <Trash2 className="h-4 w-4" />
