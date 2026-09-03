@@ -1,23 +1,28 @@
 "use client";
 
 import Modal from "./Modal";
-import BodyRecoveryMap from "./BodyRecoveryMap";
+import MuscleMapSvg from "./MuscleMapSvg";
+import ExerciseMediaSlot from "./ExerciseMediaSlot";
 import { muscleGroupLabels, equipmentLabels } from "../_lib/exerciseData";
-import type { ExerciseDefinition, MuscleGroup } from "../_lib/types";
+import { resolveMuscleMap } from "../_lib/muscleAnatomy";
+import type { ExerciseDefinition } from "../_lib/types";
 
 /**
- * Scheda di dettaglio di un esercizio: silhouette anatomica (primario/
- * secondario) + istruzioni tecniche. Riusa <Modal> (stesso pattern di
- * CustomExerciseForm/ExercisePicker), mai un <dialog> nuovo.
+ * Scheda di dettaglio di un esercizio: demo video, mappa anatomica fake-3D
+ * (primario/secondario) + istruzioni tecniche. Riusa <Modal> (stesso
+ * pattern di CustomExerciseForm/ExercisePicker), mai un <dialog> nuovo.
  *
- * Layout a 2 colonne su desktop (silhouette centrata a sinistra, istruzioni
- * con scroll dedicato a destra) per evitare che l'intero modal debba
- * scrollare in verticale — solo la colonna istruzioni scrolla al suo interno.
+ * Layout a 2 colonne su desktop per evitare che l'intero modal debba
+ * scrollare in verticale: colonna sinistra (video + mappa, con scroll
+ * proprio se il contenuto eccede l'altezza), colonna destra (istruzioni,
+ * scroll dedicato). Su mobile le due colonne collassano nell'ordine
+ * Top (video) → Middle (mappa + legenda) → Bottom (istruzioni).
  *
- * Funziona SEMPRE, anche sui custom senza instructions: la silhouette usa
- * direttamente primaryMuscle/secondaryMuscles (sempre presenti su
- * ExerciseDefinition), e la sezione istruzioni mostra un messaggio
- * discreto invece di restare vuota quando instructions è assente.
+ * Funziona SEMPRE, anche sui custom senza instructions/muscleMap/media:
+ * resolveMuscleMap() deriva un fallback da primaryMuscle/secondaryMuscles,
+ * ExerciseMediaSlot mostra un placeholder "Demo in arrivo" quando media è
+ * assente, e la sezione istruzioni mostra un messaggio discreto invece di
+ * restare vuota quando instructions è assente.
  */
 
 interface ExerciseDetailModalProps {
@@ -32,9 +37,6 @@ const LEVEL_LABELS: Record<NonNullable<ExerciseDefinition["level"]>, string> = {
   intermedio: "Intermedio",
   avanzato: "Avanzato",
 };
-
-const PRIMARY_COLOR = "#EF4444"; // rosso pieno: muscolo primario
-const SECONDARY_COLOR = "#F59E0B"; // ambra: muscoli secondari
 
 function InstructionSection({ title, items }: { title: string; items: string[] }) {
   if (items.length === 0) return null;
@@ -64,12 +66,9 @@ export default function ExerciseDetailModal({
 }: ExerciseDetailModalProps) {
   if (!exercise) return null;
 
-  // Colore per gruppo: il primario sovrascrive un eventuale duplicato nei
-  // secondari (mai il contrario), così un muscolo non finisce mai in ambra
-  // quando è anche il primario.
-  const colorByMuscle: Partial<Record<MuscleGroup, string>> = {};
-  for (const m of exercise.secondaryMuscles) colorByMuscle[m] = SECONDARY_COLOR;
-  colorByMuscle[exercise.primaryMuscle] = PRIMARY_COLOR;
+  // muscleMap esplicito se presente sull'esercizio, altrimenti fallback
+  // derivato da primaryMuscle/secondaryMuscles (sempre presenti).
+  const muscleMap = resolveMuscleMap(exercise);
 
   const instructions = exercise.instructions;
   // Fallback implicito "intermedio" quando level è assente (esercizi custom
@@ -97,35 +96,43 @@ export default function ExerciseDetailModal({
           )}
         </div>
 
-        {/* 2 colonne su desktop: sagoma centrata a sx, istruzioni con scroll proprio a dx. */}
-        <div className="grid gap-5 md:h-[65vh] md:grid-cols-[260px_1fr]">
-          <div className="flex flex-col items-center justify-center gap-3 md:h-full">
-            <div className="rounded-2xl bg-[#0F172A] p-4">
-              <BodyRecoveryMap
-                colorByMuscle={colorByMuscle}
-                srLabel={`Sagoma del corpo con i muscoli coinvolti in ${exercise.name}: primario in rosso, secondari in ambra.`}
-              />
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5 text-[11px] font-semibold text-fg-secondary">
-                <span
-                  className="h-2.5 w-2.5 rounded-full"
-                  style={{ backgroundColor: PRIMARY_COLOR }}
-                  aria-hidden="true"
-                />
-                Primario
-              </span>
-              <span className="flex items-center gap-1.5 text-[11px] font-semibold text-fg-secondary">
-                <span
-                  className="h-2.5 w-2.5 rounded-full"
-                  style={{ backgroundColor: SECONDARY_COLOR }}
-                  aria-hidden="true"
-                />
-                Secondario
-              </span>
+        {/* 2 colonne su desktop: video + mappa con scroll proprio a sx, istruzioni con scroll proprio a dx. */}
+        <div className="grid gap-5 md:h-[65vh] md:grid-cols-[280px_1fr]">
+          {/* Top: demo video. Middle: mappa anatomica fake-3D + legenda. */}
+          <div className="flex flex-col gap-4 md:h-full md:overflow-y-auto md:pr-1">
+            <ExerciseMediaSlot media={exercise.media} name={exercise.name} />
+
+            {/*
+              bg-surface (bianco/quasi-bianco anche in dark mode), NON lo sfondo
+              scuro usato da BodyRecoveryMap: --anatomy-primary/secondary sono
+              contrastati contro bianco (vedi globals.css), e mix-blend-multiply
+              su MuscleMapSvg richiede un fondo chiaro dietro l'SVG — su un fondo
+              scuro il multiply annullerebbe i colori invece di evidenziarli.
+            */}
+            <div className="flex flex-col items-center gap-3 rounded-2xl border border-border-subtle bg-surface p-4">
+              <MuscleMapSvg primary={muscleMap.primary} secondary={muscleMap.secondary} />
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-fg-secondary">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: "var(--anatomy-primary)" }}
+                    aria-hidden="true"
+                  />
+                  Primario
+                </span>
+                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-fg-secondary">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: "var(--anatomy-secondary)" }}
+                    aria-hidden="true"
+                  />
+                  Secondario
+                </span>
+              </div>
             </div>
           </div>
 
+          {/* Bottom: istruzioni step-by-step. */}
           <div className="space-y-4 border-t border-border-subtle pt-4 md:h-full md:overflow-y-auto md:border-t-0 md:pt-0 md:pl-1">
             {instructions ? (
               <>

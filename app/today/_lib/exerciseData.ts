@@ -20,6 +20,7 @@ export const exerciseDatabase: ExerciseDefinition[] = [
       commonMistakes: ["Rimbalzare il bilanciere sul petto", "Sollevare i glutei dalla panca", "Gomiti troppo aperti a 90°"],
     },
     muscleMap: { primary: ["pettorale-medio", "pettorale-inferiore"], secondary: ["tricipite-capo-laterale", "deltoide-anteriore"] },
+    media: { kind: "video", src: "/videos/panca-piana.webm", poster: "/videos/panca-piana-poster.webp" },
   },
   {
     id: "panca-inclinata", name: "Panca inclinata con manubri", primaryMuscle: "petto", secondaryMuscles: ["spalle", "tricipiti"], equipment: "manubri",
@@ -112,6 +113,7 @@ export const exerciseDatabase: ExerciseDefinition[] = [
       commonMistakes: ["Usare lo slancio (kipping) senza controllo", "Range di movimento parziale"],
     },
     muscleMap: { primary: ["gran-dorsale"], secondary: ["bicipite-brachiale", "trapezio-medio"] },
+    media: { kind: "video", src: "/videos/trazioni.webm", poster: "/videos/trazioni-poster.webp" },
   },
   {
     id: "stacchi", name: "Stacchi da terra", primaryMuscle: "schiena", secondaryMuscles: ["femorali", "glutei"], equipment: "bilanciere",
@@ -440,6 +442,7 @@ export const exerciseDatabase: ExerciseDefinition[] = [
       commonMistakes: ["Ginocchia che collassano verso l'interno", "Talloni che si sollevano da terra"],
     },
     muscleMap: { primary: ["quadricipite-retto-femorale", "quadricipite-vasti"], secondary: ["gluteo-massimo", "core-profondo"] },
+    media: { kind: "video", src: "/videos/squat.webm", poster: "/videos/squat-poster.webp" },
   },
   {
     id: "leg-press", name: "Leg press", primaryMuscle: "quadricipiti", secondaryMuscles: ["glutei"], equipment: "macchina",

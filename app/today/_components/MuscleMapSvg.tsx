@@ -14,6 +14,15 @@ import { muscleAnatomyLabels } from "../_lib/muscleAnatomy";
  * tracciato anatomico fedele): l'obiettivo è comunicare "dove" a colpo
  * d'occhio, non un atlante medico. Ogni fascio è un <path id="{MuscleAnatomyId}">
  * per restare agganciabile 1:1 alla tassonomia di muscleAnatomy.ts.
+ *
+ * Tecnica "Fake 3D" (decisione architetturale, vedi docs/3d_TASK.md §0):
+ * nessun motore WebGL/Three.js. Un'immagine raster di base (PNG/WebP in
+ * scala di grigi, i volumi 3D) sta SOTTO l'SVG dei fasci muscolari; l'SVG è
+ * assolutamente posizionato sopra con `mix-blend-mode: multiply`, così i
+ * fill piatti si fondono con le ombre del render sottostante invece di
+ * coprirlo. Finché gli asset reali non esistono in /public/models,
+ * l'<img> fallisce silenziosamente (onError → display:none): resta solo
+ * la silhouette SVG piatta, mai un'icona di immagine rotta.
  */
 
 interface MuscleMapSvgProps {
@@ -108,31 +117,48 @@ function FigureView({
   muscles,
   primary,
   secondary,
+  baseImageSrc,
 }: {
   muscles: MusclePathDef[];
   primary: MuscleAnatomyId[];
   secondary: MuscleAnatomyId[];
+  /** Render raster di base (fake-3D). Assente/404 → solo silhouette piatta. */
+  baseImageSrc: string;
 }) {
   return (
-    <svg viewBox="0 0 200 390" className="h-56 w-auto sm:h-64">
-      {/* Silhouette decorativa: solo contorno, non evidenziabile. */}
-      <g fill="none" stroke="var(--border-strong)" strokeWidth={1.5} strokeLinejoin="round">
-        {BODY_OUTLINE.front.map((d, i) => (
-          <path key={i} d={d} />
-        ))}
-      </g>
-      {/* Fasci muscolari: fill dinamico, dichiarativo, derivato dalle prop. */}
-      <g>
-        {muscles.map((m) => (
-          <path
-            key={m.id}
-            id={m.id}
-            d={m.d}
-            style={{ fill: fillFor(m.id, primary, secondary), transition: "fill 0.15s ease" }}
-          />
-        ))}
-      </g>
-    </svg>
+    <div className="relative aspect-[200/390] h-56 sm:h-64">
+      {/* eslint-disable-next-line @next/next/no-img-element -- asset statico in /public/models, nessuna ottimizzazione next/image necessaria per una silhouette fissa */}
+      <img
+        src={baseImageSrc}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="absolute inset-0 h-full w-full grayscale object-cover"
+        onError={(e) => {
+          e.currentTarget.style.display = "none";
+        }}
+      />
+      <svg viewBox="0 0 200 390" className="absolute inset-0 h-full w-full mix-blend-multiply">
+        {/* Silhouette decorativa: solo contorno, non evidenziabile. Resta
+            visibile anche senza immagine di base, come riferimento piatto. */}
+        <g fill="none" stroke="var(--border-strong)" strokeWidth={1.5} strokeLinejoin="round">
+          {BODY_OUTLINE.front.map((d, i) => (
+            <path key={i} d={d} />
+          ))}
+        </g>
+        {/* Fasci muscolari: fill dinamico, dichiarativo, derivato dalle prop. */}
+        <g>
+          {muscles.map((m) => (
+            <path
+              key={m.id}
+              id={m.id}
+              d={m.d}
+              style={{ fill: fillFor(m.id, primary, secondary), transition: "fill 0.15s ease" }}
+            />
+          ))}
+        </g>
+      </svg>
+    </div>
   );
 }
 
@@ -156,8 +182,18 @@ export default function MuscleMapSvg({
           resto del modal (pill gruppo muscolare + istruzioni). */}
       <span className="sr-only">{description}</span>
       <div aria-hidden="true" className="flex items-center justify-center gap-3">
-        <FigureView muscles={FRONT_MUSCLES} primary={primary} secondary={secondary} />
-        <FigureView muscles={BACK_MUSCLES} primary={primary} secondary={secondary} />
+        <FigureView
+          muscles={FRONT_MUSCLES}
+          primary={primary}
+          secondary={secondary}
+          baseImageSrc="/models/base-anatomica-front.webp"
+        />
+        <FigureView
+          muscles={BACK_MUSCLES}
+          primary={primary}
+          secondary={secondary}
+          baseImageSrc="/models/base-anatomica-back.webp"
+        />
       </div>
     </div>
   );
