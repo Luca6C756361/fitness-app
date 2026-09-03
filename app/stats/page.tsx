@@ -5,6 +5,7 @@ import WeightRangeChart from "./_components/WeightRangeChart";
 import WorkoutStreakCard from "./_components/WorkoutStreakCard";
 import VolumeChart from "./_components/VolumeChart";
 import PersonalRecordsCard from "./_components/PersonalRecordsCard";
+import MuscleRecoveryCard from "./_components/MuscleRecoveryCard";
 
 export default function StatsPage() {
   return (
@@ -32,6 +33,7 @@ export default function StatsPage() {
         <KcalWeekChart />
         <WeightRangeChart />
         <VolumeChart />
+        <MuscleRecoveryCard />
         <PersonalRecordsCard />
       </div>
     </main>

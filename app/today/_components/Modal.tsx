@@ -13,13 +13,14 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
-  /** "md" (default, identico a oggi) o "lg" per contenuti più ricchi. */
-  size?: "md" | "lg";
+  /** "md" (default, identico a oggi), "lg" per contenuti più ricchi, "xl" per layout multi-colonna. */
+  size?: "md" | "lg" | "xl";
 }
 
 const SIZE_CLASSES: Record<NonNullable<ModalProps["size"]>, string> = {
   md: "max-w-md",
   lg: "max-w-2xl",
+  xl: "max-w-4xl",
 };
 
 export default function Modal({

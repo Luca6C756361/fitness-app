@@ -11,7 +11,7 @@ import {
   RECOVERY_STATUS_LABELS,
   type RecoveryStatus,
 } from "../../today/_lib/muscleRecovery";
-import BodyRecoveryMap from "./BodyRecoveryMap";
+import BodyRecoveryMap from "../../today/_components/BodyRecoveryMap";
 
 /**
  * Card "Muscle Recovery" stile Fitbod: sagome fronte/retro cyber-mesh +
@@ -52,7 +52,11 @@ export default function MuscleRecoveryCard() {
       </div>
 
       {/* Alto: sagome + legenda. */}
-      <BodyRecoveryMap colorByMuscle={colorByMuscle} className="mb-5" />
+      <BodyRecoveryMap
+        colorByMuscle={colorByMuscle}
+        className="mb-5"
+        srLabel="Mappa del corpo con lo stato di recupero per gruppo muscolare, elencato in dettaglio sotto."
+      />
 
       <div className="mb-6 flex items-center justify-center gap-5">
         {statusOrder.map((s) => (
