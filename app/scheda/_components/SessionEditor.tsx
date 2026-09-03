@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, Trash2, Minus, Save, StickyNote, X, GripVertical, Replace, Timer } from "lucide-react";
+import { Plus, Trash2, Minus, Save, StickyNote, X, GripVertical, Replace, Timer, Info } from "lucide-react";
 import {
   DndContext, closestCenter, PointerSensor, TouchSensor, KeyboardSensor,
   useSensor, useSensors, type DragEndEvent,
@@ -13,6 +13,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers";
 import Modal from "../../today/_components/Modal";
+import ExerciseDetailModal from "../../today/_components/ExerciseDetailModal";
 import { usePlan } from "../../today/_lib/PlanContext";
 import { useSettings } from "../../today/_lib/SettingsContext";
 import { useProgression } from "../../today/_lib/useProgression";
@@ -98,7 +99,7 @@ function SortableRow({ id, children }: { id: string; children: React.ReactNode }
           {...attributes}
           {...listeners}
           style={{ touchAction: "none" }}
-          className="-ml-1 flex shrink-0 cursor-grab touch-none items-center px-1 text-emerald-800/30 transition hover:text-emerald-700 active:cursor-grabbing"
+          className="-ml-1 flex shrink-0 cursor-grab touch-none items-center px-1 text-fg-placeholder transition hover:text-emerald-700 active:cursor-grabbing"
           aria-label="Trascina per riordinare"
         >
           <GripVertical className="h-5 w-5" />
@@ -128,6 +129,10 @@ export default function SessionEditor({
     | { mode: "replace"; targetId: string; muscle?: MuscleGroup };
 
   const [picker, setPicker] = useState<PickerState>({ mode: "closed" });
+  // MICRO-PROMPT 4 (EXERCISE_ATLAS_TASK.md): stesso stato locale di ExercisePicker.
+  const [detailExercise, setDetailExercise] = useState<ExerciseDefinition | undefined>(
+    undefined
+  );
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -279,7 +284,7 @@ export default function SessionEditor({
       >
         <div className="space-y-4">
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
               Nome sessione
             </label>
             <input
@@ -287,12 +292,12 @@ export default function SessionEditor({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Es. Push — Petto, Spalle, Tricipiti"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-border-subtle bg-surface px-3 py-2 text-sm text-fg-primary outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
               Focus muscolare
             </label>
             <input
@@ -300,12 +305,12 @@ export default function SessionEditor({
               value={focus}
               onChange={(e) => setFocus(e.target.value)}
               placeholder="Es. Petto · Spalle · Tricipiti"
-              className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-full rounded-xl border border-border-subtle bg-surface px-3 py-2 text-sm text-fg-primary outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+            <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
               Durata stimata (min)
             </label>
             <input
@@ -314,13 +319,13 @@ export default function SessionEditor({
               min={5}
               max={180}
               onChange={(e) => setMinutes(parseInt(e.target.value, 10) || 0)}
-              className="w-24 rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
+              className="w-24 rounded-xl border border-border-subtle bg-surface px-3 py-2 text-sm text-fg-primary tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
             />
           </div>
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+              <label className="text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
                 Esercizi ({exercises.length})
               </label>
               <button
@@ -334,7 +339,7 @@ export default function SessionEditor({
             </div>
 
             {exercises.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-emerald-900/15 py-6 text-center text-xs text-emerald-800/50">
+              <p className="rounded-xl border border-dashed border-emerald-900/15 py-6 text-center text-xs text-fg-muted">
                 Nessun esercizio. Aggiungine almeno uno.
               </p>
             ) : (
@@ -355,11 +360,11 @@ export default function SessionEditor({
                       <SortableRow key={ex.id} id={ex.id}>
                     <div className="mb-2 flex items-start justify-between gap-2">
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-emerald-950">
+                        <p className="text-sm font-medium text-fg-primary">
                           {ex.exerciseName}
                         </p>
                         {ex.notes && !ex.showNotes && (
-                          <p className="mt-0.5 flex items-start gap-1 text-[11px] italic text-emerald-800/60">
+                          <p className="mt-0.5 flex items-start gap-1 text-[11px] italic text-fg-secondary">
                             <StickyNote className="mt-0.5 h-3 w-3 shrink-0" />
                             <span className="line-clamp-1">{ex.notes}</span>
                           </p>
@@ -377,7 +382,7 @@ export default function SessionEditor({
                       <button
                         type="button"
                         onClick={() => removeEx(ex.id)}
-                        className="rounded-lg p-1 text-emerald-800/40 transition hover:bg-red-50 hover:text-red-600"
+                        className="rounded-lg p-1 text-fg-muted transition hover:bg-red-50 hover:text-red-600"
                         aria-label="Rimuovi"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -387,7 +392,7 @@ export default function SessionEditor({
                     {/* Controlli set/reps + toggle nota */}
                     <div className="flex flex-wrap items-center gap-3">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase text-emerald-800/60">
+                        <span className="text-[10px] font-bold uppercase text-fg-secondary">
                           Set
                         </span>
                         <Stepper
@@ -396,7 +401,7 @@ export default function SessionEditor({
                         />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold uppercase text-emerald-800/60">
+                        <span className="text-[10px] font-bold uppercase text-fg-secondary">
                           Reps
                         </span>
                         <Stepper
@@ -432,13 +437,22 @@ export default function SessionEditor({
                       </button>
                       <button
                         type="button"
+                        onClick={() => setDetailExercise(getExerciseDef(ex.exerciseId))}
+                        className="flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase text-fg-secondary transition hover:bg-emerald-100"
+                        aria-label={`Dettagli di ${ex.exerciseName}`}
+                      >
+                        <Info className="h-3 w-3" />
+                        Dettagli
+                      </button>
+                      <button
+                        type="button"
                         onClick={() =>
                           updateEx(ex.id, { showNotes: !ex.showNotes })
                         }
                         className={`ml-auto flex items-center gap-1 rounded-md px-2 py-1 text-[10px] font-bold uppercase transition ${
                           ex.showNotes || ex.notes
-                            ? "bg-amber-50 text-amber-700 hover:bg-amber-100"
-                            : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                            ? "bg-surface-accent text-fg-warning hover:opacity-80"
+                            : "bg-surface-accent text-fg-accent hover:opacity-80"
                         }`}
                       >
                         <StickyNote className="h-3 w-3" />
@@ -464,7 +478,7 @@ export default function SessionEditor({
                         placeholder="Es. Attento alla spalla destra, scendere lento"
                         rows={2}
                         maxLength={200}
-                        className="mt-2 w-full resize-none rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-xs text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-amber-300"
+                        className="mt-2 w-full resize-none rounded-lg border border-border-subtle bg-surface px-3 py-2 text-xs text-fg-primary outline-none focus:ring-2 focus:ring-amber-300"
                       />
                     )}
                       </SortableRow>
@@ -480,7 +494,8 @@ export default function SessionEditor({
             type="button"
             onClick={handleSave}
             disabled={!canSave}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
+            aria-disabled={!canSave}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-surface-raised disabled:text-fg-muted"
           >
             <Save className="h-4 w-4" />
             {session ? "Salva modifiche" : "Crea sessione"}
@@ -499,6 +514,12 @@ export default function SessionEditor({
             ? exercises.filter((e) => e.id !== picker.targetId).map((e) => e.exerciseId)
             : exercises.map((e) => e.exerciseId)
         }
+      />
+
+      <ExerciseDetailModal
+        open={!!detailExercise}
+        exercise={detailExercise}
+        onClose={() => setDetailExercise(undefined)}
       />
     </>
   );

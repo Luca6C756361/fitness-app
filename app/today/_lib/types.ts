@@ -99,6 +99,36 @@ export type Equipment =
   | "elastici";
 
 /**
+ * Tassonomia anatomica fine, distinta da MuscleGroup (che resta la tassonomia
+ * coarse per filtri/chip in tutta l'app — non va sostituita né estesa).
+ */
+export type MuscleAnatomyId =
+  | "pettorale-superiore" | "pettorale-medio" | "pettorale-inferiore"
+  | "gran-dorsale" | "trapezio-medio" | "trapezio-inferiore" | "romboidi" | "lombari"
+  | "deltoide-anteriore" | "deltoide-laterale" | "deltoide-posteriore"
+  | "bicipite-brachiale" | "brachiale" | "avambraccio"
+  | "tricipite-capo-lungo" | "tricipite-capo-laterale" | "tricipite-capo-mediale"
+  | "quadricipite-retto-femorale" | "quadricipite-vasti"
+  | "femorale-bicipite" | "femorale-semitendinoso"
+  | "gluteo-massimo" | "gluteo-medio"
+  | "gastrocnemio" | "soleo"
+  | "retto-addominale" | "obliqui" | "core-profondo";
+
+/** Istruzioni tecniche di esecuzione di un esercizio (opzionali: i custom non le hanno). */
+export interface ExerciseInstructions {
+  setup: string[];
+  concentric: string[];
+  eccentric: string[];
+  commonMistakes: string[];
+}
+
+/** Mappa dei fasci muscolari da evidenziare in MuscleMapSvg. */
+export interface MuscleMap {
+  primary: MuscleAnatomyId[];
+  secondary: MuscleAnatomyId[];
+}
+
+/**
  * Esercizio nel database.
  * NON contiene set/reps: quelli vivono nella scheda (PlannedExercise).
  */
@@ -110,6 +140,12 @@ export interface ExerciseDefinition {
   equipment: Equipment;
   /** Demo di esecuzione. Opzionale: oggi nessun esercizio la valorizza. */
   media?: { kind: "video" | "lottie" | "image"; src: string; poster?: string };
+  /* --- Atlante esercizi esteso — campi opzionali, retrocompatibili --- */
+  instructions?: ExerciseInstructions;
+  /** Se assente, resolveMuscleMap() deriva un fallback da primaryMuscle/secondaryMuscles. */
+  muscleMap?: MuscleMap;
+  /** Se assente, la UI mostra "intermedio" come fallback implicito. */
+  level?: "principiante" | "intermedio" | "avanzato";
   /* --- Esercizi custom — campi opzionali, retrocompatibili --- */
   source?: "default" | "custom";
   /** ISO, solo per i custom. */

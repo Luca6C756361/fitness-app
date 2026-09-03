@@ -17,10 +17,10 @@ export default function SchedaPage() {
             <ArrowLeft className="h-4 w-4 text-emerald-800" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-emerald-950">
+            <h1 className="text-2xl font-bold tracking-tight text-fg-primary">
               Scheda
             </h1>
-            <p className="text-sm font-medium text-emerald-800/60">
+            <p className="text-sm font-medium text-fg-secondary">
               Gestisci sessioni e piano settimanale
             </p>
           </div>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Search, Plus, Info, Sparkles } from "lucide-react";
 import Modal from "../../today/_components/Modal";
 import ExerciseMediaSlot from "../../today/_components/ExerciseMediaSlot";
+import ExerciseDetailModal from "../../today/_components/ExerciseDetailModal";
 import { usePlan } from "../../today/_lib/PlanContext";
 import {
   muscleGroupLabels,
@@ -45,8 +46,14 @@ export default function ExercisePicker({
 
   const [query, setQuery] = useState("");
   const [muscle, setMuscle] = useState<MuscleGroup | "all">("all");
-  const [previewId, setPreviewId] = useState<string | null>(null);
   const [createOpen, setCreateOpen] = useState(false);
+  // MICRO-PROMPT 4 (EXERCISE_ATLAS_TASK.md): rimpiazza il vecchio toggle di
+  // anteprima inline (era solo ExerciseMediaSlot) con ExerciseDetailModal,
+  // che è un superset (media + mappa anatomica + istruzioni). Stesso bottone
+  // Info già presente nella riga, stesso punto di innesto.
+  const [detailExercise, setDetailExercise] = useState<ExerciseDefinition | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -76,13 +83,13 @@ export default function ExercisePicker({
     <Modal open={open} onClose={onClose} title={title} size="lg">
       {/* Ricerca */}
       <div className="relative mb-3">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fg-muted" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Cerca (es. panca, squat, curl)…"
-          className="w-full rounded-xl border border-emerald-900/10 bg-white py-3 pl-10 pr-4 text-base text-emerald-950 placeholder:text-emerald-800/40 outline-none focus:ring-2 focus:ring-emerald-300"
+          className="w-full rounded-xl border border-emerald-900/10 bg-white py-3 pl-10 pr-4 text-base text-fg-primary outline-none focus:ring-2 focus:ring-emerald-300"
         />
       </div>
 
@@ -94,7 +101,7 @@ export default function ExercisePicker({
           className={`flex min-h-[40px] shrink-0 items-center rounded-full px-3 py-2 text-[11px] font-bold transition ${
             muscle === "all"
               ? "bg-emerald-600 text-white"
-              : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+              : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
           }`}
         >
           Tutti
@@ -107,7 +114,7 @@ export default function ExercisePicker({
             className={`flex min-h-[40px] shrink-0 items-center rounded-full px-3 py-2 text-[11px] font-bold transition ${
               muscle === m
                 ? "bg-emerald-600 text-white"
-                : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
             }`}
           >
             {muscleGroupLabels[m] ?? m}
@@ -128,14 +135,13 @@ export default function ExercisePicker({
       {/* Lista */}
       <div className="max-h-[55dvh] space-y-1.5 overflow-y-auto pr-1">
         {filtered.length === 0 ? (
-          <p className="py-10 text-center text-sm text-emerald-800/50">
+          <p className="py-10 text-center text-sm text-fg-muted">
             {excludeIds.length > 0 && exercises.length - excludeIds.length === 0
               ? "Tutti gli esercizi disponibili sono già nella sessione."
               : "Nessun esercizio trovato."}
           </p>
         ) : (
           filtered.map((ex) => {
-            const expanded = previewId === ex.id;
             return (
               <div
                 key={ex.id}
@@ -165,7 +171,7 @@ export default function ExercisePicker({
                     className="h-14 w-14 shrink-0 !aspect-square"
                   />
                   <div className="min-w-0">
-                    <p className="flex items-center gap-1.5 truncate text-sm font-semibold text-emerald-950">
+                    <p className="flex items-center gap-1.5 truncate text-sm font-semibold text-fg-primary">
                       <span className="truncate">{ex.name}</span>
                       {ex.source === "custom" && (
                         <span className="shrink-0 rounded-full bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold uppercase text-teal-700">
@@ -173,7 +179,7 @@ export default function ExercisePicker({
                         </span>
                       )}
                     </p>
-                    <p className="text-xs text-emerald-800/50">
+                    <p className="text-xs text-fg-muted">
                       {muscleGroupLabels[ex.primaryMuscle]} ·{" "}
                       {equipmentLabels[ex.equipment]}
                     </p>
@@ -182,21 +188,15 @@ export default function ExercisePicker({
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setPreviewId((id) => (id === ex.id ? null : ex.id));
+                      setDetailExercise(ex);
                     }}
-                    aria-label={`Vedi esecuzione di ${ex.name}`}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-emerald-800/40 transition hover:bg-emerald-50 hover:text-emerald-700"
+                    aria-label={`Dettagli di ${ex.name}`}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-fg-muted transition hover:bg-emerald-50 hover:text-fg-accent"
                   >
                     <Info className="h-4 w-4" />
                   </button>
                   <Plus className="h-4 w-4 shrink-0 text-emerald-600" />
                 </div>
-
-                {expanded && (
-                  <div className="border-t border-emerald-900/10 p-3">
-                    <ExerciseMediaSlot media={ex.media} name={ex.name} />
-                  </div>
-                )}
               </div>
             );
           })
@@ -213,6 +213,12 @@ export default function ExercisePicker({
         setCreateOpen(false);
         onClose();
       }}
+    />
+
+    <ExerciseDetailModal
+      open={!!detailExercise}
+      exercise={detailExercise}
+      onClose={() => setDetailExercise(undefined)}
     />
     </>
   );

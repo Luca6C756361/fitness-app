@@ -92,13 +92,13 @@ export default function ComponiPage() {
             className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
             aria-label="Torna alla dashboard"
           >
-            <ArrowLeft className="h-4 w-4 text-emerald-800" />
+            <ArrowLeft className="h-4 w-4 text-fg-secondary" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-emerald-950">
+            <h1 className="text-2xl font-bold tracking-tight text-fg-primary">
               Componi allenamento
             </h1>
-            <p className="text-sm font-medium text-emerald-800/60">
+            <p className="text-sm font-medium text-fg-secondary">
               Costruisci la sessione di oggi dal database esercizi
             </p>
           </div>

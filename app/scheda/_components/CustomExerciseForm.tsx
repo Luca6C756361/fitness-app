@@ -114,7 +114,7 @@ export default function CustomExerciseForm({
     <Modal open={open} onClose={onClose} title="Crea esercizio">
       <div className="space-y-4">
         <div>
-          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
             Nome
           </label>
           <input
@@ -123,15 +123,15 @@ export default function CustomExerciseForm({
             onChange={(e) => setName(e.target.value)}
             maxLength={60}
             placeholder="Es. Panca Scott"
-            className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 placeholder:text-emerald-800/30 outline-none focus:ring-2 focus:ring-emerald-300"
+            className="w-full rounded-xl border border-emerald-900/10 bg-white px-3 py-2 text-sm text-fg-primary outline-none focus:ring-2 focus:ring-emerald-300"
           />
           {errorMessage && (
-            <p className="mt-1 text-xs font-medium text-red-600">{errorMessage}</p>
+            <p className="mt-1 text-xs font-medium text-fg-danger">{errorMessage}</p>
           )}
         </div>
 
         <div>
-          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
             Gruppo primario
           </label>
           <div className="flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export default function CustomExerciseForm({
                 className={`rounded-full px-3 py-2 text-[11px] font-bold transition ${
                   primaryMuscle === m
                     ? "bg-emerald-600 text-white"
-                    : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                    : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
                 }`}
               >
                 {muscleGroupLabels[m]}
@@ -153,7 +153,7 @@ export default function CustomExerciseForm({
         </div>
 
         <div>
-          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
             Attrezzatura
           </label>
           <div className="flex flex-wrap gap-2">
@@ -165,7 +165,7 @@ export default function CustomExerciseForm({
                 className={`rounded-full px-3 py-2 text-[11px] font-bold transition ${
                   equipment === eq
                     ? "bg-emerald-600 text-white"
-                    : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                    : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
                 }`}
               >
                 {equipmentLabels[eq]}
@@ -175,7 +175,7 @@ export default function CustomExerciseForm({
         </div>
 
         <div>
-          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-emerald-800/70">
+          <label className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-fg-secondary">
             Gruppi secondari (opzionale)
           </label>
           <div className="flex flex-wrap gap-2">
@@ -187,7 +187,7 @@ export default function CustomExerciseForm({
                 className={`rounded-full px-3 py-2 text-[11px] font-bold transition ${
                   secondaryMuscles.includes(m)
                     ? "bg-teal-600 text-white"
-                    : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                    : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
                 }`}
               >
                 {muscleGroupLabels[m]}
@@ -200,7 +200,8 @@ export default function CustomExerciseForm({
           type="button"
           onClick={handleSubmit}
           disabled={!canSubmit}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
+          aria-disabled={!canSubmit}
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-surface-raised disabled:text-fg-muted"
         >
           {saving ? (
             <Loader2 className="h-4 w-4 animate-spin" />

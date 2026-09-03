@@ -11,7 +11,7 @@ interface ProgressionHintProps {
 const confidenceStyles: Record<ProgressionSuggestion["confidence"], string> = {
   alta: "bg-emerald-100 text-emerald-700",
   media: "bg-amber-50 text-amber-700",
-  bassa: "bg-emerald-50 text-emerald-800/60",
+  bassa: "bg-emerald-50 text-fg-secondary",
 };
 
 /** "+2.5 kg → 42.5 kg" per weight/deload, "+1 rep → 11" per reps. */
@@ -32,7 +32,7 @@ export default function ProgressionHint({ suggestion, onApply }: ProgressionHint
 
   if (suggestion.kind === "hold") {
     return (
-      <p className="mt-1.5 flex items-center gap-1.5 text-[11px] text-emerald-800/60">
+      <p className="mt-1.5 flex items-center gap-1.5 text-[11px] text-fg-secondary">
         <Info className="h-3 w-3 shrink-0" />
         {suggestion.reason}
       </p>
@@ -54,10 +54,10 @@ export default function ProgressionHint({ suggestion, onApply }: ProgressionHint
     >
       <Icon className={`h-3.5 w-3.5 shrink-0 ${isDeload ? "text-amber-700" : "text-emerald-700"}`} />
       <span className="min-w-0 flex-1">
-        <span className={`block text-xs font-bold ${isDeload ? "text-amber-800" : "text-emerald-800"}`}>
+        <span className={`block text-xs font-bold ${isDeload ? "text-fg-warning" : "text-fg-secondary"}`}>
           {label}
         </span>
-        <span className="block text-[10px] text-emerald-800/60">{suggestion.reason}</span>
+        <span className="block text-[10px] text-fg-secondary">{suggestion.reason}</span>
       </span>
       <span
         className={`shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${confidenceStyles[suggestion.confidence]}`}

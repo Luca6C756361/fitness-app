@@ -30,6 +30,14 @@
 
   --pill-on:          #047857;
   --pill-on-fg:       #FFFFFF;   /* 5.48:1 */
+
+  /* Atlante esercizi: mappa anatomica (MuscleMapSvg). Grigio neutro di
+     riposo + due rossi di evidenziazione, validati a >=3:1 (WCAG 1.4.11,
+     elemento grafico non testuale) sia contro il grigio neutro sia contro
+     lo sfondo bianco della card che ospita l'SVG. */
+  --fg-muted-fill:    #C4CFC9;
+  --anatomy-primary:    #B91C1C; /* 4.04:1 su --fg-muted-fill, 6.47:1 su bianco */
+  --anatomy-secondary:  #B94747; /* 3.23:1 su --fg-muted-fill, 5.18:1 su bianco */
 }
 
 /* === TOKEN SEMANTICI — TEMA SCURO (stessi nomi, riassegnati) === */
@@ -52,6 +60,12 @@ html[data-theme="dark"] {
 
   --pill-on:          #34D399;
   --pill-on-fg:       #06281F;   /* 8.21:1 */
+
+  /* Atlante esercizi: mappa anatomica, riassegnati per il tema scuro
+     (stessa soglia >=3:1 sia su --fg-muted-fill sia sullo sfondo card). */
+  --fg-muted-fill:    #3A4A43;
+  --anatomy-primary:    #F87171; /* 3.39:1 su --fg-muted-fill, 5.66:1 su surface */
+  --anatomy-secondary:  #D08484; /* 3.27:1 su --fg-muted-fill, 5.45:1 su surface */
 }
 
 /* Espone i token a Tailwind 4 come classi utility (text-fg-secondary,
@@ -74,6 +88,9 @@ html[data-theme="dark"] {
   --color-border-strong:  var(--border-strong);
   --color-pill-on:        var(--pill-on);
   --color-pill-on-fg:     var(--pill-on-fg);
+  --color-fg-muted-fill:  var(--fg-muted-fill);
+  --color-anatomy-primary:   var(--anatomy-primary);
+  --color-anatomy-secondary: var(--anatomy-secondary);
 }
 
 /* === TEMA CHIARO (default) === */

@@ -88,7 +88,7 @@ export default function RestTimer({
             <button
               type="button"
               onClick={() => setFocus(true)}
-              className="rounded-lg p-1 text-emerald-800/50 transition hover:bg-emerald-50 hover:text-emerald-800"
+              className="rounded-lg p-1 text-fg-muted transition hover:bg-emerald-50 hover:text-emerald-800"
               aria-label="Modalità Focus recupero"
             >
               <Maximize2 className="h-4 w-4" />
@@ -96,7 +96,7 @@ export default function RestTimer({
             <button
               type="button"
               onClick={onCancel}
-              className="rounded-lg p-1 text-emerald-800/50 transition hover:bg-emerald-50 hover:text-emerald-800"
+              className="rounded-lg p-1 text-fg-muted transition hover:bg-emerald-50 hover:text-emerald-800"
               aria-label="Annulla recupero"
             >
               <X className="h-4 w-4" />
@@ -104,7 +104,7 @@ export default function RestTimer({
           </div>
         </div>
 
-        <p className="mb-2 text-center font-mono text-3xl font-bold text-emerald-950 tabular-nums">
+        <p className="mb-2 text-center font-mono text-3xl font-bold text-fg-primary tabular-nums">
           {formatTime(remaining)}
         </p>
 

@@ -58,7 +58,7 @@ export default function PRToast() {
           <p className="text-[11px] font-bold uppercase tracking-widest text-amber-700">
             Record personale!
           </p>
-          <p className="truncate text-sm font-bold text-emerald-950">
+          <p className="truncate text-sm font-bold text-fg-primary">
             {lastPR.name}
           </p>
 
@@ -70,7 +70,7 @@ export default function PRToast() {
               >
                 {prTypeLabels[t]}: {value(t)}
                 {previous(t) && (
-                  <span className="ml-1 font-medium text-amber-800/50">
+                  <span className="ml-1 font-medium text-fg-warning">
                     ({previous(t)})
                   </span>
                 )}
@@ -83,7 +83,7 @@ export default function PRToast() {
           type="button"
           onClick={dismissPR}
           aria-label="Chiudi"
-          className="rounded-full p-1 text-amber-700/60 transition hover:bg-amber-100 hover:text-amber-800"
+          className="rounded-full p-1 text-fg-warning transition hover:bg-amber-100 hover:text-amber-800"
         >
           <X className="h-4 w-4" />
         </button>

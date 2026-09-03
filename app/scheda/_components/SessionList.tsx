@@ -32,8 +32,8 @@ export default function SessionList() {
       <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Dumbbell className="h-4 w-4 text-teal-700" />
-            <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+            <Dumbbell className="h-4 w-4 text-fg-accent" />
+            <h2 className="text-xs font-bold uppercase tracking-widest text-fg-secondary">
               Le mie sessioni ({plan?.sessions?.length || 0})
             </h2>
           </div>
@@ -56,8 +56,8 @@ export default function SessionList() {
               <span className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50">
                 <ClipboardList className="h-5 w-5 text-emerald-600" />
               </span>
-              <p className="mb-1 text-sm font-bold text-emerald-950">Nessuna scheda attiva</p>
-              <p className="mx-auto mb-4 max-w-xs text-xs text-emerald-800/60">
+              <p className="mb-1 text-sm font-bold text-fg-primary">Nessuna scheda attiva</p>
+              <p className="mx-auto mb-4 max-w-xs text-xs text-fg-secondary">
                 Costruiscila esercizio per esercizio, oppure parti da un template.
               </p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -80,7 +80,7 @@ export default function SessionList() {
               </div>
             </div>
           ) : (
-            <p className="py-6 text-center text-sm text-emerald-800/50">
+            <p className="py-6 text-center text-sm text-fg-muted">
               Nessuna sessione. Creane una per iniziare a costruire la scheda.
             </p>
           )
@@ -102,8 +102,8 @@ export default function SessionList() {
                 >
                   <div className="mb-2 flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-bold text-emerald-950">{s.name}</p>
-                      <p className="text-xs font-medium text-emerald-800/60">
+                      <p className="text-sm font-bold text-fg-primary">{s.name}</p>
+                      <p className="text-xs font-medium text-fg-secondary">
                         {s.focus} · ~{s.estimatedMinutes} min
                       </p>
                     </div>
@@ -111,7 +111,7 @@ export default function SessionList() {
                       <button
                         type="button"
                         onClick={() => openEdit(s)}
-                        className="rounded-lg border border-emerald-900/10 bg-white p-2 text-emerald-700 transition hover:bg-emerald-50"
+                        className="rounded-lg border border-emerald-900/10 bg-white p-2 text-fg-accent transition hover:bg-emerald-50"
                         aria-label="Modifica"
                       >
                         <Pencil className="h-3.5 w-3.5" />
@@ -119,7 +119,7 @@ export default function SessionList() {
                       <button
                         type="button"
                         onClick={() => setConfirmDelete(s.id)}
-                        className="rounded-lg border border-emerald-900/10 bg-white p-2 text-red-600 transition hover:bg-red-50"
+                        className="rounded-lg border border-emerald-900/10 bg-white p-2 text-fg-danger transition hover:bg-red-50"
                         aria-label="Elimina"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -128,7 +128,7 @@ export default function SessionList() {
                   </div>
 
                   {preview && (
-                    <p className="truncate text-[11px] font-medium text-emerald-800/50">
+                    <p className="truncate text-[11px] font-medium text-fg-muted">
                       {preview}
                       {extra}
                     </p>
@@ -136,10 +136,10 @@ export default function SessionList() {
 
                   {/* Conferma inline eliminazione */}
                   {confirmDelete === s.id && (
-                    <div className="mt-3 rounded-lg bg-red-50 p-3">
+                    <div className="mt-3 rounded-lg border border-fg-danger/40 bg-surface-raised p-3">
                       <div className="mb-2 flex items-start gap-2">
-                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
-                        <p className="text-xs text-red-900">
+                        <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-fg-danger" />
+                        <p className="text-xs text-fg-danger">
                           Eliminare questa sessione? Verrà rimossa anche dai
                           giorni in cui era assegnata.
                         </p>
@@ -148,7 +148,7 @@ export default function SessionList() {
                         <button
                           type="button"
                           onClick={() => setConfirmDelete(null)}
-                          className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-emerald-800"
+                          className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-fg-secondary"
                         >
                           Annulla
                         </button>

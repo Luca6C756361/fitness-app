@@ -22,13 +22,13 @@ export default function WeekView() {
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
       <div className="mb-4 flex items-center gap-2">
         <CalendarDays className="h-4 w-4 text-emerald-700" />
-        <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-fg-secondary">
           Piano settimanale
         </h2>
       </div>
 
       {noSessions && (
-        <p className="mb-3 text-xs text-emerald-800/50">
+        <p className="mb-3 text-xs text-fg-muted">
           Crea prima una sessione per poterla assegnare ai giorni.
         </p>
       )}
@@ -56,7 +56,7 @@ export default function WeekView() {
             >
               {/* Giorno */}
               <div className="w-24 shrink-0">
-                <p className="text-sm font-bold text-emerald-950">
+                <p className="text-sm font-bold text-fg-primary">
                   {dayLabels[dayIndex]}
                 </p>
                 {isToday && (
@@ -74,7 +74,7 @@ export default function WeekView() {
                     overrideDay(dayIndex, e.target.value || null)
                   }
                   disabled={noSessions}
-                  className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 outline-none focus:ring-2 focus:ring-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="w-full truncate rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-fg-primary outline-none focus:ring-2 focus:ring-emerald-300 disabled:cursor-not-allowed disabled:text-fg-muted"
                 >
                   <option value="">— Riposo —</option>
                   {plan?.sessions?.map((s) => (
@@ -84,7 +84,7 @@ export default function WeekView() {
                   ))}
                 </select>
                 {session && (
-                  <p className="mt-1 text-[11px] text-emerald-800/50">
+                  <p className="mt-1 text-[11px] text-fg-muted">
                     {session.exercises.length} esercizi · ~
                     {session.estimatedMinutes} min
                   </p>
@@ -95,7 +95,7 @@ export default function WeekView() {
         })}
       </ul>
 
-      <p className="mt-3 text-[11px] text-emerald-800/50">
+      <p className="mt-3 text-[11px] text-fg-muted">
         Le modifiche qui aggiornano la scheda base per tutte le settimane.
       </p>
     </section>

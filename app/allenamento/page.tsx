@@ -19,6 +19,7 @@ import SessionTimer from "./_components/SessionTimer";
 import RestTimer from "./_components/RestTimer";
 import RestPresetPicker from "./_components/RestPresetPicker";
 import ExerciseSetCard from "./_components/ExerciseSetCard";
+import ExerciseDetailModal from "../today/_components/ExerciseDetailModal";
 import type { CompletedSet } from "../today/_lib/types";
 import PRToast from "./_components/PRToast";
 
@@ -42,12 +43,15 @@ export default function AllenamentoPage() {
   const restDefault = settings.restDefaultSeconds;
   const [restActive, setRestActive] = useState<number | null>(null);
   const [durationSec, setDurationSec] = useState(0);
+  // MICRO-PROMPT 4 (EXERCISE_ATLAS_TASK.md): un solo ExerciseDetailModal per
+  // l'intera pagina, montato in fondo — ExerciseSetCard non possiede il modal.
+  const [detailExerciseId, setDetailExerciseId] = useState<string | null>(null);
 
   if (!todaySession) {
     return (
       <ShellWithBack>
         <div className="rounded-2xl border border-emerald-900/5 bg-white p-8 text-center shadow-sm">
-          <p className="mb-4 text-sm text-emerald-800/60">
+          <p className="mb-4 text-sm text-fg-secondary">
             Nessuna sessione in programma oggi.
           </p>
           <Link
@@ -66,10 +70,10 @@ export default function AllenamentoPage() {
     return (
       <ShellWithBack subtitle={isTodayComposed ? "Sessione composta" : "Sessione proposta"}>
         <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-          <h2 className="mb-1 text-xl font-bold text-emerald-950">
+          <h2 className="mb-1 text-xl font-bold text-fg-primary">
             {todaySession.name}
           </h2>
-          <p className="mb-4 flex items-center gap-1.5 text-sm font-medium text-emerald-800/60">
+          <p className="mb-4 flex items-center gap-1.5 text-sm font-medium text-fg-secondary">
             <Clock className="h-3.5 w-3.5" />
             {todaySession.focus} · ~{todaySession.estimatedMinutes} min ·{" "}
             {todaySession.exercises.length} esercizi
@@ -84,7 +88,7 @@ export default function AllenamentoPage() {
                   className="rounded-xl bg-[#FAF7F0] px-4 py-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-2 text-sm font-medium text-emerald-950">
+                    <span className="flex items-center gap-2 text-sm font-medium text-fg-primary">
                       {def?.name ?? "?"}
                       {pe.notes && (
                         <StickyNote className="h-3.5 w-3.5 shrink-0 text-amber-600" />
@@ -95,7 +99,7 @@ export default function AllenamentoPage() {
                     </span>
                   </div>
                   {pe.notes && (
-                    <p className="mt-1 text-[11px] italic text-emerald-800/60">
+                    <p className="mt-1 text-[11px] italic text-fg-secondary">
                       {pe.notes}
                     </p>
                   )}
@@ -167,7 +171,7 @@ export default function AllenamentoPage() {
       <SessionTimer onTick={setDurationSec} onStop={() => setDurationSec(durationSec)} />
 
       <div className="rounded-2xl border border-emerald-900/5 bg-white p-4 shadow-sm">
-        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-emerald-800/60">
+        <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-fg-secondary">
           <span>Progresso</span>
           <span className="tabular-nums">
             {totalCompleted} / {totalTargetSets} set
@@ -191,6 +195,8 @@ export default function AllenamentoPage() {
               key={`${ex.exerciseId}-${i}`}
               index={i}
               name={ex.name}
+              exerciseId={ex.exerciseId}
+              onShowDetail={setDetailExerciseId}
               targetSets={ex.targetSets}
               targetReps={ex.targetReps}
               completedSets={ex.sets}
@@ -214,7 +220,7 @@ export default function AllenamentoPage() {
         className={`flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-base font-bold uppercase tracking-wide shadow-md transition ${
           isFullyComplete
             ? "bg-teal-600 text-white hover:bg-teal-700"
-            : "bg-emerald-600 text-white hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
+            : "bg-emerald-600 text-white hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-surface-raised disabled:text-fg-muted"
         }`}
       >
         {isFullyComplete ? (
@@ -235,6 +241,12 @@ export default function AllenamentoPage() {
         onCancel={() => setRestActive(null)}
         onEnd={() => setRestActive(null)}
         onExtend={(extra) => setRestActive((r) => (r === null ? null : r + extra))}
+      />
+
+      <ExerciseDetailModal
+        open={detailExerciseId !== null}
+        exercise={detailExerciseId ? getExerciseDef(detailExerciseId) : undefined}
+        onClose={() => setDetailExerciseId(null)}
       />
     </ShellWithBack>
   );
@@ -260,7 +272,7 @@ function ShellWithBack({
               className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
               aria-label="Annulla sessione"
             >
-              <ArrowLeft className="h-4 w-4 text-emerald-800" />
+              <ArrowLeft className="h-4 w-4 text-fg-secondary" />
             </button>
           ) : (
             <Link
@@ -268,15 +280,15 @@ function ShellWithBack({
               className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/10 bg-white shadow-sm transition hover:bg-emerald-50"
               aria-label="Torna alla dashboard"
             >
-              <ArrowLeft className="h-4 w-4 text-emerald-800" />
+              <ArrowLeft className="h-4 w-4 text-fg-secondary" />
             </Link>
           )}
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-emerald-950">
+            <h1 className="text-2xl font-bold tracking-tight text-fg-primary">
               Allenamento
             </h1>
             {subtitle && (
-              <p className="text-sm font-medium text-emerald-800/60">{subtitle}</p>
+              <p className="text-sm font-medium text-fg-secondary">{subtitle}</p>
             )}
           </div>
         </div>

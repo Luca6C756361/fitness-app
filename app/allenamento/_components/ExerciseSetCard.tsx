@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Check, CheckCircle2, Undo2, Zap, Copy, StickyNote, Timer } from "lucide-react";
+import { useId, useState } from "react";
+import { Check, CheckCircle2, Undo2, Zap, Copy, StickyNote, Timer, Info } from "lucide-react";
 import type { CompletedSet } from "../../today/_lib/types";
 import { formatRestLabel } from "../_lib/restPresets";
 import RestPicker from "../../scheda/_components/RestPicker";
@@ -9,6 +9,14 @@ import RestPicker from "../../scheda/_components/RestPicker";
 interface ExerciseSetCardProps {
   index: number;
   name: string;
+  /**
+   * Id dell'esercizio nel database (per aprire ExerciseDetailModal dal
+   * genitore). Opzionale: se assente o se onShowDetail non è definito,
+   * l'icona Info non compare — nessuna rottura per chi non la passa.
+   */
+  exerciseId?: string;
+  /** Se definita (insieme a exerciseId), rende cliccabile il nome/icona Info in testata. */
+  onShowDetail?: (exerciseId: string) => void;
   targetSets: number;
   targetReps: number;
   completedSets: CompletedSet[];
@@ -41,6 +49,8 @@ type Mode = "simple" | "advanced";
 export default function ExerciseSetCard({
   index,
   name,
+  exerciseId,
+  onShowDetail,
   targetSets,
   targetReps,
   completedSets,
@@ -61,6 +71,7 @@ export default function ExerciseSetCard({
   );
   const [mode, setMode] = useState<Mode>("simple");
   const [showRestPicker, setShowRestPicker] = useState(false);
+  const simpleWeightInputId = useId();
 
   const isFullyDone = completedSets.length >= targetSets;
 
@@ -99,18 +110,32 @@ export default function ExerciseSetCard({
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wide text-emerald-800/50">
+            <span className="text-[10px] font-bold uppercase tracking-wide text-fg-muted">
               Esercizio {index + 1}
             </span>
             {isFullyDone && (
               <span className="flex items-center gap-1 rounded-full bg-teal-100 px-2 py-0.5 text-[10px] font-bold text-teal-700">
-                <CheckCircle2 className="h-3 w-3" /> Completo
+                <CheckCircle2 className="h-3 w-3" aria-hidden="true" /> Completo
               </span>
             )}
           </div>
-          <h3 className="text-base font-bold text-emerald-950">{name}</h3>
+          <h3 className="text-base font-bold text-fg-primary">
+            {onShowDetail && exerciseId ? (
+              <button
+                type="button"
+                onClick={() => onShowDetail(exerciseId)}
+                className="flex items-center gap-1 text-left transition hover:text-fg-accent"
+                aria-label={`Dettagli di ${name}`}
+              >
+                {name}
+                <Info className="h-3.5 w-3.5 shrink-0 text-fg-muted" aria-hidden="true" />
+              </button>
+            ) : (
+              name
+            )}
+          </h3>
           <div className="flex flex-wrap items-center gap-2">
-            <p className="text-xs font-medium text-emerald-800/50 tabular-nums">
+            <p className="text-xs font-medium text-fg-muted tabular-nums">
               {targetSets} × {targetReps}
             </p>
             {restSeconds !== undefined && (
@@ -131,7 +156,7 @@ export default function ExerciseSetCard({
                 className={`flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold uppercase transition ${
                   restIsCustom
                     ? "bg-teal-50 text-teal-700"
-                    : "bg-emerald-50 text-emerald-800/60"
+                    : "bg-emerald-50 text-fg-secondary"
                 } ${onRestChange ? "cursor-pointer hover:opacity-80" : "cursor-default"}`}
               >
                 <Timer className="h-3 w-3" />
@@ -147,7 +172,7 @@ export default function ExerciseSetCard({
                 globalDefault={restGlobalDefault ?? restSeconds ?? 0}
                 onChange={(s) => onRestChange(s ?? null)}
               />
-              <p className="mt-1 text-[10px] text-emerald-800/50">
+              <p className="mt-1 text-[10px] text-fg-muted">
                 Vale solo per la sessione di oggi. Per cambiarlo in modo
                 permanente modifica la scheda.
               </p>
@@ -192,7 +217,7 @@ export default function ExerciseSetCard({
       {!isFullyDone && (
         <div className="rounded-xl border border-emerald-900/10 bg-white p-3">
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-wide text-emerald-800/70">
+            <p className="text-xs font-bold uppercase tracking-wide text-fg-secondary">
               Set {completedSets.length + 1} di {targetSets}
             </p>
 
@@ -200,10 +225,11 @@ export default function ExerciseSetCard({
               <button
                 type="button"
                 onClick={() => setMode("simple")}
+                aria-pressed={mode === "simple"}
                 className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase transition ${
                   mode === "simple"
-                    ? "bg-white text-emerald-800 shadow-sm"
-                    : "text-emerald-800/50 hover:text-emerald-800"
+                    ? "bg-pill-on text-pill-on-fg shadow-sm"
+                    : "text-fg-secondary hover:text-emerald-800"
                 }`}
               >
                 Semplice
@@ -211,10 +237,11 @@ export default function ExerciseSetCard({
               <button
                 type="button"
                 onClick={() => setMode("advanced")}
+                aria-pressed={mode === "advanced"}
                 className={`flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase transition ${
                   mode === "advanced"
-                    ? "bg-white text-emerald-800 shadow-sm"
-                    : "text-emerald-800/50 hover:text-emerald-800"
+                    ? "bg-pill-on text-pill-on-fg shadow-sm"
+                    : "text-fg-secondary hover:text-emerald-800"
                 }`}
               >
                 <Zap className="h-2.5 w-2.5" />
@@ -225,17 +252,21 @@ export default function ExerciseSetCard({
 
           {mode === "simple" ? (
             <div>
-              <label className="mb-1 block text-[10px] font-bold uppercase tracking-wide text-emerald-800/60">
+              <label
+                htmlFor={simpleWeightInputId}
+                className="mb-1 block text-[10px] font-bold uppercase tracking-wide text-fg-secondary"
+              >
                 Peso per {targetReps} ripetizioni
               </label>
               <div className="flex gap-2">
                 <input
+                  id={simpleWeightInputId}
                   type="number"
                   step="0.5"
                   value={singleWeight}
                   onChange={(e) => setSingleWeight(e.target.value)}
                   placeholder="Kg"
-                  className="w-full rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-emerald-950 tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
+                  className="w-full rounded-lg border border-emerald-900/10 bg-white px-3 py-2 text-sm text-fg-primary tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
                 />
                 <button
                   type="button"
@@ -249,14 +280,15 @@ export default function ExerciseSetCard({
           ) : (
             <div>
               <div className="mb-1 flex items-center justify-between">
-                <label className="text-[10px] font-bold uppercase tracking-wide text-emerald-800/60">
+                <label className="text-[10px] font-bold uppercase tracking-wide text-fg-secondary">
                   Kg per ogni ripetizione
                 </label>
                 <button
                   type="button"
                   onClick={copyFirstToAll}
                   disabled={!repWeights[0]}
-                  className="flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 transition hover:bg-emerald-100 disabled:opacity-40"
+                  aria-disabled={!repWeights[0]}
+                  className="flex items-center gap-1 rounded-md bg-surface-accent px-2 py-0.5 text-[10px] font-bold text-fg-accent transition hover:opacity-80 disabled:cursor-not-allowed disabled:text-fg-muted"
                 >
                   <Copy className="h-3 w-3" />
                   Copia
@@ -266,7 +298,7 @@ export default function ExerciseSetCard({
               <div className="mb-2 grid grid-cols-4 gap-1.5 sm:grid-cols-6">
                 {repWeights.map((w, i) => (
                   <div key={i} className="text-center">
-                    <span className="mb-0.5 block text-[9px] font-bold uppercase text-emerald-800/40">
+                    <span aria-hidden="true" className="mb-0.5 block text-[9px] font-bold uppercase text-fg-muted">
                       #{i + 1}
                     </span>
                     <input
@@ -279,7 +311,8 @@ export default function ExerciseSetCard({
                         setRepWeights(next);
                       }}
                       placeholder="kg"
-                      className="w-full rounded-md border border-emerald-900/10 bg-white px-1 py-1.5 text-center text-xs text-emerald-950 tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
+                      aria-label={`Peso ripetizione ${i + 1}`}
+                      className="w-full rounded-md border border-emerald-900/10 bg-white px-1 py-1.5 text-center text-xs text-fg-primary tabular-nums outline-none focus:ring-2 focus:ring-emerald-300"
                     />
                   </div>
                 ))}
@@ -301,7 +334,7 @@ export default function ExerciseSetCard({
         <button
           type="button"
           onClick={onUndo}
-          className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border border-emerald-900/10 bg-white/60 py-1.5 text-xs font-medium text-emerald-800/60 transition hover:bg-white hover:text-emerald-800"
+          className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border border-border-subtle bg-surface py-1.5 text-xs font-medium text-fg-muted transition hover:bg-white hover:text-emerald-800"
         >
           <Undo2 className="h-3 w-3" />
           Annulla ultimo set

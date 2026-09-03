@@ -13,7 +13,7 @@ interface RestPickerProps {
 
 const CHIP_BASE = "rounded-full px-2 py-0.5 text-[10px] font-bold uppercase transition";
 const CHIP_ACTIVE = "bg-teal-600 text-white";
-const CHIP_INACTIVE = "bg-emerald-50 text-emerald-800/60 hover:bg-emerald-100";
+const CHIP_INACTIVE = "bg-emerald-50 text-fg-secondary hover:bg-emerald-100";
 
 /** Picker inline compatto del recupero: componente controllato, nessuno stato
  * interno oltre alla stringa dell'input libero. */
@@ -68,7 +68,7 @@ export default function RestPicker({ value, globalDefault, onChange }: RestPicke
           if (customInput.trim() !== "") commitCustom(customInput);
           setCustomInput("");
         }}
-        className="w-16 rounded-full border border-emerald-900/10 bg-white px-2 py-0.5 text-[10px] font-bold text-emerald-950 outline-none focus:ring-2 focus:ring-teal-300"
+        className="w-16 rounded-full border border-emerald-900/10 bg-white px-2 py-0.5 text-[10px] font-bold text-fg-primary outline-none focus:ring-2 focus:ring-teal-300"
         aria-label="Recupero personalizzato in secondi"
       />
     </div>

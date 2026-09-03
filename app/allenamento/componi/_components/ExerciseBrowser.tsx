@@ -50,19 +50,19 @@ export default function ExerciseBrowser({
 
   return (
     <section className="rounded-2xl border border-emerald-900/5 bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-emerald-800/70">
+      <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-fg-secondary">
         Database esercizi
       </h2>
 
       {/* Ricerca */}
       <div className="relative mb-3">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-emerald-800/40" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fg-muted" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Cerca (es. panca, squat, curl)…"
-          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-emerald-950 placeholder:text-emerald-800/40 outline-none focus:ring-2 focus:ring-emerald-300"
+          className="w-full rounded-xl border border-emerald-900/10 bg-white py-2.5 pl-10 pr-4 text-sm text-fg-primary outline-none focus:ring-2 focus:ring-emerald-300"
         />
       </div>
 
@@ -74,7 +74,7 @@ export default function ExerciseBrowser({
           className={`rounded-full px-3 py-1 text-xs font-bold transition ${
             muscle === "all"
               ? "bg-emerald-600 text-white"
-              : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+              : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
           }`}
         >
           Tutti
@@ -87,7 +87,7 @@ export default function ExerciseBrowser({
             className={`rounded-full px-3 py-1 text-xs font-bold transition ${
               muscle === m
                 ? "bg-emerald-600 text-white"
-                : "bg-emerald-50 text-emerald-800/70 hover:bg-emerald-100"
+                : "bg-emerald-50 text-fg-secondary hover:bg-emerald-100"
             }`}
           >
             {muscleGroupLabels[m] ?? m}
@@ -98,7 +98,7 @@ export default function ExerciseBrowser({
       {/* Lista */}
       <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
         {filtered.length === 0 ? (
-          <p className="py-6 text-center text-sm text-emerald-800/50">
+          <p className="py-6 text-center text-sm text-fg-muted">
             Nessun esercizio trovato.
           </p>
         ) : (
@@ -112,7 +112,7 @@ export default function ExerciseBrowser({
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0 flex-1">
-                    <p className="flex items-center gap-1.5 text-sm font-medium text-emerald-950">
+                    <p className="flex items-center gap-1.5 text-sm font-medium text-fg-primary">
                       <span className="truncate">{ex.name}</span>
                       {isCustom && (
                         <span className="shrink-0 rounded-full bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold uppercase text-teal-700">
@@ -120,7 +120,7 @@ export default function ExerciseBrowser({
                         </span>
                       )}
                     </p>
-                    <p className="text-xs text-emerald-800/50">
+                    <p className="text-xs text-fg-muted">
                       {muscleGroupLabels[ex.primaryMuscle]} ·{" "}
                       {equipmentLabels[ex.equipment]}
                     </p>
@@ -131,7 +131,8 @@ export default function ExerciseBrowser({
                         type="button"
                         onClick={() => setConfirmDeleteId(ex.id)}
                         disabled={deletingId === ex.id}
-                        className="rounded-lg p-2 text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-disabled={deletingId === ex.id}
+                        className="rounded-lg p-2 text-fg-danger transition hover:bg-red-50 disabled:cursor-not-allowed disabled:text-fg-muted"
                         aria-label={`Elimina ${ex.name}`}
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -155,10 +156,10 @@ export default function ExerciseBrowser({
 
                 {/* Conferma inline eliminazione: mai window.confirm() */}
                 {confirmDeleteId === ex.id && (
-                  <div className="mt-3 rounded-lg bg-red-50 p-3">
+                  <div className="mt-3 rounded-lg border border-fg-danger/40 bg-surface-raised p-3">
                     <div className="mb-2 flex items-start gap-2">
-                      <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
-                      <p className="text-xs text-red-900">
+                      <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-fg-danger" />
+                      <p className="text-xs text-fg-danger">
                         Eliminare &ldquo;{ex.name}&rdquo;? L&apos;azione non è
                         reversibile.
                       </p>
@@ -167,7 +168,7 @@ export default function ExerciseBrowser({
                       <button
                         type="button"
                         onClick={() => setConfirmDeleteId(null)}
-                        className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-emerald-800"
+                        className="rounded-lg border border-red-200 bg-white py-1.5 text-xs font-bold text-fg-secondary"
                       >
                         Annulla
                       </button>

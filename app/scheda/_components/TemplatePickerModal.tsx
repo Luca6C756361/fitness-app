@@ -117,7 +117,7 @@ export default function TemplatePickerModal({ open, onClose }: TemplatePickerMod
             <button
               type="button"
               onClick={() => setPending(null)}
-              className="rounded-lg border border-amber-300 bg-white py-2 text-xs font-bold text-emerald-800"
+              className="rounded-lg border border-amber-300 bg-white py-2 text-xs font-bold text-fg-secondary"
             >
               Annulla
             </button>
@@ -138,15 +138,15 @@ export default function TemplatePickerModal({ open, onClose }: TemplatePickerMod
               type="button"
               disabled={applying}
               onClick={() => handlePick(t)}
-              className="w-full rounded-xl border border-emerald-900/10 bg-white p-4 text-left transition hover:border-emerald-600 hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full rounded-xl border border-emerald-900/10 bg-white p-4 text-left transition hover:border-emerald-600 hover:bg-emerald-50 disabled:cursor-not-allowed disabled:bg-surface-raised"
             >
               <div className="mb-1 flex items-center justify-between gap-2">
-                <span className="text-sm font-bold text-emerald-950">{t.name}</span>
-                <span className="text-[10px] font-bold uppercase tracking-wide text-emerald-800/50">
+                <span className="text-sm font-bold text-fg-primary">{t.name}</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide text-fg-muted">
                   {t.daysPerWeek}g/sett
                 </span>
               </div>
-              <p className="mb-2 text-xs text-emerald-800/60">{t.description}</p>
+              <p className="mb-2 text-xs text-fg-secondary">{t.description}</p>
               <ul className="space-y-1">
                 {t.plan.sessions.map((s) => {
                   const preview = s.exercises
@@ -155,8 +155,8 @@ export default function TemplatePickerModal({ open, onClose }: TemplatePickerMod
                     .join(" · ");
                   const extra = s.exercises.length > 3 ? ` +${s.exercises.length - 3}` : "";
                   return (
-                    <li key={s.id} className="text-[11px] font-medium text-emerald-800/50">
-                      <span className="font-bold text-emerald-800/70">{s.name}:</span> {preview}
+                    <li key={s.id} className="text-[11px] font-medium text-fg-muted">
+                      <span className="font-bold text-fg-secondary">{s.name}:</span> {preview}
                       {extra}
                     </li>
                   );
@@ -165,7 +165,7 @@ export default function TemplatePickerModal({ open, onClose }: TemplatePickerMod
             </button>
           ))}
           {applying && (
-            <p className="text-center text-xs font-medium text-emerald-800/60">
+            <p className="text-center text-xs font-medium text-fg-secondary">
               Applico il template…
             </p>
           )}
